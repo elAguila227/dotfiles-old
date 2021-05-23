@@ -6,7 +6,7 @@
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
-PS1='[\u@\h \W]\$ '
+PS1='\[\033[2;37m\][\[\033[0;32m\]\u@\h \[\033[1;34m\]\W\[\033[2;37m\]] \[\033[0;37m\]\$ '
 
 export HISTCONTROL=ignorebpth:erasedups
 export EDITOR=nvim
@@ -16,7 +16,9 @@ export BROWSER=qutebrowser
 # &   # Run the process in the background.
 # ( ) # Hide shell job control messages.
 # Not supported in the "fish" shell.
-(cat ~/.cache/wal/sequences &)
+if [ -d "$HOME/.cache/wal/" ] ;
+    then (cat ~/.cache/wal/sequences &)
+fi
 
 # set vi mode in bash shell
 set -o vi
@@ -37,7 +39,9 @@ bind "set completion-ignore-case on"
 
 # dmenu pywal integration
 # Import the colors
-. "${HOME}/.cache/wal/colors.sh"
+if [ -d "$HOME/.cache/wal/" ] ;
+    then . "${HOME}/.cache/wal/colors.sh"
+fi
 
 # Create the alias
 alias dmenu='dmenu -nb "$color0" -nf "$color15" -sb "$color1" -sf "$color15"'
