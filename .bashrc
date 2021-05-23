@@ -10,7 +10,7 @@ PS1='[\u@\h \W]\$ '
 
 export HISTCONTROL=ignorebpth:erasedups
 export EDITOR=nvim
-export BROWSER=brave
+export BROWSER=qutebrowser
 
 # Import colorscheme from 'wal' asynchronously
 # &   # Run the process in the background.
