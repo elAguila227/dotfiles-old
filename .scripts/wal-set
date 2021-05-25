@@ -1,4 +1,4 @@
 #!/bin/sh
-sxiv -fto $HOME/Downloads/*.jpg | xargs -r wal -i 
+sxiv -fto $HOME/.config/wallpapers/*.jpg | xargs -r wal -i 
 genzathurarc > $HOME/.config/zathura/zathurarc && cat $HOME/.config/zathura/conf >> $HOME/.config/zathura/zathurarc
 cd $HOME/dwm && sudo make clean install && cd $HOME/
