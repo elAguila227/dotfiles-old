@@ -6,7 +6,7 @@
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
-PS1='\[\033[2;37m\][\[\033[0;32m\]\u@\h \[\033[1;34m\]\W\[\033[2;37m\]] \[\033[0;37m\]\$ '
+PS1='\[\033[2;37m\][\[\033[0;32m\]\u@\h \[\033[0;34m\]\W\[\033[2;37m\]] \[\033[0;37m\]\$ '
 
 export HISTCONTROL=ignorebpth:erasedups
 export EDITOR=nvim
