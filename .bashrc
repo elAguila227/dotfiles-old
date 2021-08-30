@@ -10,7 +10,8 @@ PS1='\[\033[2;37m\][\[\033[0;32m\]\u@\h \[\033[0;34m\]\W\[\033[2;37m\]] \[\033[0
 
 export HISTCONTROL=ignorebpth:erasedups
 export EDITOR=nvim
-export BROWSER=qutebrowser
+export BROWSER=brave
+export TERMINAL=st
 
 # Import colorscheme from 'wal' asynchronously
 # &   # Run the process in the background.
@@ -31,7 +32,7 @@ fi
 
 # if .scripts add to PATH
 if [ -d "$HOME/.scripts/" ] ;
-    then PATH="$HOME/.scripts:$PATH"
+    then PATH="$PATH:$HOME/.scripts"
 fi
 
 # ignore upper and lowercase whrn TAB completion
@@ -67,8 +68,5 @@ alias pacman='sudo pacman --color auto'
 alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
 
 # Config
-alias config='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 # run in terminal: config config --local status.showUntrackedFiles no
-
-# vimlike
-alias ",q"='exit'

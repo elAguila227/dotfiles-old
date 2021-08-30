@@ -1,4 +1,11 @@
 #!/bin/sh
-sxiv -fto $HOME/.config/wallpapers/*.jpg | xargs -r wal -i 
+cwd=$(pwd)
+
+sxiv -fto $HOME/.config/wallpapers/*.{jpg,JPG,gif,GIF,png,PNG} | xargs -r wal -i 
 genzathurarc > $HOME/.config/zathura/zathurarc && cat $HOME/.config/zathura/conf >> $HOME/.config/zathura/zathurarc
-cd $HOME/dwm && sudo make clean install && cd $HOME/
+xrdb -merge $HOME/.cache/wal/colors.Xresources
+cp $HOME/.cache/wal/colors.Xresources $HOME/.Xresources
+razer-cli -a
+xdotool key Super_L+shift+F5
+
+cd $cwd
