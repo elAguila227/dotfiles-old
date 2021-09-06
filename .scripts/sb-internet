@@ -5,9 +5,8 @@
 # Show  if a vpn connection is active
 
 case $BUTTON in
-	1) "$TERMINAL" -e nmtui; pkill -RTMIN+4 dwmblocks ;;
-	2) "$TERMINAL" -e nmtui; pkill -RTMIN+4 dwmblocks ;;
-	3) "$TERMINAL" -e nmtui; pkill -RTMIN+4 dwmblocks ;;
+	1) st -e nmtui; pkill -RTMIN+4 dwmblocks ;;
+	3) pkill -RTMIN+4 dwmblocks ;;
 esac
 
 case "$(cat /sys/class/net/w*/operstate 2>/dev/null)" in

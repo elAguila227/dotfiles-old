@@ -17,9 +17,9 @@
 # When = PostTransaction
 # Exec = /usr/bin/pkill -RTMIN+8 dwmblocks # Or i3blocks if using i3.
 
-case $BLOCK_BUTTON in
-	1) setsid -f "$TERMINAL" -e sb-popupgrade ;;
-	3) pkill -RTMIN+4 dwmblocks ;;
+case $BUTTON in
+	1) setsid -f st -e sb-popupgrade ;;
+	3) yay -Sy; pkill -RTMIN+8 dwmblocks ;;
 esac
 
-pacman -Qu | grep -Fcv "[ignored]" | sed "s/^/📦 /;s/^📦 0$//g"
+pacman -Qu | grep -Fcv "[ignored]" | sed "s/^/📦 /;s/^📦 0$//g"
