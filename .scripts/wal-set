@@ -5,6 +5,7 @@ sxiv -fto $HOME/.config/wallpapers/*.{jpg,JPG,gif,GIF,png,PNG} | xargs -r wal -i
 genzathurarc > $HOME/.config/zathura/zathurarc && cat $HOME/.config/zathura/conf >> $HOME/.config/zathura/zathurarc
 xrdb -merge $HOME/.cache/wal/colors.Xresources
 cp $HOME/.cache/wal/colors.Xresources $HOME/.Xresources
+launchdunst
 razer-cli -a
 xdotool key Super_L+shift+F5
 

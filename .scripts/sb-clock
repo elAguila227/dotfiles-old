@@ -19,9 +19,7 @@ case "$clock" in
 esac
 
 case $BUTTON in
-	# 1)
-	# 2)
-	# 3)
+	3) pkill -RTMIN+1 dwmblocks ;;
 esac
 
-date "+📅 %Y %b %d (%a) | $icon %H:%M%p"
+date "+📅 %Y/%b/%d (%a) | $icon %H:%M"

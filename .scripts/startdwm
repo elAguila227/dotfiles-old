@@ -4,18 +4,14 @@ if [ -d "/home/user/.scripts" ] ;
     then PATH="$PATH:/home/user/.scripts/"
 fi
 
-setxkbmap -option caps:escape &
-
 wal -R &
 xrbd -merge /home/user/.Xresources &
 
 autorandr --change &
 
-dwmblocks &
-
 # while true; do
     # Log stderror to a file 
-    dwm 2> ~/.dwm.log
+    dwm 2> /home/user/dwm.log
     # No error logging
     #dwm >/dev/null 2>&1
 # done
