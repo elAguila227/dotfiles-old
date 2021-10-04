@@ -19,6 +19,6 @@ dunst -lf  "${color7:-#ffffff}" \
       -nf  "${color7:-#cccccc}" \
       -nb  "${color1:-#bbbbbb}" \
       -nfr "${color7:-#aaaaaa}" \
-      -cf  "${color5:-#999999}" \
+      -cf  "${color7:-#999999}" \
       -cb  "${color0:-#888888}" \
-      -cfr "${color5:-#777777}" > /dev/null 2>&1 &
+      -cfr "${color7:-#777777}" > /dev/null 2>&1 &
