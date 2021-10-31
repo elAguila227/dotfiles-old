@@ -1,4 +1,5 @@
 
+set sandbox normal
 set page-padding 1
 set selection-clipboard clipboard
 map u scroll half-up

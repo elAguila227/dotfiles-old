@@ -1,1 +1,1 @@
-pactl list short sinks | awk '{ print $2 }' | dmenu | xargs pactl set-default-sink
+pactl list short sinks | awk '{ print $2 }' | dmenu | xargs pactl set-default-sink && pkill -RTMIN+2 dwmblocks
