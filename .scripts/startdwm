@@ -11,6 +11,8 @@ autorandr --change &
 
 launchdunst &
 
+setsid picom --experimental-backends &
+
 # while true; do
     # Log stderror to a file 
     dwm 2> /home/user/dwm.log
