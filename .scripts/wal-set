@@ -6,7 +6,10 @@ genzathurarc > $HOME/.config/zathura/zathurarc && cat $HOME/.config/zathura/conf
 xrdb -merge $HOME/.cache/wal/colors.Xresources
 cp $HOME/.cache/wal/colors.Xresources $HOME/.Xresources
 launchdunst
+pywal-discord
 razer-cli -a
+oomox-cli $HOME/.cache/wal/colors-oomox
+/opt/oomox/plugins/icons_numix/change_color.sh -o oomox-colors-oomox ~/.cache/wal/colors-oomox
 xdotool key Super_L+shift+F5
 
 cd $cwd
