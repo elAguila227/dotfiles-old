@@ -13,9 +13,6 @@ export EDITOR=nvim
 export BROWSER=brave
 export TERMINAL=st
 
-export LESS='-R --use-color -Dd+r$Du+b'
-export MANPAGER="less -R --use-color -Dd+r -Du+b"
-
 # Import colorscheme from 'wal' asynchronously
 # &   # Run the process in the background.
 # ( ) # Hide shell job control messages.
@@ -31,6 +28,11 @@ bind -m vi-insert 'Control-l: clear-screen'
 
 if [ -d "$HOME/.scripts/" ] ;
     then PATH="$HOME/.local/bin:$PATH"
+fi
+
+# R suport on termux
+if [ -d "/data/data/com.termux/files/usr/local/R-4.1.2/bin" ] ;
+    then PATH="/data/data/com.termux/files/usr/local/R-4.1.2/bin:$PATH"
 fi
 
 # if .scripts add to PATH
@@ -56,9 +58,6 @@ alias ls='ls --color=auto'
 alias la='ls -A'
 alias ll='ls -lA'
 alias l.="ls =A | egrep '^\.'"
-
-## Colorize the diff command output for ease of use (good for log files)##
-alias diff='diff --color=auto'
 
 ## Colorize the grep command output for ease of use (good for log files)##
 alias grep='grep --color=auto'
