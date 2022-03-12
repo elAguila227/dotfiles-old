@@ -11,6 +11,8 @@ autorandr --change &
 
 launchdunst &
 
+udiskie &
+
 setsid picom --experimental-backends &
 
 # while true; do

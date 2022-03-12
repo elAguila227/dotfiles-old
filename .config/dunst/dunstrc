@@ -196,7 +196,7 @@
     max_icon_size = 32
 
     # Paths to default icons.
-    icon_path = /usr/share/icons/Adwaita/16x16/status/:/usr/share/icons/Adwaita/16x16/devices/:/usr/share/icons/Adwaita/16x16/legacy/
+    icon_path = /home/user/.icons/oomox-colors-oomox/16/status/:/home/user/.icons/oomox-colors-oomox/16/devices/:/home/user/.icons/oomox-colors-oomox/16/legacy/
 
     ### History ###
 

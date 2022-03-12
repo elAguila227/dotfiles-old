@@ -1,15 +1,23 @@
-#!/bin/sh
+#!/bin/bash
 cwd=$(pwd)
 
 sxiv -fto $HOME/.config/wallpapers/*.{jpg,JPG,gif,GIF,png,PNG} | xargs -r wal -i 
-genzathurarc > $HOME/.config/zathura/zathurarc && cat $HOME/.config/zathura/conf >> $HOME/.config/zathura/zathurarc
+
 xrdb -merge $HOME/.cache/wal/colors.Xresources
 cp $HOME/.cache/wal/colors.Xresources $HOME/.Xresources
-launchdunst
-pywal-discord
-razer-cli -a
+
 oomox-cli $HOME/.cache/wal/colors-oomox
 /opt/oomox/plugins/icons_numix/change_color.sh -o oomox-colors-oomox ~/.cache/wal/colors-oomox
+
+genzathurarc > $HOME/.config/zathura/zathurarc && cat $HOME/.config/zathura/conf >> $HOME/.config/zathura/zathurarc
+launchdunst
+pywal-discord
+
 xdotool key Super_L+shift+F5
 
+$HOME/.local/bin/razer-cli -a
+
+notify-send "Theme successfully changed"
+
 cd $cwd
+
