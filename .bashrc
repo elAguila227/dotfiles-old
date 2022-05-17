@@ -10,7 +10,7 @@ PS1='\[\033[2;37m\][\[\033[0;32m\]\u@\h \[\033[0;34m\]\W\[\033[2;37m\]] \[\033[0
 
 export HISTCONTROL=ignorebpth:erasedups
 export EDITOR=nvim
-export BROWSER=brave
+export BROWSER=librewolf
 export TERMINAL=st
 
 # Import colorscheme from 'wal' asynchronously
