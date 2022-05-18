@@ -1,0 +1,144 @@
+#!/bin/sh
+
+while true
+do
+    read -r -p "Install Nerd Fonts? [Y/n] " nerdfont
+    case "$nerdfont" in
+        [yY][eE][sS]|[yY]|"")
+            echo "installing font..."
+            yay --nocleanmenu --nodiffmenu --noeditmenu --removemake -S nerd-font-hack
+            if [[ $? != 0 ]]; then echo "error installing font"; exit 1; fi
+            break
+            ;;
+        [nN][oO]|[nN]) break ;;
+        *) echo "Invalid Option" ;;
+    esac
+done
+
+while true
+do
+    read -r -p "Install Suckless Desktop? [Y/n] " desktop
+    case "$desktop" in
+        [yY][eE][sS]|[yY]|"")
+            echo "installing desktop enviroment..."
+            pacman -S lightdm lightdm-gtk-greeter --noconfirm
+            if [[ $? != 0 ]]; then echo "error installing lightdm"; exit 1; fi
+            sudo systemctl enable lightdm.service
+            if [[ $? != 0 ]]; then echo "error enableling lightdm in systemctl"; exit 1; fi
+
+            pacman -S dunst libnotify picom xorg-appres --noconfirm
+            if [[ $? != 0 ]]; then echo "error installing dunst and picom"; exit 1; fi
+
+            pacman -S imlib2 libxcb libcft libxinerama --noconfirm
+            if [[ $? != 0 ]]; then echo "error installing dependencies"; exit 1; fi
+
+            cd $HOME
+            mkdir .suckless
+            if [[ $? != 0 ]]; then echo "error making suckless directory"; exit 1; fi
+            cd .suckless
+
+            clear=0
+            git clone git@github.com:elAguila227/dwm.git ; clear=$(($clear + $?))
+            git clone git@github.com:elAguila227/dwmblocks.git ; clear=$(($clear + $?))
+            git clone git@github.com:elAguila227/st.git ; clear=$(($clear + $?))
+            git clone git@github.com:elAguila227/dmenu.git ; clear=$(($clear + $?))
+            git clone https://git.suckless.org/scroll ; clear=$(($clear + $?))
+            if [[ $clear != 0 ]]; then echo "error downloading source code"; exit 1; fi
+
+            cd dwm/ && sudo make clean install ; clear=$(($clear + $?))
+            cd ../dwmblocks/ && sudo make clean install ; clear=$(($clear + $?))
+            cd ../dmenu/ && sudo make clean install ; clear=$(($clear + $?))
+            cd ../st/ && sudo make clean install ; clear=$(($clear + $?))
+            cd ../scroll/ && sudo make clean install ; clear=$(($clear + $?))
+            if [[ $clear != 0 ]]; then echo "error building the desktop"; exit 1; fi
+
+            cd $HOME/.suckless/dwm/
+            sudo mkdir /usr/share/xsessions/
+            sudo cp de dwm.desktop /usr/share/xsessions/
+            if [[ $? != 0 ]]; then echo "error adding desktop image to xsession"; exit 1; fi
+            break
+            ;;
+        [nN][oO]|[nN]) break ;;
+        *) echo "Invalid Option" ;;
+    esac
+done
+
+while true
+do
+    read -r -p "Install NeoVim? [Y/n] " neovim
+    case "$neovim" in
+        [yY][eE][sS]|[yY]|"")
+            echo "installing neovim..."
+            pacman -S neovim xcllip lua --noconfirm
+            if [[ $? != 0 ]]; then echo "error installing neovim"; exit 1; fi
+
+            cd $HOME/.config/
+            git clone git@github.com:elAguila227/nvim.git
+            if [[ $? != 0 ]]; then echo "error downloading neovim configuration"; exit 1; fi
+            break
+            ;;
+        [nN][oO]|[nN]) break ;;
+        *) echo "Invalid Option" ;;
+    esac
+done
+
+while true
+do
+    read -r -p "Install pywal and theming dependencies? [Y/n] " wal
+    case "$wal" in
+        [yY][eE][sS]|[yY]|"")
+            echo "installing pywal..."
+            pacman -S python-pywal sxiv feh xdotool --noconfirm
+            if [[ $? != 0 ]]; then echo "error installing pywal"; exit 1; fi
+            yay --nocleanmenu --nodiffmenu --noeditmenu --removemake -S themix-full-git
+            break
+            ;;
+        [nN][oO]|[nN]) break ;;
+        *) echo "Invalid Option" ;;
+    esac
+done
+
+while true
+do
+    read -r -p "Install Zathura? [Y/n] " zathura
+    case "$zathura" in
+        [yY][eE][sS]|[yY]|"")
+            echo "installing zathura..."
+            pacman -S zathura zathura-djvu zathura-pdf-poppler zathura-ps --noconfirm
+            if [[ $? != 0 ]]; then echo "error installing zathura"; exit 1; fi
+            break
+            ;;
+        [nN][oO]|[nN]) break ;;
+        *) echo "Invalid Option" ;;
+    esac
+done
+
+while true
+do
+    read -r -p "Install librewolf? [Y/n] " browser
+    case "$browser" in
+        [yY][eE][sS]|[yY]|"")
+            echo "installing browser..."
+            yay --nocleanmenu --nodiffmenu --noeditmenu --removemake -S librewolf-bin
+            if [[ $? != 0 ]]; then echo "error installing the browser"; exit 1; fi
+            break
+            ;;
+        [nN][oO]|[nN]) break ;;
+        *) echo "Invalid Option" ;;
+    esac
+done
+
+while true
+do
+    read -r -p "Install misc? [Y/n] " misc
+    case "$misc" in
+        [yY][eE][sS]|[yY]|"")
+            echo "installing misc..."
+            pacman -S neofetch bpytop pamixer mpv pcmanfm-gtk3 xarchiver networkmanager-openvpn --noconfirm
+            if [[ $? != 0 ]]; then echo "error installing the browser"; exit 1; fi
+            break
+            ;;
+        [nN][oO]|[nN]) break ;;
+        *) echo "Invalid Option" ;;
+    esac
+done
