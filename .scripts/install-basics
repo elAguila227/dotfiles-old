@@ -29,7 +29,7 @@ do
             sudo pacman -S dunst libnotify picom xorg-appres --noconfirm
             if [[ $? != 0 ]]; then echo "error installing dunst and picom"; exit 1; fi
 
-            sudo pacman -S imlib2 libxcb libcft libxinerama --noconfirm
+            sudo pacman -S imlib2 libxcb libxinerama --noconfirm
             if [[ $? != 0 ]]; then echo "error installing dependencies"; exit 1; fi
 
             cd $HOME
@@ -54,7 +54,7 @@ do
 
             cd $HOME/.suckless/dwm/
             sudo mkdir /usr/share/xsessions/
-            sudo cp de dwm.desktop /usr/share/xsessions/
+            sudo cp dwm.desktop /usr/share/xsessions/
             if [[ $? != 0 ]]; then echo "error adding desktop image to xsession"; exit 1; fi
             break
             ;;
@@ -69,7 +69,7 @@ do
     case "$neovim" in
         [yY][eE][sS]|[yY]|"")
             echo "installing neovim..."
-            sudo pacman -S neovim xcllip lua --noconfirm
+            sudo pacman -S neovim xclip lua --noconfirm
             if [[ $? != 0 ]]; then echo "error installing neovim"; exit 1; fi
 
             cd $HOME/.config/
