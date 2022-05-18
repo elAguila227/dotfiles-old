@@ -21,15 +21,15 @@ do
     case "$desktop" in
         [yY][eE][sS]|[yY]|"")
             echo "installing desktop enviroment..."
-            pacman -S lightdm lightdm-gtk-greeter --noconfirm
+            sudo pacman -S lightdm lightdm-gtk-greeter --noconfirm
             if [[ $? != 0 ]]; then echo "error installing lightdm"; exit 1; fi
             sudo systemctl enable lightdm.service
             if [[ $? != 0 ]]; then echo "error enableling lightdm in systemctl"; exit 1; fi
 
-            pacman -S dunst libnotify picom xorg-appres --noconfirm
+            sudo pacman -S dunst libnotify picom xorg-appres --noconfirm
             if [[ $? != 0 ]]; then echo "error installing dunst and picom"; exit 1; fi
 
-            pacman -S imlib2 libxcb libcft libxinerama --noconfirm
+            sudo pacman -S imlib2 libxcb libcft libxinerama --noconfirm
             if [[ $? != 0 ]]; then echo "error installing dependencies"; exit 1; fi
 
             cd $HOME
@@ -69,7 +69,7 @@ do
     case "$neovim" in
         [yY][eE][sS]|[yY]|"")
             echo "installing neovim..."
-            pacman -S neovim xcllip lua --noconfirm
+            sudo pacman -S neovim xcllip lua --noconfirm
             if [[ $? != 0 ]]; then echo "error installing neovim"; exit 1; fi
 
             cd $HOME/.config/
@@ -88,7 +88,7 @@ do
     case "$wal" in
         [yY][eE][sS]|[yY]|"")
             echo "installing pywal..."
-            pacman -S python-pywal sxiv feh xdotool --noconfirm
+            sudo pacman -S python-pywal sxiv feh xdotool --noconfirm
             if [[ $? != 0 ]]; then echo "error installing pywal"; exit 1; fi
             yay --nocleanmenu --nodiffmenu --noeditmenu --removemake -S themix-full-git
             break
@@ -104,7 +104,7 @@ do
     case "$zathura" in
         [yY][eE][sS]|[yY]|"")
             echo "installing zathura..."
-            pacman -S zathura zathura-djvu zathura-pdf-poppler zathura-ps --noconfirm
+            sudo pacman -S zathura zathura-djvu zathura-pdf-poppler zathura-ps --noconfirm
             if [[ $? != 0 ]]; then echo "error installing zathura"; exit 1; fi
             break
             ;;
@@ -134,7 +134,7 @@ do
     case "$misc" in
         [yY][eE][sS]|[yY]|"")
             echo "installing misc..."
-            pacman -S neofetch bpytop pamixer mpv pcmanfm-gtk3 xarchiver networkmanager-openvpn --noconfirm
+            sudo pacman -S neofetch bpytop pamixer mpv pcmanfm-gtk3 xarchiver networkmanager-openvpn --noconfirm
             if [[ $? != 0 ]]; then echo "error installing the browser"; exit 1; fi
             break
             ;;
