@@ -3,7 +3,7 @@
 # A dmenu wrapper script for system functions.
 
 cmds="\
- shutdown	${shut:-sudo -A shutdown -h now}
+ shutdown	${shut:-sudo -A shutdown now}
  reboot	${reb:-sudo -A reboot}
  lock		kill -TERM $(pgrep -u $USER "\bdwm$")
  cancel"

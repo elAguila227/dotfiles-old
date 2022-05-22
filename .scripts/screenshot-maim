@@ -1,0 +1,67 @@
+#!/bin/sh
+
+# A dmenu script for maim
+
+cd $HOME
+
+clipboard=''
+path='/dev/null'
+a_flag='false'
+
+print_usage() {
+    printf "
+Usage: $(basename $0) [OPTIONS]
+
+Make screanshoots with maim.
+
+Options:
+  -p <PATH>   Set default path
+  -a          Ask for path before saving
+  -c          Use clipboard
+"
+}
+
+while getopts 'acp:' flag; do
+  case "${flag}" in
+    a) a_flag='true'; path="$(pwd)" ;;
+    c) clipboard='| xclip -selection clipboard -t image/png -f >' ;;
+    p) path="${OPTARG}" ;;
+    *) print_usage
+       exit 1 ;;
+  esac
+done
+
+cmds="\
+麗 Select	maim -s
+ﬓ Window	maim -st 9999999
+ Full		maim
+爐 QR Scan
+ Cancel"
+
+choice="$(echo "$cmds" | cut -d'	' -f 1 | dmenu)" || exit 1
+
+if [[ $choice == " Cancel" ]]; then
+    exit
+fi
+
+if [[ $a_flag == 'true' ]] || [[ $path == '' ]]; then
+    path="$(echo "$path" | dmenu -p "Set path:")" || exit 1
+fi
+
+if [[ -d $path ]]; then
+    path="$path/$(date +%s).png"
+fi
+
+if [[ $choice == "爐 QR Scan" ]]; then
+    deco="$(maim -qs | zbarimg -q --raw - )"
+    if [[ $deco != '' ]]; then
+        path="$(echo $path | sed 's/.png/.txt/')"
+        clipboard="$(echo $clipboard | sed 's/-t image\/png //')"
+        notify-send "QR detected"
+        eval "echo $deco $clipboard> $path"
+    fi
+else
+    cmd="$(echo "$cmds" | grep "^$choice	" | cut -d '	' -f2-)"
+    eval "$cmd $clipboard $path"
+    notify-send "Screenshot Taken!"
+fi
