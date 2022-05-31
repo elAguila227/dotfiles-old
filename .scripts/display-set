@@ -1,1 +1,1 @@
-autorandr | awk '{print $1 }' | dmenu | xargs autorandr -l
+autorandr | awk '{print $1 }' | dmenu -l 10 | xargs autorandr -l

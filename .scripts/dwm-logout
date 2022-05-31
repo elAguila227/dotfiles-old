@@ -3,11 +3,11 @@
 # A dmenu wrapper script for system functions.
 
 cmds="\
- shutdown	${shut:-sudo -A shutdown now}
+ shutdown	${shut:-sudo -A shutdown -h now}
  reboot	${reb:-sudo -A reboot}
  lock		kill -TERM $(pgrep -u $USER "\bdwm$")
  cancel"
 
-choice="$(echo "$cmds" | cut -d'	' -f 1 | dmenu)" || exit 1
+choice="$(echo "$cmds" | cut -d'	' -f 1 | dmenu -l 5)" || exit 1
 
 eval "$(echo "$cmds" | grep "^$choice	" | cut -d '	' -f2-)"

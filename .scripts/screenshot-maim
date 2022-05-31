@@ -32,13 +32,13 @@ while getopts 'acp:' flag; do
 done
 
 cmds="\
-麗 Select	maim -s
-ﬓ Window	maim -st 9999999
- Full		maim
+麗 Select	maim -su
+ﬓ Window	maim -sut 9999999
+ Full		maim -u
 爐 QR Scan
  Cancel"
 
-choice="$(echo "$cmds" | cut -d'	' -f 1 | dmenu)" || exit 1
+choice="$(echo "$cmds" | cut -d'	' -f 1 | dmenu -l 6)" || exit 1
 
 if [[ $choice == " Cancel" ]]; then
     exit
@@ -53,7 +53,7 @@ if [[ -d $path ]]; then
 fi
 
 if [[ $choice == "爐 QR Scan" ]]; then
-    deco="$(maim -qs | zbarimg -q --raw - )"
+    deco="$(maim -qus | zbarimg -q --raw - )"
     if [[ $deco != '' ]]; then
         path="$(echo $path | sed 's/.png/.txt/')"
         clipboard="$(echo $clipboard | sed 's/-t image\/png //')"
@@ -62,6 +62,6 @@ if [[ $choice == "爐 QR Scan" ]]; then
     fi
 else
     cmd="$(echo "$cmds" | grep "^$choice	" | cut -d '	' -f2-)"
-    eval "$cmd $clipboard $path"
-    notify-send "Screenshot Taken!"
+    eval "$cmd $clipboard $path" || exit 1
+    # notify-send "Screenshot Taken!"
 fi
