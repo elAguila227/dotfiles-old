@@ -26,8 +26,10 @@ do
             sudo systemctl enable lightdm.service
             if [[ $? != 0 ]]; then echo "error enableling lightdm in systemctl"; exit 1; fi
 
-            sudo pacman -S dunst libnotify picom xorg-appres --noconfirm
-            if [[ $? != 0 ]]; then echo "error installing dunst and picom"; exit 1; fi
+            sudo pacman -S dunst libnotify xorg-appres --noconfirm
+            if [[ $? != 0 ]]; then echo "error installing dunst"; exit 1; fi
+            yay --nocleanmenu --nodiffmenu --noeditmenu --removemake -S picom-jonaburg-git
+            if [[ $? != 0 ]]; then echo "error installing picom"; exit 1; fi
 
             sudo pacman -S imlib2 libxcb libxinerama --noconfirm
             if [[ $? != 0 ]]; then echo "error installing dependencies"; exit 1; fi
