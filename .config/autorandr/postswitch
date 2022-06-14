@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+wal -R
+notify-send "Display profile: $AUTORANDR_CURRENT_PROFILE"
