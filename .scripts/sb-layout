@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+case $BUTTON in
+    1) change-layout ;;
+	3) pkill -RTMIN+10 dwmblocks ;;
+esac
+
+echo "[ $(setxkbmap -query | grep layout | awk '{print $2}') ]"
