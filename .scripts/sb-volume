@@ -20,5 +20,5 @@ else
 	icon="奔"
 fi
 
-echo "[ $icon $vol% ]"
+echo "$icon $vol%"
 

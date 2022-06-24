@@ -22,4 +22,4 @@ case $BUTTON in
 	3) yay -Sy; pkill -RTMIN+8 dwmblocks ;;
 esac
 
-pacman -Qu | grep -Fcv "[ignored]" | sed "s/^/📦 /;s/^📦 0$//g;s/^/[ /;s/$/ ]/"
+pacman -Qu | grep -Fcv "[ignored]" | sed "s/^/📦 /;s/^📦 0$//g"

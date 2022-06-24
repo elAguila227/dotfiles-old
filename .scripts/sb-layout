@@ -5,4 +5,4 @@ case $BUTTON in
 	3) pkill -RTMIN+10 dwmblocks ;;
 esac
 
-echo "[ $(setxkbmap -query | grep layout | awk '{print $2}') ]"
+echo "$(setxkbmap -query | grep layout | awk '{print $2}')"
