@@ -56,8 +56,8 @@ alias dmenu_run='dmenu_run -nb "$color0" -nf "$color15" -sb "$color1" -sf "$colo
 # list
 alias ls='ls --color=auto'
 alias la='ls -A'
-alias ll='ls -lA'
-alias l.="ls =A | egrep '^\.'"
+alias ll='ls -lh'
+alias l.="ls -A | egrep '^\.'"
 
 ## Colorize the grep command output for ease of use (good for log files)##
 alias grep='grep --color=auto'
