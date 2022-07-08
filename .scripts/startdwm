@@ -4,14 +4,14 @@ if [ -d "/home/user/.scripts" ] ;
     then PATH="$PATH:/home/user/.scripts/"
 fi
 
-wal -R && xrdb -merge /home/user/wal/colors.Xresources
+wal -R && xrdb -merge /home/user/.cache/wal/colors.Xresources
 if [ -f "/home/user/.Xresources" ] ;
     then xrbd -merge /home/user/.Xresources &
 fi
 
-while true; do
+# while true; do
     # Log stderror to a file
     dwm 2> /home/user/dwm.log
     # No error logging
     #dwm >/dev/null 2>&1
-done
+# done

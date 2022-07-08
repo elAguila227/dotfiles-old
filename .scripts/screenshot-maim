@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # A dmenu script for maim
 
@@ -24,7 +24,7 @@ Options:
 while getopts 'acp:' flag; do
   case "${flag}" in
     a) a_flag='true'; path="$(pwd)" ;;
-    c) clipboard='| xclip -selection clipboard -t image/png -f >' ;;
+    c) clipboard="| xclip -selection clipboard -t image/png -f >" ;;
     p) path="${OPTARG}" ;;
     *) print_usage
        exit 1 ;;
@@ -56,9 +56,9 @@ if [[ $choice == "爐 QR Scan" ]]; then
     deco="$(maim -qus | zbarimg -q --raw - )"
     if [[ $deco != '' ]]; then
         path="$(echo $path | sed 's/.png/.txt/')"
-        clipboard="$(echo $clipboard | sed 's/-t image\/png //')"
+        clipboard="$(echo "$clipboard" | sed 's/-t image\/png //')"
         notify-send "QR detected"
-        eval "echo $deco $clipboard> $path"
+        eval "echo \"$deco\" "$clipboard"> $path"
     fi
 else
     cmd="$(echo "$cmds" | grep "^$choice	" | cut -d '	' -f2-)"

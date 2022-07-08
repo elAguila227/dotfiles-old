@@ -28,7 +28,7 @@ do
 
             sudo pacman -S dunst libnotify xorg-appres --noconfirm
             if [[ $? != 0 ]]; then echo "error installing dunst"; exit 1; fi
-            yay --nocleanmenu --nodiffmenu --noeditmenu --removemake -S picom-jonaburg-git
+            yay --nocleanmenu --nodiffmenu --noeditmenu --removemake -S picom-animations-git
             if [[ $? != 0 ]]; then echo "error installing picom"; exit 1; fi
 
             sudo pacman -S imlib2 libxcb libxinerama --noconfirm
@@ -40,23 +40,43 @@ do
             cd .suckless
 
             clear=0
-            git clone git@github.com:elAguila227/dwm.git ; clear=$(($clear + $?))
-            git clone git@github.com:elAguila227/dwmblocks.git ; clear=$(($clear + $?))
-            git clone git@github.com:elAguila227/st.git ; clear=$(($clear + $?))
-            git clone git@github.com:elAguila227/dmenu.git ; clear=$(($clear + $?))
+            git clone https://github.com/bakkeby/dwm-flexipatch.git dwm; clear=$(($clear + $?))
+            git clone https://github.com/bakkeby/st-flexipatch.git st ; clear=$(($clear + $?))
+            git clone https://github.com/bakkeby/dmenu-flexipatch.git dmenu ; clear=$(($clear + $?))
+            git clone https://github.com/bakkeby/slock-flexipatch.git slock ; clear=$(($clear + $?))
             git clone https://git.suckless.org/scroll ; clear=$(($clear + $?))
+            git clone https://github.com/torrinfail/dwmblocks.git ; clear=$(($clear + $?))
             if [[ $clear != 0 ]]; then echo "error downloading source code"; exit 1; fi
+
+            cd dwmblocks
+            curl https://dwm.suckless.org/patches/statuscmd/dwmblocks-statuscmd-20210402-96cbb45.diff | patch -p1
+            if [[ $? != 0 ]]; then echo "error patching dwmblocks"; exit 1; fi
+            cd ..
+
+            if [[ -d $HOME/.config/suckless/ ]]; then
+                for dir in $(ls $HOME/.config/suckless/); do
+                    if [[ -d "$dir" ]]; then
+                        ln $HOME/.config/suckless/$dir/*.h $dir/
+                        if [[ $? != 0 ]]; then echo "error creating links"; exit 1; fi
+                        if [[ -f "$HOME/.config/suckless/$dir/config.mk" ]]; then
+                            mv $dir/config.mk config.mk.$dir.backup
+                            ln $HOME/.config/suckless/$dir/config.mk $dir
+                            if [[ $? != 0 ]]; then echo "error replacing config.mk files"; exit 1; fi
+                        fi
+                    fi
+                done
+            fi
 
             cd dwm/ && sudo make clean install ; clear=$(($clear + $?))
             cd ../dwmblocks/ && sudo make clean install ; clear=$(($clear + $?))
             cd ../dmenu/ && sudo make clean install ; clear=$(($clear + $?))
             cd ../st/ && sudo make clean install ; clear=$(($clear + $?))
             cd ../scroll/ && sudo make clean install ; clear=$(($clear + $?))
+            cd ../slock/ && sudo make clean install ; clear=$(($clear + $?))
             if [[ $clear != 0 ]]; then echo "error building the desktop"; exit 1; fi
 
-            cd $HOME/.suckless/dwm/
             sudo mkdir /usr/share/xsessions/
-            sudo cp dwm.desktop /usr/share/xsessions/
+            sudo cp $HOME/.config/suckless/dwm/dwm.desktop /usr/share/xsessions/
             if [[ $? != 0 ]]; then echo "error adding desktop image to xsession"; exit 1; fi
             break
             ;;

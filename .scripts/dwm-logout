@@ -3,9 +3,10 @@
 # A dmenu wrapper script for system functions.
 
 cmds="\
- shutdown	${shut:-sudo -A shutdown -h now}
- reboot	${reb:-sudo -A reboot}
- lock		kill -TERM $(pgrep -u $USER "\bdwm$")
+ shutdown	shutdown -h now
+ reboot	reboot
+ lock		slock
+ logout	kill -TERM $(pidof dwm)
  cancel"
 
 choice="$(echo "$cmds" | cut -d'	' -f 1 | dmenu -l 5)" || exit 1
