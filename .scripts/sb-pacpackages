@@ -1,21 +1,17 @@
 #!/bin/sh
 
 # Displays number of upgradeable packages.
-# For this to work, have a `pacman -Sy` command run in the background as a
-# cronjob every so often as root. This script will then read those packages.
+# For this to work, have a `pacman -Sy` command run in the background every so often
 # When clicked, it will run an upgrade via pacman.
 #
-# Add the following text as a file in /usr/share/libalpm/hooks/statusbar.hook:
+# Add the following text as a executable file in /etc/NetworkManager/dispatcher.d/sync-packages
 #
-# [Trigger]
-# Operation = Upgrade
-# Type = Package
-# Target = *
+# #!/usr/bin/env bash
 #
-# [Action]
-# Description = Updating statusbar...
-# When = PostTransaction
-# Exec = /usr/bin/pkill -RTMIN+8 dwmblocks # Or i3blocks if using i3.
+# if [[ $2 == "up" ]]; then
+#         yay -Sy
+#         pkill -RTMIN+8 dwmblocks
+# fi
 
 case $BUTTON in
 	1) setsid -f st -e sb-popupgrade ;;
