@@ -8,14 +8,15 @@ xrdb -merge $HOME/.cache/wal/colors.Xresources
 xdotool key Super_L+shift+F5
 
 genzathurarc > $HOME/.config/zathura/zathurarc && cat $HOME/.config/zathura/conf >> $HOME/.config/zathura/zathurarc
-launchdunst
 
 $HOME/.local/bin/razer-cli -a
 
 oomox-cli $HOME/.cache/wal/colors-oomox
 /opt/oomox/plugins/icons_numix/change_color.sh -o oomox-colors-oomox ~/.cache/wal/colors-oomox
 
-convert "$(cat $HOME/.cache/wal/wal)" -fill "$(xrdb -query | grep color0 | head -1 | awk '{print $2}')" -colorize 40% -filter Gaussian -blur 0x9 "/usr/share/wallpapers/wal"
+# convert "$(cat $HOME/.cache/wal/wal)" -fill "$(xrdb -query | grep color0 | head -1 | awk '{print $2}')" -colorize 40% -filter Gaussian -blur 0x9 "/usr/share/wallpapers/wal"
+
+launchdunst
 
 notify-send "Theme successfully changed"
 

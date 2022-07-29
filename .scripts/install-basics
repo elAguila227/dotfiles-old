@@ -78,6 +78,9 @@ do
             sudo mkdir /usr/share/xsessions/
             sudo cp $HOME/.config/suckless/dwm/dwm.desktop /usr/share/xsessions/
             if [[ $? != 0 ]]; then echo "error adding desktop image to xsession"; exit 1; fi
+
+            sudo pacman -S autorandr --noconfirm
+
             break
             ;;
         [nN][oO]|[nN]) break ;;
@@ -112,7 +115,7 @@ do
             echo "installing pywal..."
             sudo pacman -S python-pywal sxiv feh xdotool --noconfirm
             if [[ $? != 0 ]]; then echo "error installing pywal"; exit 1; fi
-            yay --nocleanmenu --nodiffmenu --noeditmenu --removemake -S themix-full-git
+            yay --nocleanmenu --nodiffmenu --noeditmenu --removemake -S themix-theme-oomox-git themix-icons-numix-git
             break
             ;;
         [nN][oO]|[nN]) break ;;
@@ -156,7 +159,7 @@ do
     case "$misc" in
         [yY][eE][sS]|[yY]|"")
             echo "installing misc..."
-            sudo pacman -S neofetch bpytop pamixer mpv nemo xarchiver maim networkmanager-openvpn --noconfirm
+            sudo pacman -S bash-completion neofetch bpytop pamixer mpv nemo nemo-fileroller xarchiver libqalculate onboard maim networkmanager-openvpn --noconfirm
             if [[ $? != 0 ]]; then echo "error installing the browser"; exit 1; fi
             break
             ;;
