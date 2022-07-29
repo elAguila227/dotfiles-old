@@ -1,6 +1,11 @@
 {
   "settingsVersion": "1.67.1",
-  "exclusionRules": [],
+  "exclusionRules": [
+    {
+      "pattern": "https?://web.whatsapp.com/*",
+      "passKeys": ""
+    }
+  ],
   "filterLinkHints": false,
   "waitForEnterForFilteredHints": true,
   "hideHud": false,
