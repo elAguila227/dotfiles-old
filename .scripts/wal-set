@@ -15,6 +15,8 @@ $HOME/.local/bin/razer-cli -a
 oomox-cli $HOME/.cache/wal/colors-oomox
 /opt/oomox/plugins/icons_numix/change_color.sh -o oomox-colors-oomox ~/.cache/wal/colors-oomox
 
+convert "$(cat $HOME/.cache/wal/wal)" -fill "$(xrdb -query | grep color0 | head -1 | awk '{print $2}')" -colorize 40% -filter Gaussian -blur 0x9 "/usr/share/wallpapers/wal"
+
 notify-send "Theme successfully changed"
 
 cd $cwd

@@ -2,7 +2,8 @@
 
 case $BUTTON in
     1) change-layout ;;
-	3) pkill -RTMIN+10 dwmblocks ;;
+	2) pkill -RTMIN+10 dwmblocks ;;
+	3) onboard ;;
 esac
 
 echo "$(setxkbmap -query | grep layout | awk '{print $2}')"
