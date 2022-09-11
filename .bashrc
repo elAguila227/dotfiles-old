@@ -10,7 +10,7 @@ PS1='\[\033[2;37m\][\[\033[0;32m\]\u@\h \[\033[0;34m\]\W\[\033[2;37m\]] \[\033[0
 
 export HISTCONTROL=ignorebpth:erasedups
 export EDITOR=nvim
-export BROWSER=librewolf
+# export BROWSER=librewolf
 export TERMINAL=st
 
 # Import colorscheme from 'wal' asynchronously
@@ -75,3 +75,7 @@ alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
 # Config
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 # run in terminal: config config --local status.showUntrackedFiles no
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)

@@ -6,8 +6,10 @@ fi
 
 wal -R && xrdb -merge /home/user/.cache/wal/colors.Xresources
 if [ -f "/home/user/.Xresources" ] ;
-    then xrbd -merge /home/user/.Xresources &
+    then xrbd -merge /home/user/.Xresources
 fi
+
+setxkbmap -option caps:escape
 
 # while true; do
     # Log stderror to a file

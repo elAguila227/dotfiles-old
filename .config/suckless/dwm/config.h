@@ -130,9 +130,9 @@ static void (*bartabmonfns[])(Monitor *) = { NULL /* , customlayoutfn */ };
 #if BAR_PANGO_PATCH
 static const char font[]                 = "monospace 10";
 #else
-static const char *fonts[]               = { "Hack Nerd Font:size=11", "monospace:size=10" };
+static const char *fonts[]               = { "Hack Nerd Font:size=11", "JoyPixels:pixelsize=11:antialias=true:autohint=true" };
 #endif // BAR_PANGO_PATCH
-static const char dmenufont[]            = "monospace:size=14";
+static const char dmenufont[]            = "Hack Nerd Font:size=14";
 
 static char c000000[]                    = "#000000"; // placeholder value
 
@@ -370,13 +370,14 @@ static const char *layoutmenu_cmd = "layoutmenu.sh";
 
 #if COOL_AUTOSTART_PATCH
 static const char *const autostart[] = {
-    "setxkbmap", "-option", "caps:escape", NULL,
     "dwmblocks", NULL,
     "launchdunst", NULL,
     "autorandr", "--change", NULL,
     "picom", "--experimental-backends", NULL,
     "udiskie", NULL,
     "unclutter", NULL,
+    "setxkbmap", "-option", "caps:escape", NULL,
+    "check-idle-start", NULL,
     NULL /* terminate */
 };
 #endif // COOL_AUTOSTART_PATCH
@@ -849,6 +850,8 @@ static const char *dmenucmd[] = {
 };
 static const char *termcmd[]  = { "st", NULL };
 
+static const char *jgmenucmd[]  = { "jgmenu_run", NULL };
+
 #if BAR_STATUSCMD_PATCH
 #if BAR_DWMBLOCKS_PATCH
 /* This defines the name of the executable that handles the bar (used for signalling purposes) */
@@ -881,6 +884,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,          spawn,                  SHCMD("dwm-logout") },
 	{ MODKEY,                       XK_d,          spawn,                  {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return,     spawn,                  {.v = termcmd } },
+	{ MODKEY,                       XK_w,          spawn,                  SHCMD("librewolf") },
 	{ MODKEY,                       XK_backslash,  spawn,                  SHCMD("screenshot-maim -c") },
 	{ MODKEY|ControlMask,           XK_backslash,  spawn,                  SHCMD("screenshot-maim -ca") },
 	{ MODKEY,                       XK_BackSpace,  spawn,                  SHCMD("change-layout") },
@@ -1327,7 +1331,8 @@ static Command commands[] = {
 static Button buttons[] = {
 	/* click                event mask           button          function        argument */
 	#if BAR_STATUSBUTTON_PATCH
-	{ ClkButton,            0,                   Button1,        spawn,          SHCMD("dwm-logout") },
+  { ClkButton,            0,                   Button1,        spawn,          {.v = jgmenucmd} },
+	// { ClkButton,            0,                   Button1,        spawn,          SHCMD("dwm-logout") },
 	#endif // BAR_STATUSBUTTON_PATCH
 	{ ClkLtSymbol,          0,                   Button1,        setlayout,      {0} },
 	#if BAR_LAYOUTMENU_PATCH

@@ -1,0 +1,7 @@
+^sep()
+Exit,^checkout(exit),system-shutdown
+^tag(exit)
+Lock,slock,system-lock-screen
+Logout,xdotool key Super_L+alt+control+q,system-logout
+Reboot,systemctl -i reboot,system-reboot
+Poweroff,systemctl -i poweroff,system-shutdown

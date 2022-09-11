@@ -6,7 +6,7 @@ cmds="\
  shutdown	shutdown -h now
  reboot	reboot
  lock		slock
- logout	kill -TERM $(pidof dwm)
+ logout	xdotool key Super_L+alt+control+q
  cancel"
 
 choice="$(echo "$cmds" | cut -d'	' -f 1 | dmenu -l 5)" || exit 1

@@ -9,6 +9,8 @@ xdotool key Super_L+shift+F5
 
 genzathurarc > $HOME/.config/zathura/zathurarc && cat $HOME/.config/zathura/conf >> $HOME/.config/zathura/zathurarc
 
+cat $HOME/.config/jgmenu/jgmenu.conf > $HOME/.config/jgmenu/jgmenurc && cat $HOME/.cache/wal/colors-jgmenurc >> $HOME/.config/jgmenu/jgmenurc
+
 $HOME/.local/bin/razer-cli -a
 
 oomox-cli $HOME/.cache/wal/colors-oomox

@@ -26,7 +26,7 @@ do
             sudo systemctl enable lightdm.service
             if [[ $? != 0 ]]; then echo "error enableling lightdm in systemctl"; exit 1; fi
 
-            sudo pacman -S dunst libnotify xorg-appres --noconfirm
+            sudo pacman -S dunst libnotify xorg-appres jgmenu --noconfirm
             if [[ $? != 0 ]]; then echo "error installing dunst"; exit 1; fi
             yay --nocleanmenu --nodiffmenu --noeditmenu --removemake -S picom-animations-git
             if [[ $? != 0 ]]; then echo "error installing picom"; exit 1; fi

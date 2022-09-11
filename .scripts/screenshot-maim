@@ -45,12 +45,14 @@ if [[ $choice == " Cancel" ]]; then
 fi
 
 if [[ $a_flag == 'true' ]] || [[ $path == '' ]]; then
-    path="$(echo "$path" | dmenu -p "Set path:" && sleep 0.01)" || exit 1
+    path="$(echo "$path" | dmenu -p "Set path:")" || exit 1
 fi
 
 if [[ -d $path ]]; then
     path="$path/$(date +%s).png"
 fi
+
+sleep 0.02
 
 if [[ $choice == "爐 QR Scan" ]]; then
     deco="$(maim -qus | zbarimg -q --raw - )"
