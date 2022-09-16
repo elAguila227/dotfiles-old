@@ -159,7 +159,7 @@ do
     case "$misc" in
         [yY][eE][sS]|[yY]|"")
             echo "installing misc..."
-            sudo pacman -S bash-completion neofetch bpytop pamixer mpv udisks2 udiskie nemo nemo-fileroller xarchiver libqalculate onboard maim networkmanager-openvpn --noconfirm
+            sudo pacman -S bash-completion neofetch bpytop pamixer mpv udisks2 udiskie nemo nemo-fileroller xarchiver libqalculate onboard maim zbar networkmanager-openvpn --noconfirm
             if [[ $? != 0 ]]; then echo "error installing the browser"; exit 1; fi
             break
             ;;

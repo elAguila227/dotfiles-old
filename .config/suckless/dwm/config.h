@@ -378,6 +378,7 @@ static const char *const autostart[] = {
     "unclutter", NULL,
     "setxkbmap", "-option", "caps:escape", NULL,
     "check-idle-start", NULL,
+    "keepassxc", NULL,
     NULL /* terminate */
 };
 #endif // COOL_AUTOSTART_PATCH

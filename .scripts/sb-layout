@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 case $BUTTON in
-    1) change-layout ;;
-	2) pkill -RTMIN+10 dwmblocks ;;
+  1) change-layout ;;
+	2) setxkbmap -option caps:escape; pkill -RTMIN+10 dwmblocks ;;
 	3) onboard ;;
 esac
 
