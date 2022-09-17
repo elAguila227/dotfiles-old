@@ -61,12 +61,12 @@ return packer.startup(function(use)
 
   -- use "mhinz/vim-startify"
   -- use "glepnir/dashboard-nvim"
-  use {
-    'goolord/alpha-nvim',
-    config = function ()
-      require'alpha'.setup(require'alpha.themes.dashboard'.config)
-    end
-  }
+  -- use {
+  --   'goolord/alpha-nvim',
+  --   config = function ()
+  --     require'alpha'.setup(require'alpha.themes.dashboard'.config)
+  --   end
+  -- }
 
   -- -- telescope
   -- use {
