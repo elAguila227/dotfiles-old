@@ -97,9 +97,9 @@ do
             sudo pacman -S neovim xclip lua --noconfirm
             if [[ $? != 0 ]]; then echo "error installing neovim"; exit 1; fi
 
-            cd $HOME/.config/
-            git clone git@github.com:elAguila227/nvim.git
-            if [[ $? != 0 ]]; then echo "error downloading neovim configuration"; exit 1; fi
+            # cd $HOME/.config/
+            # git clone git@github.com:elAguila227/nvim.git
+            # if [[ $? != 0 ]]; then echo "error downloading neovim configuration"; exit 1; fi
             break
             ;;
         [nN][oO]|[nN]) break ;;
@@ -159,7 +159,7 @@ do
     case "$misc" in
         [yY][eE][sS]|[yY]|"")
             echo "installing misc..."
-            sudo pacman -S bash-completion neofetch bpytop pamixer mpv udisks2 udiskie nemo nemo-fileroller xarchiver libqalculate onboard maim zbar networkmanager-openvpn --noconfirm
+            sudo pacman -S bash-completion neofetch bpytop pamixer mpv udisks2 udiskie nemo nemo-fileroller xarchiver libqalculate onboard keepassxc maim zbar networkmanager-openvpn --noconfirm
             if [[ $? != 0 ]]; then echo "error installing the browser"; exit 1; fi
             break
             ;;
