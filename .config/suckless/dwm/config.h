@@ -1341,6 +1341,24 @@ static const Command commands[] = {
 };
 #endif // KEYMODES_PATCH
 
+#if BAR_WINTITLEACTIONS_PATCH
+static void toggleAndKill(const Arg *arg);
+void toggleAndKill(const Arg *arg) {
+	Client *c = (Client*)arg->v;
+	if (!c)
+		return;
+	if (c == selmon->sel)
+		killclient(c);
+	else {
+		if (HIDDEN(c))
+			show(c);
+		focus(c);
+		restack(c->mon);
+    killclient(c);
+	}
+}
+#endif // BAR_WINTITLEACTIONS_PATCH
+
 /* button definitions */
 #if STATUSBUTTON_PATCH
 /* click can be ClkButton, ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
@@ -1361,13 +1379,18 @@ static Button buttons[] = {
 	#endif // BAR_LAYOUTMENU_PATCH
 	#if BAR_WINTITLEACTIONS_PATCH
 	{ ClkWinTitle,          0,                   Button1,        togglewin,      {0} },
-	{ ClkWinTitle,          0,                   Button3,        showhideclient, {0} },
-	#endif // BAR_WINTITLEACTIONS_PATCH
+	{ ClkWinTitle,          0,                   Button2,        showhideclient, {0} },
+  // { ClkWinTitle,          0,                   Button3,        showhideclient, {0} },
+  { ClkWinTitle,          0,                   Button3,        toggleAndKill,  {0} },
+  #else
 	{ ClkWinTitle,          0,                   Button2,        zoom,           {0} },
+  #endif // BAR_WINTITLEACTIONS_PATCH
 	#if BAR_STATUSCMD_PATCH && BAR_DWMBLOCKS_PATCH
 	{ ClkStatusText,        0,                   Button1,        sigstatusbar,   {.i = 1 } },
 	{ ClkStatusText,        0,                   Button2,        sigstatusbar,   {.i = 2 } },
 	{ ClkStatusText,        0,                   Button3,        sigstatusbar,   {.i = 3 } },
+	{ ClkStatusText,        0,                   Button4,        sigstatusbar,   {.i = 4 } },
+	{ ClkStatusText,        0,                   Button5,        sigstatusbar,   {.i = 5 } },
 	#elif BAR_STATUSCMD_PATCH
 	{ ClkStatusText,        0,                   Button1,        spawn,          {.v = statuscmd } },
 	{ ClkStatusText,        0,                   Button2,        spawn,          {.v = statuscmd } },

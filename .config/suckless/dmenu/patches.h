@@ -36,7 +36,7 @@
  * the program will crash on encountering such characters. Note that you will also need a font
  * that provides color emojis for this to work.
  */
-#define COLOR_EMOJI_PATCH 0
+#define COLOR_EMOJI_PATCH 1
 
 /* Minor patch to enable the use of Ctrl+v (XA_PRIMARY) and Ctrl+Shift+v (CLIPBOARD) to paste.
  * By default dmenu only supports Ctrl+y and Ctrl+Shift+y to paste.
@@ -70,6 +70,12 @@
  * https://tools.suckless.org/dmenu/patches/fuzzymatch/
  */
 #define FUZZYMATCH_PATCH 1
+
+/* Adds fzf-like functionality for dmenu.
+ * Refer to https://github.com/DAFF0D11/dafmenu/ for documentation and example use cases.
+ * https://github.com/DAFF0D11/dafmenu/blob/master/patches/dmenu-fzfexpect-5.1.diff
+ */
+#define FZFEXPECT_PATCH 0
 
 /* Allows dmenu's entries to be rendered in a grid by adding a new -g flag to specify
  * the number of grid columns. The -g and -l options can be used together to create a
@@ -110,19 +116,6 @@
  * https://tools.suckless.org/dmenu/patches/instant/
  */
 #define INSTANT_PATCH 0
-
-/* This patch adds basic support for json files.
- * This patch depends on the jansson library. Uncomment the relevant line in config.mk when
- * enabling this patch.
- *
- * This patch is not compatible with the multi-selection, printinputtext, pipeout and
- * non-blocking stdin patches.
- * The multi-selection patch takes precedence over this patch.
- * This patch takes precedence over non-blocking stdin, pipeout and printintputtext patches.
- *
- * https://tools.suckless.org/dmenu/patches/json/
- */
-#define JSON_PATCH 0
 
 /* This patch adds a '-h' option which sets the minimum height of a dmenu line. This helps
  * integrate dmenu with other UI elements that require a particular vertical size.
@@ -303,6 +296,13 @@
  * https://tools.suckless.org/dmenu/patches/scroll/
  */
 #define SCROLL_PATCH 1
+
+/* This patch adds -d and -D flags which separates the input into two halves; one half to be
+ * displayed in dmenu and the other to be printed to stdout. This patch takes precedence over
+ * the TSV patch.
+ * https://tools.suckless.org/dmenu/patches/separator/
+ */
+#define SEPARATOR_PATCH 0
 
 /* This patch allows the symbols, which are printed in dmenu to indicate that either the input
  * is too long or there are too many options to be shown in dmenu in one line, to be defined.
