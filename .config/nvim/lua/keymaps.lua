@@ -71,6 +71,12 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 -- Nvim-Tree
 keymap("n", "<C-n>", ":NvimTreeToggle<CR>", opts)
 
+-- Telescope
+keymap("n", "<leader>ff", "<cmd>Telescope find_files<CR>", opts)
+keymap("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", opts)
+keymap("n", "<leader>fb", "<cmd>Telescope buffers<CR>", opts)
+keymap("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", opts)
+
 -- VISUAL --
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)

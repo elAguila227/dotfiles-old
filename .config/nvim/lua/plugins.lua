@@ -59,6 +59,7 @@ return packer.startup(function(use)
     requires = "kyazdani42/nvim-web-devicons"         -- icon support
   }
 
+  -- dashboard
   -- use "mhinz/vim-startify"
   -- use "glepnir/dashboard-nvim"
   -- use {
@@ -68,12 +69,12 @@ return packer.startup(function(use)
   --   end
   -- }
 
-  -- -- telescope
-  -- use {
-  --   'nvim-telescope/telescope.nvim', tag = '0.1.0',
-  --   -- or                            , branch = '0.1.x',
-  --   requires = { {'nvim-lua/plenary.nvim'} }
-  -- }
+  -- telescope
+  use {
+    'nvim-telescope/telescope.nvim', tag = '0.1.0',
+    -- or                            , branch = '0.1.x',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
 
   -- bufferline
   use { 'akinsho/bufferline.nvim',
