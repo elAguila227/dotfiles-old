@@ -71,12 +71,6 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 -- Nvim-Tree
 keymap("n", "<C-n>", ":NvimTreeToggle<CR>", opts)
 
--- Telescope
-keymap("n", "<leader>ff", "<cmd>Telescope find_files<CR>", opts)
-keymap("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", opts)
-keymap("n", "<leader>fb", "<cmd>Telescope buffers<CR>", opts)
-keymap("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", opts)
-
 -- VISUAL --
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
@@ -97,3 +91,14 @@ keymap("n", "<leader><leader>d", ":call ToggleDeadKeys()<CR>", opts)
 keymap("i", "<leader><leader>d", "<ESC>:call ToggleDeadKeys()<CR>a", opts)
 keymap("n", "<leader><leader>i", ":call ToggleIPA()<CR>", opts)
 keymap("i", "<leader><leader>i", "<ESC>:call ToggleIPA()<CR>a", opts)
+
+-- Telescope
+keymap("n", "<leader>ff", "<cmd>Telescope find_files find_command=rg,--hidden,--files<CR>", opts)
+keymap("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", opts)
+keymap("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", opts)
+keymap("n", "<leader>fb", "<cmd>Telescope buffers<CR>", opts)
+keymap("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", opts)
+
+-- Dashboard
+keymap("n", "<leader>W", "<cmd>SessionSave<CR>", opts)
+keymap("n", "<leader>sl", "<cmd>SessionLoad<CR>", opts)

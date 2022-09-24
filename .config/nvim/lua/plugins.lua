@@ -61,7 +61,7 @@ return packer.startup(function(use)
 
   -- dashboard
   -- use "mhinz/vim-startify"
-  -- use "glepnir/dashboard-nvim"
+  use "glepnir/dashboard-nvim"
   -- use {
   --   'goolord/alpha-nvim',
   --   config = function ()
