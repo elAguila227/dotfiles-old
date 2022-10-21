@@ -29,7 +29,7 @@
  */
 #define ALPHA_GRADIENT_PATCH 0
 
-/* This patch allows st to reize to any pixel size rather than snapping to character width/height.
+/* This patch allows st to resize to any pixel size rather than snapping to character width/height.
  * https://st.suckless.org/patches/anysize/
  */
 #define ANYSIZE_PATCH 0
@@ -101,7 +101,7 @@
  * restores the window title (for instance nvim does this when opening and closing).
  * https://st.suckless.org/patches/csi_22_23/
  */
-#define CSI_22_23_PATCH 1
+#define CSI_22_23_PATCH 0
 
 /* According to the specification (see link in BLINKING_CURSOR_PATCH) the "Set cursor style
  * (DECSCUSR), VT520." escape sequences define both values of 0 and 1 as a blinking block,
@@ -235,7 +235,7 @@
  * same CWD (current working directory) as the original st instance.
  * https://st.suckless.org/patches/newterm/
  */
-#define NEWTERM_PATCH 1
+#define NEWTERM_PATCH 0
 
 /* This patch will set the _MOTIF_WM_HINTS property for the st window which, if the window manager
  * respects it, will show the st window without window decorations.
@@ -267,12 +267,12 @@
  * program of choice, e.g. open a file, view an image, open a URL.
  * https://st.suckless.org/patches/right_click_to_plumb/
  */
-#define RIGHTCLICKTOPLUMB_PATCH 1
+#define RIGHTCLICKTOPLUMB_PATCH 0
 
 /* Scroll back through terminal output using Shift+{PageUp, PageDown}.
  * https://st.suckless.org/patches/scrollback/
  */
-#define SCROLLBACK_PATCH 0
+#define SCROLLBACK_PATCH 1
 
 /* Scroll back through terminal output using Shift+MouseWheel.
  * This variant depends on SCROLLBACK_PATCH being enabled.
@@ -284,7 +284,7 @@
  * This variant depends on SCROLLBACK_PATCH being enabled.
  * https://st.suckless.org/patches/scrollback/
  */
-#define SCROLLBACK_MOUSE_ALTSCREEN_PATCH 0
+#define SCROLLBACK_MOUSE_ALTSCREEN_PATCH 1
 
 /* This is the single drawable buffer patch as outlined in the FAQ to get images
  * in w3m to display. While this patch does not break the alpha patch it images
@@ -299,11 +299,6 @@
  *      not specific to this variant of st - the same issue is present in
  *      the xterm implementation. This is likely an issue of sixel height
  *      not being detected correctly.
- *    - If combined with the alpha patch sixel graphics disappear (become white)
- *      when transparent and rendered against a white background. This is believed
- *      to be related to how the sixel graphics use RGB colors instead of RGBA.
- *      A pull request or instructions for how to properly add alpha support for
- *      sixel graphics would be very welcome.
  *
  * Note that you need to uncomment the corresponding lines in config.mk when including this patch.
  * This patch is incompatible with the W3M patch.

@@ -44,15 +44,33 @@ return packer.startup(function(use)
   use "numToStr/Comment.nvim"
   use "windwp/nvim-ts-autotag"
 
+  use({
+      "RRethy/vim-hexokinase",
+      run = "make hexokinase",
+      setup = function()
+          vim.g.Hexokinase_highlighters = { "virtual" }
+      end,
+  })
+
   use "LukeSmithxyz/vimling"
 
   -- toggleterm
-  use {"akinsho/toggleterm.nvim", tag = 'v1.*', config = function()
-  require("toggleterm").setup()
-  end}
+  use {"akinsho/toggleterm.nvim", tag = '*', -- config = function()
+  -- require("toggleterm").setup()
+  -- end
+  }
 
   -- surround
-  use "tpope/vim-surround"
+  -- use "tpope/vim-surround"
+  use({
+    "kylechui/nvim-surround",
+    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+    -- config = function()
+    --   require("nvim-surround").setup({
+    --     -- Configuration here, or leave empty to use defaults
+    --   })
+    -- end
+  })
 
   -- nvim-tree
   use { "kyazdani42/nvim-tree.lua",

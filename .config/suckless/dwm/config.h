@@ -3,11 +3,11 @@
 /* appearance */
 #if ROUNDED_CORNERS_PATCH
 static const unsigned int borderpx       = 0;   /* border pixel of windows */
-static const int corner_radius           = 7;
+static const int corner_radius           = 11;
 #else
 static const unsigned int borderpx       = 2;   /* border pixel of windows */
 #endif // ROUNDED_CORNERS_PATCH
-static const unsigned int snap           = 32;  /* snap pixel */
+static const unsigned int snap           = 16;  /* snap pixel */
 #if SWALLOW_PATCH
 static const int swallowfloating         = 0;   /* 1 means swallow floating windows by default */
 #endif // SWALLOW_PATCH
@@ -57,7 +57,7 @@ static const int vertpad                 = 10;  /* vertical padding of bar */
 static const int sidepad                 = 10;  /* horizontal padding of bar */
 #endif // BAR_PADDING_PATCH
 #if BAR_WINICON_PATCH
-#define ICONSIZE 20    /* icon size */
+#define ICONSIZE 16    /* icon size */
 #define ICONSPACING 5  /* space between icon and title */
 #endif // BAR_WINICON_PATCH
 #if FOCUSONCLICK_PATCH
@@ -91,7 +91,7 @@ static const int vertpadbar              = 8;   /* vertical padding for statusba
 static const char buttonbar[]            = "﫻";
 #endif // BAR_STATUSBUTTON_PATCH
 #if BAR_SYSTRAY_PATCH
-static const unsigned int systrayspacing = 1;   /* systray spacing */
+static const unsigned int systrayspacing = 6;   /* systray spacing */
 static const int showsystray             = 1;   /* 0 means no systray */
 #endif // BAR_SYSTRAY_PATCH
 #if BAR_TAGLABELS_PATCH
@@ -121,6 +121,16 @@ static const int ulineall = 0;                  /* 1 to show underline on all ta
  * like rofi -dmenu. */
 #define NAMETAG_COMMAND "dmenu < /dev/null"
 #endif // NAMETAG_PATCH
+
+#if ALT_TAB_PATCH
+/* alt-tab configuration */
+static const unsigned int tabmodkey        = 0x40; /* (Alt) when this key is held down the alt-tab functionality stays active. Must be the same modifier as used to run alttabstart */
+static const unsigned int tabcyclekey      = 0x17; /* (Tab) when this key is hit the menu moves one position forward in client stack. Must be the same key as used to run alttabstart */
+static const unsigned int tabposy          = 1;    /* tab position on Y axis, 0 = top, 1 = center, 2 = bottom */
+static const unsigned int tabposx          = 1;    /* tab position on X axis, 0 = left, 1 = center, 2 = right */
+static const unsigned int maxwtab          = 600;  /* tab menu width */
+static const unsigned int maxhtab          = 200;  /* tab menu height */
+#endif // ALT_TAB_PATCH
 
 /* Indicators: see patch/bar_indicators.h for options */
 static int tagindicatortype              = INDICATOR_TOP_LEFT_SQUARE;
@@ -387,11 +397,11 @@ static const char *layoutmenu_cmd = "layoutmenu.sh";
 #if COOL_AUTOSTART_PATCH
 static const char *const autostart[] = {
     "dwmblocks", NULL,
-    "launchdunst", NULL,
     "autorandr", "--change", NULL,
     "picom", "--experimental-backends", NULL,
     "udiskie", NULL,
     "unclutter", NULL,
+    "launchdunst", NULL,
     "setxkbmap", "-option", "caps:escape", NULL,
     "check-idle-start", NULL,
     "keepassxc", NULL,
@@ -490,14 +500,18 @@ static const Rule rules[] = {
 	RULE(.wintype = WTYPE "UTILITY", .isfloating = 1)
 	RULE(.wintype = WTYPE "TOOLBAR", .isfloating = 1)
 	RULE(.wintype = WTYPE "SPLASH", .isfloating = 1)
-	RULE(.class = "Gimp", .tags = 1 << 4)
-	RULE(.class = "Firefox", .tags = 1 << 7)
-	#if RENAMED_SCRATCHPADS_PATCH
+	// RULE(.class = "Gimp", .tags = 1 << 4)
+	// RULE(.class = "Firefox", .tags = 1 << 7)
+	#if RENAMED_SCRATCHPADS_PATCH && SWALLOW_PATCH
+	RULE(.instance = "spterm", .scratchkey = 's', .isterminal = 1, .isfloating = 1)
+	#elif RENAMED_SCRATCHPADS_PATCH
 	RULE(.instance = "spterm", .scratchkey = 's', .isfloating = 1)
+	#elif SCRATCHPADS_PATCH && SWALLOW_PATCH
+	RULE(.instance = "spterm", .tags = SPTAG(0), .isterminal =1, .isfloating = 1)
 	#elif SCRATCHPADS_PATCH
 	RULE(.instance = "spterm", .tags = SPTAG(0), .isfloating = 1)
 	#endif // SCRATCHPADS_PATCH
-	RULE(.class = "Onboard", .isfloating = 1)
+  RULE(.class = "Onboard", .isfloating = 1)
 };
 
 #if MONITOR_RULES_PATCH
@@ -864,6 +878,9 @@ static const char *dmenucmd[] = {
 	#endif // BAR_DMENUMATCHTOP_PATCH
 	NULL
 };
+
+#define ROFI(mode) { .v = (const char*[]){ "rofi", "-show", mode, NULL } }
+
 static const char *termcmd[]  = { "st", NULL };
 
 static const char *jgmenucmd[]  = { "jgmenu_run", NULL };
@@ -898,7 +915,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Escape,     setkeymode,             {.ui = COMMANDMODE} },
 	#endif // KEYMODES_PATCH
 	{ MODKEY|ShiftMask,             XK_q,          spawn,                  SHCMD("dwm-logout") },
-	{ MODKEY,                       XK_d,          spawn,                  {.v = dmenucmd } },
+	{ MODKEY,                       XK_d,          spawn,                  ROFI("drun") },
+	{ MODKEY|ShiftMask,             XK_d,          spawn,                  ROFI("run") },
 	{ MODKEY,                       XK_Return,     spawn,                  {.v = termcmd } },
 	{ MODKEY,                       XK_w,          spawn,                  SHCMD("librewolf") },
 	{ MODKEY,                       XK_backslash,  spawn,                  SHCMD("screenshot-maim -c") },
@@ -1037,7 +1055,11 @@ static const Key keys[] = {
 	{ MODKEY|Mod1Mask,              XK_o,          togglegaps,             {0} },
 	{ MODKEY|Mod1Mask,              XK_0,          defaultgaps,            {0} },
 	#endif // VANITYGAPS_PATCH
+	#if ALT_TAB_PATCH
+	{ Mod1Mask,                     XK_Tab,        alttabstart,            {0} },
+	#else
 	{ MODKEY,                       XK_Tab,        view,                   {0} },
+	#endif // ALT_TAB_PATCH
 	#if SHIFTTAG_PATCH
 	{ MODKEY|ShiftMask,             XK_Left,       shifttag,               { .i = -1 } }, // note keybinding conflict with focusadjacenttag tagtoleft
 	{ MODKEY|ShiftMask,             XK_Right,      shifttag,               { .i = +1 } }, // note keybinding conflict with focusadjacenttag tagtoright

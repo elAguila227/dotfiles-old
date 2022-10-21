@@ -49,7 +49,8 @@ static char *url_opener = "xdg-open";
 static char *shell = "/bin/sh";
 char *utmp = NULL;
 /* scroll program: to enable use a string like "scroll" */
-char *scroll = "scroll";
+// char *scroll = "scroll";
+char *scroll = NULL;
 char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
 /* identification sequence returned in DA and DECID */
@@ -396,13 +397,21 @@ static Shortcut shortcuts[] = {
 	{ MODKEY,               XK_0,           zoomreset,       {.f =  0} },
 	{ TERMMOD,              XK_C,           clipcopy,        {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,       {.i =  0} },
+	#if ALPHA_PATCH
+	{ TERMMOD,              XK_plus,         changealpha,     {.f = +0.05} },
+	{ TERMMOD,              XK_underscore,   changealpha,     {.f = -0.05} },
+	#if ALPHA_FOCUS_HIGHLIGHT_PATCH
+	//{ TERMMOD,              XK_,           changealphaunfocused, {.f = +0.05} },
+	//{ TERMMOD,              XK_,           changealphaunfocused, {.f = -0.05} },
+	#endif // ALPHA_FOCUS_HIGHLIGHT_PATCH
+	#endif // ALPHA_PATCH
 	#if SCROLLBACK_PATCH
 	{ ShiftMask,            XK_Page_Up,     kscrollup,       {.i = -1}, S_PRI },
 	{ ShiftMask,            XK_Page_Down,   kscrolldown,     {.i = -1}, S_PRI },
+	{ MODKEY,               XK_k,           kscrollup,       {.i = 1},      0, S_PRI },
+	{ MODKEY,               XK_j,           kscrolldown,     {.i = 1},      0, S_PRI },
 	#endif // SCROLLBACK_PATCH
-	{ MODKEY,               XK_k,           ttysend,         {.s = "\031"}, 0, 1 },
-	{ MODKEY,               XK_j,           ttysend,         {.s = "\005"}, 0, 1 },
-	#if CLIPBOARD_PATCH
+  #if CLIPBOARD_PATCH
 	{ TERMMOD,              XK_Y,           clippaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      clippaste,       {.i =  0} },
 	#else
@@ -411,10 +420,10 @@ static Shortcut shortcuts[] = {
 	#endif // CLIPBOARD_PATCH
 	{ TERMMOD,              XK_Num_Lock,    numlock,         {.i =  0} },
 	#if COPYURL_PATCH || COPYURL_HIGHLIGHT_SELECTED_URLS_PATCH
-	{ MODKEY,               XK_l,           copyurl,         {.i =  0} },
+	{ TERMMOD,              XK_L,           copyurl,         {.i =  0} },
 	#endif // COPYURL_PATCH
 	#if OPENCOPIED_PATCH
-	{ MODKEY,               XK_o,           opencopied,      {.v = "xdg-open"} },
+	{ TERMMOD,              XK_O,           opencopied,      {.v = "xdg-open"} },
 	#endif // OPENCOPIED_PATCH
 	#if NEWTERM_PATCH
 	{ TERMMOD,              XK_Return,      newterm,         {.i =  0} },
@@ -426,7 +435,7 @@ static Shortcut shortcuts[] = {
 	#endif // EXTERNALPIPEIN_PATCH
 	#endif // EXTERNALPIPE_PATCH
 	#if KEYBOARDSELECT_PATCH
-	{ TERMMOD,              XK_Escape,      keyboard_select, { 0 } },
+	{ MODKEY,               XK_Escape,      keyboard_select, { 0 } },
 	#endif // KEYBOARDSELECT_PATCH
 	#if ISO14755_PATCH
 	{ TERMMOD,              XK_I,           iso14755,        {.i =  0} },

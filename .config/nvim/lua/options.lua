@@ -48,6 +48,7 @@ local options = {
 
   -- MOUSE SUPPORT
   mouse = "a",
+  -- mousemodel = "extend",
 }
 
 for k, v in pairs(options) do
@@ -66,12 +67,15 @@ vim.opt.iskeyword:append "-"
 
 vim.cmd [[au TextYankPost * silent! lua vim.highlight.on_yank()]]               -- highlight yanked text
 
+vim.cmd [[au InsertEnter * silent! set norelativenumber]]                       -- change to absolute numbers on insert mode
+vim.cmd [[au InsertLeave * silent! set relativenumber]]                         -- change to relativenumber on exit insert mode
+
 vim.cmd [[au BufRead,BufNewFile *.java set foldmethod=marker foldmarker={,}]]   -- better folds for java
 vim.cmd [[au BufEnter * setlocal formatoptions-=cro]]                           -- no auto comment on writing
 vim.cmd [[au BufRead,BufNewFile *.ens set filetype=asm]]                        -- better syntax on ens files
 vim.cmd [[au BufWritePre * %s/\s\+$//e]]                                        -- remove trailing spaces
 
 vim.cmd [[au Filetype rmd map <leader><leader>r :!Rscript -e "rmarkdown::render('%')"<CR>]]
-vim.cmd [[au Filetype tex map <leader><leader>r :!pdflatex %<CR>]]
+vim.cmd [[au Filetype tex map <leader><leader>r :!pdflatex % && pdflatex % && rm %:r.log; rm %:r.toc; rm %:r.aux<CR>]]
 
 -- vim.cmd [[autocmd InsertEnter * norm zz]]                                       -- centers cursor on screen when writing

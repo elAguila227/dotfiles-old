@@ -1,5 +1,5 @@
 # dwm version
-VERSION = 6.3
+VERSION = 6.4
 
 # Customize below to fit your system
 
@@ -43,10 +43,10 @@ XRENDER = -lXrender
 #YAJLINC = -I/usr/include/yajl
 
 # Uncomment this for the rounded corners patch / ROUNDED_CORNERS_PATCH
-#XEXTLIB = -lXext
+XEXTLIB = -lXext
 
 # Uncomment this for the swallow patch / SWALLOW_PATCH
-#XCBLIBS = -lX11-xcb -lxcb -lxcb-res
+XCBLIBS = -lX11-xcb -lxcb -lxcb-res
 
 # This is needed for the winicon and tagpreview patches / BAR_WINICON_PATCH / BAR_TAGPREVIEW_PATCH
 IMLIB2LIBS = -lImlib2

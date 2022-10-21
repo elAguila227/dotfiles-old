@@ -29,6 +29,8 @@ lualine.setup {
     theme = 'pywal-nvim',
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
+    -- component_separators = { left = '|', right = '|'},
+    -- section_separators = { left = '', right = ''},
     disabled_filetypes = {
       "alpha",
       "dashboard",
@@ -65,5 +67,5 @@ lualine.setup {
   tabline = {},
   winbar = {},
   inactive_winbar = {},
-  extensions = {}
+  extensions = {'nvim-tree'}
 }

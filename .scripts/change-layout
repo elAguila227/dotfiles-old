@@ -6,17 +6,18 @@ for i in ${!layouts[@]}; do
     if [[ ${layouts[$i]} == $current ]]; then
         setxkbmap ${layouts[($i+1)%${#layouts[@]}]} &&
         notify-send "Changed layout: ${layouts[($i+1)%${#layouts[@]}]}"
+        pidof dwmblocks && pkill -RTMIN+10 dwmblocks
         exit 0
     fi
 done
 
 layouts+=($current)
 
-choise=$(printf '%s\n' ${layouts[@]} | dmenu -p "Layout '$current', Change?" -l 7)
+choise=$(printf '%s\n' ${layouts[@]} | rofi -dmenu -p "Layout '$current', Change?" -l 7)
 
 if [[ $choise != "" ]]; then
     setxkbmap $choise &&
     notify-send "Changed layout: $choise"
+    pidof dwmblocks && pkill -RTMIN+10 dwmblocks
 fi
 
-pidof dwmblocks && pkill -RTMIN+10 dwmblocks

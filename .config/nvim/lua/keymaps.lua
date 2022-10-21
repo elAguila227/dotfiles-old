@@ -21,6 +21,7 @@ vim.g.maplocalleader = " "
 -- NORMAL --
 keymap("n", "<leader>w", ":w<CR>", opts)
 keymap("n", "<leader>q", ":Bdelete<CR>", opts)
+keymap("n", "<leader><leader>q", ":q<CR>", opts)
 keymap("n", "<leader>Q", ":qa<CR>", opts)
 
 -- Enable spell checking
@@ -68,9 +69,6 @@ keymap("n", "<C-Down>", ":resize +2<CR>", opts)
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
--- Nvim-Tree
-keymap("n", "<C-n>", ":NvimTreeToggle<CR>", opts)
-
 -- VISUAL --
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
@@ -86,6 +84,9 @@ keymap("v", "<A-J>", ":move '>+1<CR>gv-gv", opts)
 keymap("v", "<A-K>", ":move '<-2<CR>gv-gv", opts)
 
 -- PLUGINS --
+-- Nvim-Tree
+keymap("n", "<C-n>", ":NvimTreeToggle<CR>", opts)
+
 -- vimling bindigs
 keymap("n", "<leader><leader>d", ":call ToggleDeadKeys()<CR>", opts)
 keymap("i", "<leader><leader>d", "<ESC>:call ToggleDeadKeys()<CR>a", opts)
@@ -102,3 +103,10 @@ keymap("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", opts)
 -- Dashboard
 keymap("n", "<leader>W", "<cmd>SessionSave<CR>", opts)
 keymap("n", "<leader>sl", "<cmd>SessionLoad<CR>", opts)
+
+-- bufferline
+keymap("n", "<A-l>", "<cmd>BufferLineMoveNext<CR>", opts)
+keymap("n", "<A-h>", "<cmd>BufferLineMovePrev<CR>", opts)
+keymap("n", "<TAB>", "<cmd>BufferLineCycleNext<CR>", opts)
+keymap("n", "<S-TAB>", "<cmd>BufferLineCyclePrev<CR>", opts)
+keymap("n", "<A-0>", "<cmd>BufferLineTogglePin<CR>", opts)

@@ -12,7 +12,8 @@ bufferline.setup {
     left_mouse_command = "buffer %d",    -- can be a string | function, see "Mouse actions"
     middle_mouse_command = nil,          -- can be a string | function, see "Mouse actions"
     indicator = {
-      icon = '▎', -- this should be omitted if indicator style is not 'icon'
+      -- icon = '▎', -- this should be omitted if indicator style is not 'icon'
+      icon = '', -- this should be omitted if indicator style is not 'icon'
       style = 'icon', -- 'icon' | 'underline' | 'none'
     },
     buffer_close_icon = '',
@@ -34,7 +35,7 @@ bufferline.setup {
     max_prefix_length = 30, -- prefix used when a buffer is de-duplicated
     truncate_names = true, -- whether or not tab names should be truncated
     tab_size = 21,
-    diagnostics = false, -- false | "nvim_lsp" | "coc"
+    diagnostics = "nvim_lsp", -- false | "nvim_lsp" | "coc"
     diagnostics_update_in_insert = false,
     -- The diagnostics indicator can be set to nil to keep the buffer name highlight but delete the highlighting
     -- diagnostics_indicator = function(count, level, diagnostics_dict, context)
@@ -77,7 +78,8 @@ bufferline.setup {
     persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
     -- can also be a table containing 2 custom separators
     -- [focused and unfocused]. eg: { '|', '|' }
-    separator_style = "thin", -- "slant" | "thick" | "thin" | { 'any', 'any' },
+    -- separator_style = "thin", -- "slant" | "thick" | "thin" | { 'any', 'any' },
+    separator_style = { '|', '|'}, -- "slant" | "thick" | "thin" | { 'any', 'any' },
     enforce_regular_tabs = false,
     always_show_bufferline = true,
     -- hover = {
@@ -85,7 +87,7 @@ bufferline.setup {
     --   delay = 200,
     --   reveal = {'close'}
     -- },
-    -- sort_by = 'relative_directory', -- 'insert_after_current' |'insert_at_end' | 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function(buffer_a, buffer_b)
+    sort_by = 'insert_at_end', -- 'insert_after_current' |'insert_at_end' | 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function(buffer_a, buffer_b)
     --   -- add custom logic
     --   return buffer_a.modified > buffer_b.modified
     -- end
