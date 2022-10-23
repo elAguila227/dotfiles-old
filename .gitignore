@@ -1,0 +1,3 @@
+.config/nvim/.sessions/*
+.config/nvim/plugin/*
+*.log

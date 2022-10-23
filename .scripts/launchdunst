@@ -2,6 +2,8 @@
 
 pidof dunst && killall dunst
 
-dunst_xr_theme_changer
+# dunst_xr_theme_changer
+#
+# dunst -conf .config/dunst/dunstrc_xr_colors > /dev/null 2>&1 &
 
-dunst -conf .config/dunst/dunstrc_xr_colors > /dev/null 2>&1 &
+dunst > /dev/null 2>&1 &

@@ -129,7 +129,7 @@ static const unsigned int tabcyclekey      = 0x17; /* (Tab) when this key is hit
 static const unsigned int tabposy          = 1;    /* tab position on Y axis, 0 = top, 1 = center, 2 = bottom */
 static const unsigned int tabposx          = 1;    /* tab position on X axis, 0 = left, 1 = center, 2 = right */
 static const unsigned int maxwtab          = 600;  /* tab menu width */
-static const unsigned int maxhtab          = 200;  /* tab menu height */
+static const unsigned int maxhtab          = 100;  /* tab menu height */
 #endif // ALT_TAB_PATCH
 
 /* Indicators: see patch/bar_indicators.h for options */
@@ -504,10 +504,12 @@ static const Rule rules[] = {
 	// RULE(.class = "Firefox", .tags = 1 << 7)
 	#if RENAMED_SCRATCHPADS_PATCH && SWALLOW_PATCH
 	RULE(.instance = "spterm", .scratchkey = 's', .isterminal = 1, .isfloating = 1)
+	RULE(.instance = "st", .isterminal = 1)
 	#elif RENAMED_SCRATCHPADS_PATCH
 	RULE(.instance = "spterm", .scratchkey = 's', .isfloating = 1)
 	#elif SCRATCHPADS_PATCH && SWALLOW_PATCH
 	RULE(.instance = "spterm", .tags = SPTAG(0), .isterminal =1, .isfloating = 1)
+	RULE(.instance = "st", .isterminal = 1)
 	#elif SCRATCHPADS_PATCH
 	RULE(.instance = "spterm", .tags = SPTAG(0), .isfloating = 1)
 	#endif // SCRATCHPADS_PATCH

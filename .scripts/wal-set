@@ -1,24 +1,40 @@
 #!/bin/bash
 cwd=$(pwd)
 
-sxiv -fto $HOME/.config/wallpapers/*.{jpg,JPG,gif,GIF,png,PNG} | xargs -r wal -i
+wall=$(sxiv -fto $HOME/.config/wallpapers/*.{jpg,JPG,gif,GIF,png,PNG})
+
+if [[ $wall == "" ]]; then notify-send "Theme change aborted"; exit 1; fi; dunstify -t 0 "Changing Theme"
+
+wal -i $wall; dunstify -t 0 -h int:value:20 "Changing Theme"
 
 xrdb -merge $HOME/.cache/wal/colors.Xresources
 
 xdotool key Super_L+shift+F5
 
-genzathurarc > $HOME/.config/zathura/zathurarc && cat $HOME/.config/zathura/conf >> $HOME/.config/zathura/zathurarc
+# cat $HOME/.config/zathura/zathura.conf > $HOME/.config/zathura/zathurarc && cat $HOME/.cache/wal/colors-zathura >> $HOME/.config/zathura/zathurarc
 
 cat $HOME/.config/jgmenu/jgmenu.conf > $HOME/.config/jgmenu/jgmenurc && cat $HOME/.cache/wal/colors-jgmenurc >> $HOME/.config/jgmenu/jgmenurc
 
-$HOME/.local/bin/razer-cli -a
+cat $HOME/.config/dunst/dunst.conf > $HOME/.config/dunst/dunstrc && cat $HOME/.cache/wal/colors-dunstrc >> $HOME/.config/dunst/dunstrc
 
-oomox-cli $HOME/.cache/wal/colors-oomox
-/opt/oomox/plugins/icons_numix/change_color.sh -o oomox-colors-oomox ~/.cache/wal/colors-oomox
+dunstify -t 0 -h int:value:30 "Changing Theme"
+
+$HOME/.local/bin/razer-cli -a; dunstify -t 0 -h int:value:40 "Changing Theme"
+
+oomox-cli $HOME/.cache/wal/colors-oomox; dunstify -t 0 -h int:value:60 "Changing Theme"
+
+/opt/oomox/plugins/icons_numix/change_color.sh -o oomox-colors-oomox $HOME/.cache/wal/colors-oomox; dunstify -t 0 -h int:value:70 "Changing Theme"
 
 # convert "$(cat $HOME/.cache/wal/wal)" -fill "$(xrdb -query | grep color0 | head -1 | awk '{print $2}')" -colorize 40% -filter Gaussian -blur 0x9 "/usr/share/wallpapers/wal"
 
-launchdunst
+sudo cp -r $HOME/.themes/oomox-colors-oomox /usr/share/themes
+sudo cp -r $HOME/.icons/oomox-colors-oomox /usr/share/icons
+
+dunstify -t 0 -h int:value:85 "Changing Theme"
+
+sudo convert $wall -modulate 70,55 -blur 0x8 /usr/share/wallpapers/wal.jpg; dunstify -t 0 -h int:value:95 "Changing Theme"
+
+launchdunst; dunstify -t 10 -h int:value:190 "Changing Theme"
 
 notify-send "Theme successfully changed"
 

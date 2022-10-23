@@ -96,7 +96,7 @@ keymap("i", "<leader><leader>i", "<ESC>:call ToggleIPA()<CR>a", opts)
 -- Telescope
 keymap("n", "<leader>ff", "<cmd>Telescope find_files find_command=rg,--hidden,--files<CR>", opts)
 keymap("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", opts)
-keymap("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", opts)
+keymap("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", opts)
 keymap("n", "<leader>fb", "<cmd>Telescope buffers<CR>", opts)
 keymap("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", opts)
 

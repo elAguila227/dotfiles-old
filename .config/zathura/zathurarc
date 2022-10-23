@@ -1,4 +1,3 @@
-
 set sandbox normal
 set page-padding 1
 set selection-clipboard clipboard
@@ -10,3 +9,5 @@ map R rotate
 map K zoom in
 map J zoom out
 map i recolor
+
+include ../../.cache/wal/colors-zathura

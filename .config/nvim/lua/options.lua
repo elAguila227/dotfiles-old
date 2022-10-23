@@ -63,19 +63,30 @@ autocmd CmdlineLeave /,\? :set nohlsearch
 augroup END
 ]]
 
-vim.opt.iskeyword:append "-"
+-- vim.opt.iskeyword:append "-"
 
 vim.cmd [[au TextYankPost * silent! lua vim.highlight.on_yank()]]               -- highlight yanked text
 
 vim.cmd [[au InsertEnter * silent! set norelativenumber]]                       -- change to absolute numbers on insert mode
 vim.cmd [[au InsertLeave * silent! set relativenumber]]                         -- change to relativenumber on exit insert mode
 
-vim.cmd [[au BufRead,BufNewFile *.java set foldmethod=marker foldmarker={,}]]   -- better folds for java
-vim.cmd [[au BufEnter * setlocal formatoptions-=cro]]                           -- no auto comment on writing
-vim.cmd [[au BufRead,BufNewFile *.ens set filetype=asm]]                        -- better syntax on ens files
-vim.cmd [[au BufWritePre * %s/\s\+$//e]]                                        -- remove trailing spaces
+vim.cmd [[au BufWritePre * %s/\s\+$//e]]                                             -- remove trailing spaces
+vim.cmd [[au BufEnter * setlocal formatoptions-=cro]]                                -- no auto comment on writing
+vim.cmd [[au BufRead,BufNewFile *.java setlocal foldmethod=marker foldmarker={,}]]   -- better folds for java
+vim.cmd [[au BufRead,BufNewFile *.ens setlocal filetype=asm]]                        -- better syntax on ens files
 
-vim.cmd [[au Filetype rmd map <leader><leader>r :!Rscript -e "rmarkdown::render('%')"<CR>]]
-vim.cmd [[au Filetype tex map <leader><leader>r :!pdflatex % && pdflatex % && rm %:r.log; rm %:r.toc; rm %:r.aux<CR>]]
+-- pdf rendering
+vim.cmd [[au Filetype rmd nnoremap <buffer> <leader><leader>r :!Rscript -e "rmarkdown::render('%')"<CR>]]
+vim.cmd [[au Filetype tex nnoremap <buffer> <leader><leader>r :!pdflatex % && pdflatex % && rm %:r.log; rm %:r.toc; rm %:r.aux<CR>]]
+
+-- dashboard keybinds
+vim.cmd [[
+augroup dashboard
+autocmd!
+au Filetype dashboard nmap <buffer> e :DashboardNewFile<CR>
+au Filetype dashboard nmap <buffer> q :qa<CR>
+au Filetype dashboard nmap <buffer> <leader>c :cd ~/.config/nvim/ \| SessionLoad<CR>
+augroup END
+]]
 
 -- vim.cmd [[autocmd InsertEnter * norm zz]]                                       -- centers cursor on screen when writing

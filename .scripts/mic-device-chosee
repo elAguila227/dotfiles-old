@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+pactl list short sources | grep "fallback" | awk '{ print $2 }' | rofi -dmenu -p "Set source" -l 3 | xargs pactl set-default-source

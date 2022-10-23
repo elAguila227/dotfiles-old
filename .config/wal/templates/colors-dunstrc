@@ -1,0 +1,20 @@
+[urgency_low]
+    background = "{color0}D9"
+    foreground = "{color4}"
+    frame_color = "{color4}"
+    highlight = "{color2}"
+    timeout = 10
+
+[urgency_normal]
+    background = "{color0}D9"
+    foreground = "{color7}"
+    frame_color = "{color7}"
+    highlight = "{color2}"
+    timeout = 10
+
+[urgency_critical]
+    background = "{color0}D9"
+    foreground = "{color1}"
+    frame_color = "{color1}"
+    highlight = "{color2}"
+    timeout = 0

@@ -5,7 +5,6 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-alias ls='ls --color=auto'
 PS1='\[\033[2;37m\][\[\033[0;32m\]\u@\h \[\033[0;34m\]\W\[\033[2;37m\]] \[\033[0;37m\]\$ '
 
 export HISTCONTROL=ignorebpth:erasedups
@@ -26,7 +25,7 @@ set -o vi
 bind -m vi-command 'control-l: clear-screen'
 bind -m vi-insert 'Control-l: clear-screen'
 
-if [ -d "$HOME/.scripts/" ] ;
+if [ -d "$HOME/.local/bin/" ] ;
     then PATH="$HOME/.local/bin:$PATH"
 fi
 
@@ -43,20 +42,33 @@ fi
 # ignore upper and lowercase whrn TAB completion
 bind "set completion-ignore-case on"
 
-# dmenu pywal integration
 # Import the colors
 if [ -d "$HOME/.cache/wal/" ] ;
     then . "${HOME}/.cache/wal/colors.sh"
 fi
 
-# Create the alias
-alias dmenu='dmenu -nb "$color0" -nf "$color15" -sb "$color1" -sf "$color15"'
-alias dmenu_run='dmenu_run -nb "$color0" -nf "$color15" -sb "$color1" -sf "$color15"'
+if [ -x "$(command -v bat)" ]; then
+  cless() {
+    case "$1" in
+      *.md) glow -s dark "$1" | less -r;;
+      *) bat "$1" -p -f | less -r;;
+    esac
+  }
+  MANPAGGER="sh -c 'col -bx | bat -l man -p'"
+  alias cat='bat -p'
+  alias less='cless'
+fi
+
+if [ -x "$(command -v lsd)" ]; then
+  alias ls='lsd'
+else
+  alias ls='ls --color=auto'
+fi
 
 # list
-alias ls='ls --color=auto'
 alias la='ls -A'
 alias ll='ls -lh'
+alias lla='ls -lAh'
 alias l.="ls -A | egrep '^\.'"
 
 ## Colorize the grep command output for ease of use (good for log files)##
@@ -76,6 +88,5 @@ alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 # run in terminal: config config --local status.showUntrackedFiles no
 
-
 # Load Angular CLI autocompletion.
-source <(ng completion script)
+source <(ng completion script 2> /dev/null)

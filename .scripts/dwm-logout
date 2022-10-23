@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# A dmenu wrapper script for system functions.
+# A rofi -dmenu wrapper script for system functions.
 
 cmds="\
  shutdown	shutdown -h now
@@ -9,6 +9,6 @@ cmds="\
  logout	xdotool key Super_L+alt+control+q
  cancel"
 
-choice="$(echo "$cmds" | cut -d'	' -f 1 | dmenu -l 5)" || exit 1
+choice="$(echo "$cmds" | cut -d'	' -f 1 | rofi -dmenu -l 5)" || exit 1
 
 eval "$(echo "$cmds" | grep "^$choice	" | cut -d '	' -f2-)"
