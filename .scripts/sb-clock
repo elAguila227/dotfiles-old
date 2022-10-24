@@ -19,7 +19,7 @@
 # esac
 
 case $BUTTON in
-    1) notify-send "$(cal)" ;;
+    1) notify-send -i ' ' "$(cal)" ;;
 	3) pkill -RTMIN+1 dwmblocks ;;
 esac
 

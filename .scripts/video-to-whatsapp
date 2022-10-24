@@ -1,0 +1,29 @@
+#!/bin/bash
+
+print_usage() {
+    printf "
+Usage: $(basename $0) VIDEO [ OUTPUT ]
+
+Fix video files to send on whatsapp web
+
+"
+}
+
+if [[ ! -r $1 ]]; then
+  print_usage; exit 1
+fi
+
+if [[ $# == 2 ]]; then
+  if [[ -d $2 ]]; then
+    path="$2/whatsapp.mp4"
+  else
+    path=$2
+  fi
+else
+  path="$(pwd)/whatsapp.mp4"
+fi
+
+ffmpeg -i $1 -c:v libx264 -profile:v baseline -level 3.0 -pix_fmt yuv420p $path
+if [[ $? == 1 ]]; then
+  ffmpeg -i $1 -vf "pad=ceil(iw/2)*2:ceil(ih/2)*2" -c:v libx264 -profile:v baseline -level 3.0 -pix_fmt yuv420p $path
+fi

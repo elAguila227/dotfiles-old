@@ -1,7 +1,7 @@
 #!/bin/bash
 cwd=$(pwd)
 
-wall=$(sxiv -fto $HOME/.config/wallpapers/*.{jpg,JPG,gif,GIF,png,PNG})
+wall=$(sxiv -fto $HOME/.config/wallpapers/*.*)
 
 if [[ $wall == "" ]]; then notify-send "Theme change aborted"; exit 1; fi; dunstify -t 0 "Changing Theme"
 

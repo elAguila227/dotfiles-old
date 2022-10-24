@@ -9,7 +9,7 @@ path='/dev/null'
 a_flag='false'
 
 print_usage() {
-    printf "
+  printf "
 Usage: $(basename $0) [OPTIONS]
 
 Make screanshoots with maim.
@@ -18,52 +18,86 @@ Options:
   -p <PATH>   Set default path
   -a          Ask for path before saving
   -c          Use clipboard
-"
+  "
 }
 
 while getopts 'acp:' flag; do
   case "${flag}" in
-    a) a_flag='true'; path="$(pwd)" ;;
+    a) a_flag='true';;
     c) clipboard="| xclip -selection clipboard -t image/png -f >" ;;
     p) path="${OPTARG}" ;;
     *) print_usage
-       exit 1 ;;
+      exit 1 ;;
   esac
 done
 
 cmds="\
 麗 Select	maim -su
 ﬓ Window	maim -sut 9999999
- Full		maim -u
-爐 QR Scan
+  Full		maim -u
+櫓 QR Scan
+  Screencap
  Cancel"
 
-choice="$(echo "$cmds" | cut -d'	' -f 1 | rofi -dmenu -p "" -l 5)" || exit 1
+keys='
+configuration {
+  kb-accept-entry: "Return,KP_Enter,space,o";
+  kb-row-left: "h";
+  kb-row-right: "l";
+  kb-row-up: "Up,k";
+  kb-row-down: "Down,j";
+  kb-cancel: "Escape,q";
+}
+'
+theme='
+configuration {
+  show-icons: false;
+  hover-select: true;
+}
+#listview {
+  border: 0px;
+  padding: 0px;
+  scrollbar: false;
+}
+'
 
+choice="$(echo "$cmds" | cut -d'	' -f 1 |
+  rofi -theme-str "$keys$theme #inputbar {enabled: false;}#window {width:8em;}" -dmenu -p "" -l 6)" || exit 1
 if [[ $choice == " Cancel" ]]; then
-    exit
+  exit
 fi
 
-if [[ $a_flag == 'true' ]] || [[ $path == '' ]]; then
-    path="$(echo "$path" | rofi -dmenu -p "Set path" -l 1)" || exit 1
+if [[ $a_flag == 'true' ]] || [[ $path == '' ]] || [[ $choice == "  Screencap" ]]; then
+  path="$(pwd)"
+  path="$(echo $path | rofi -theme-str "$theme #window {width:30em;}#entry {placeholder: \"$path\";}" -dmenu -p "Set path" -l 0)" || exit 1
 fi
 
 if [[ -d $path ]]; then
-    path="$path/$(date +%s).png"
+  path="$path/$(date +%s).png"
 fi
 
 sleep 0.02
 
-if [[ $choice == "爐 QR Scan" ]]; then
-    deco="$(maim -qus | zbarimg -q --raw - )"
-    if [[ $deco != '' ]]; then
-        path="$(echo $path | sed 's/.png/.txt/')"
-        clipboard="$(echo "$clipboard" | sed 's/-t image\/png //')"
-        notify-send "QR detected"
-        eval "echo \"$deco\" "$clipboard"> $path"
-    fi
+if [[ $choice == "櫓 QR Scan" ]]; then
+  deco="$(maim -qus | zbarimg -q --raw - )"
+  if [[ $deco != '' ]]; then
+    path="$(echo $path | sed 's/.png/.txt/')"
+    clipboard="$(echo "$clipboard" | sed 's/-t image\/png //')"
+    notify-send "QR detected"
+    eval "echo \"$deco\" "$clipboard"> $path"
+  fi
+elif [[ $choice == "  Screencap" ]]; then
+  path="$(echo $path | sed 's/.png/.mp4/')"
+  region=$(slop -f "-s %wx%h -i :0.0+%x,%y")
+  if [[ $region != '' ]]; then
+    setsid -f st -c FloatFFMPEG -e ffmpeg -f x11grab $region "$path"
+    notify-send -i media-playback-record -t 0 -w recording...
+    killall ffmpeg
+  fi
+
 else
-    cmd="$(echo "$cmds" | grep "^$choice	" | cut -d '	' -f2-)"
-    eval "$cmd $clipboard $path" || exit 1
-    # notify-send "Screenshot Taken!"
+  cmd="$(echo "$cmds" | grep "^$choice	" | cut -d '	' -f2-)"
+  eval "$cmd $clipboard $path" || exit 1
+  # notify-send "Screenshot Taken!"
 fi
+

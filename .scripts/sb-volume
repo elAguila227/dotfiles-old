@@ -3,9 +3,9 @@
 # Prints the current volume or 🔇 if muted.
 
 case $BUTTON in
-  1) audio-divice-chosee ;;
+  1)  ;;
 	2) pamixer -t ;;
-  3) mic-device-chosee ;;
+  3) audio-devices-menu ;;
 	4) pamixer --allow-boost -i 5 ;;
   5) pamixer --allow-boost -d 5 ;;
 esac

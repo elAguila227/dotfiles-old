@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+sinks=($(pactl list short sinks | awk '{ print $2 }'))
+CSV="Sinks, ^checkout(sinks), audio-speakers\n"
+CSV=$CSV"Sources, ^checkout(sources), audio-input-microphone\n"
+
+CSV=$CSV"^tag(sinks)\n"
+for sink in ${sinks[@]}; do
+  name=${sink#*-}; name=${name%%-*}
+  type=${sink#*.}; type=${type%%-*}
+  case $type in
+    usb) icon="audio-headset";;
+    pci) icon="audio-card";;
+    *) icon="audio-headphones";;
+  esac
+  CSV=$CSV$(echo "$name, pactl set-default-sink $sink, $icon\n")
+done
+
+CSV=$CSV"^tag(sources)\n"
+sources=($(pactl list short sources | grep "fallback" | awk '{ print $2 }'))
+
+for source in ${sources[@]}; do
+  name=${source#*-}; name=${name%%-*}
+  type=${source#*.}; type=${type%%-*}
+  case $type in
+    usb) icon="audio-headset";;
+    pci) icon="audio-card";;
+    *) icon="audio-input-microphone";;
+  esac
+  CSV=$CSV$(echo "$name, pactl set-default-source $source, $icon\n")
+done
+
+echo -e $CSV | jgmenu --simple --at-pointer && pkill -RTMIN+2 dwmblocks

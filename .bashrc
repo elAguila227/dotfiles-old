@@ -49,10 +49,14 @@ fi
 
 if [ -x "$(command -v bat)" ]; then
   cless() {
-    case "$1" in
-      *.md) glow -s dark "$1" | less -r;;
-      *) bat "$1" -p -f | less -r;;
-    esac
+    if (( $# == 0 )) ; then
+      bat -p -f < /dev/stdin | less -r
+    else
+      case "$1" in
+        *.md) glow -s dark "$1" | less -r;;
+        *) bat "$1" -p -f | less -r;;
+      esac
+    fi
   }
   MANPAGGER="sh -c 'col -bx | bat -l man -p'"
   alias cat='bat -p'

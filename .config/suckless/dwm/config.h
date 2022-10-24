@@ -513,6 +513,7 @@ static const Rule rules[] = {
 	#elif SCRATCHPADS_PATCH
 	RULE(.instance = "spterm", .tags = SPTAG(0), .isfloating = 1)
 	#endif // SCRATCHPADS_PATCH
+	RULE(.class = "FloatFFMPEG", .tags = 1 << 8, .isfloating = 1)
   RULE(.class = "Onboard", .isfloating = 1)
 };
 
