@@ -1,6 +1,7 @@
 local opts = { noremap = true, silent = true }
 
 local term_opts = { silent = true }
+local vis_opts = { noremap = true }
 
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
@@ -24,9 +25,15 @@ keymap("n", "<leader>q", ":Bdelete<CR>", opts)
 keymap("n", "<leader><leader>q", ":q<CR>", opts)
 keymap("n", "<leader>Q", ":qa<CR>", opts)
 
+-- Better substitude
+keymap("n", "s", ":s/", vis_opts)
+keymap("n", "S", ":%s/", vis_opts)
+keymap("v", "s", ":s/", vis_opts)
+keymap("v", "S", ":%s/", vis_opts)
+
 -- Enable spell checking
-keymap("n", "<leader>s", ":setlocal spell! spelllang=en<CR>", { noremap = true })
-keymap("n", "<leader>S", ":setlocal spell! spelllang=es<CR>", { noremap = true })
+keymap("n", "<leader>s", ":setlocal spell! spelllang=en<CR>", vis_opts)
+keymap("n", "<leader>S", ":setlocal spell! spelllang=es<CR>", vis_opts)
 
 -- Folds
 keymap("n", "<leader>a", "za", opts)
@@ -35,8 +42,8 @@ keymap("n", "<leader><leader>a", "zR", opts)
 keymap("n", "<leader><leader>A", "zM", opts)
 
 -- Insert line
-keymap("n", "<A-p>", "o<ESC>k", opts)
-keymap("n", "<A-P>", "O<ESC>j", opts)
+keymap("n", "<A-p>", ":<C-u>call append(line('.'), repeat([''], v:count1))<CR>", opts)
+keymap("n", "<A-P>", ":<C-u>call append(line('.')-1, repeat([''], v:count1))<CR><C-e>", opts)
 
 -- Move text up and down
 keymap("n", "<A-J>", ":m .+1<CR>==", opts)
@@ -52,6 +59,9 @@ keymap("v", "cv", '"+p', opts)
 keymap("v", "cV", 'o<ESC>"+p', opts)
 keymap("v", "cp", '"+y', opts)
 keymap("v", "cP", '"+Y', opts)
+
+keymap("n", "<A-k>", "<C-y>", opts)
+keymap("n", "<A-j>", "<C-y>", opts)
 
 -- Navigate buffers
 keymap("n", "<TAB>", ":bnext<CR>", opts)
@@ -94,19 +104,19 @@ keymap("n", "<leader><leader>i", ":call ToggleIPA()<CR>", opts)
 keymap("i", "<leader><leader>i", "<ESC>:call ToggleIPA()<CR>a", opts)
 
 -- Telescope
-keymap("n", "<leader>ff", "<cmd>Telescope find_files find_command=rg,--hidden,--files<CR>", opts)
-keymap("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", opts)
-keymap("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", opts)
-keymap("n", "<leader>fb", "<cmd>Telescope buffers<CR>", opts)
-keymap("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", opts)
+keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
+keymap("n", "<leader>fr", ":Telescope oldfiles<CR>", opts)
+keymap("n", "<leader>fw", ":Telescope live_grep<CR>", opts)
+keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
+keymap("n", "<leader>fh", ":Telescope help_tags<CR>", opts)
 
 -- Dashboard
-keymap("n", "<leader>W", "<cmd>SessionSave<CR>", opts)
-keymap("n", "<leader>sl", "<cmd>SessionLoad<CR>", opts)
+keymap("n", "<leader>W", ":SessionSave<CR>", opts)
+keymap("n", "<leader>sl", ":SessionLoad<CR>", opts)
 
 -- bufferline
-keymap("n", "<A-l>", "<cmd>BufferLineMoveNext<CR>", opts)
-keymap("n", "<A-h>", "<cmd>BufferLineMovePrev<CR>", opts)
-keymap("n", "<TAB>", "<cmd>BufferLineCycleNext<CR>", opts)
-keymap("n", "<S-TAB>", "<cmd>BufferLineCyclePrev<CR>", opts)
-keymap("n", "<A-0>", "<cmd>BufferLineTogglePin<CR>", opts)
+keymap("n", "<A-l>", ":BufferLineMoveNext<CR>", opts)
+keymap("n", "<A-h>", ":BufferLineMovePrev<CR>", opts)
+keymap("n", "<TAB>", ":BufferLineCycleNext<CR>", opts)
+keymap("n", "<S-TAB>", ":BufferLineCyclePrev<CR>", opts)
+keymap("n", "<A-0>", ":BufferLineTogglePin<CR>", opts)

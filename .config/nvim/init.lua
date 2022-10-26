@@ -1,5 +1,2 @@
-require "options"
-require "keymaps"
-require "colorscheme"
+require "core"
 require "plugins"
-require "plugin-conf"

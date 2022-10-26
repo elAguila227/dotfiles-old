@@ -1,13 +1,13 @@
-require("plugin-conf.lsp.mason")
-require("plugin-conf.lsp.mason-lspconfig")
+require("plugins.lsp.mason")
+require("plugins.lsp.mason-lspconfig")
 require("mason-lspconfig").setup_handlers {
   -- The first entry (without a key) will be the default handler
   -- and will be called for each installed server that doesn't have
   -- a dedicated handler.
   function (server_name) -- default handler (optional)
     require("lspconfig")[server_name].setup {
-      on_attach = require("plugin-conf.lsp.handlers").on_attach,
-      capabilities = require("plugin-conf.lsp.handlers").capabilities,
+      on_attach = require("plugins.lsp.handlers").on_attach,
+      capabilities = require("plugins.lsp.handlers").capabilities,
     }
   end,
   -- Next, you can provide targeted overrides for specific servers.
@@ -23,4 +23,4 @@ if not status_ok then
 end
 
 
-require("plugin-conf.lsp.handlers").setup()
+require("plugins.lsp.handlers").setup()
