@@ -21,7 +21,7 @@ do
     case "$desktop" in
         [yY][eE][sS]|[yY]|"")
             echo "installing desktop enviroment..."
-            sudo pacman -S lightdm lightdm-gtk-greeter --noconfirm
+            sudo pacman -S lightdm lightdm-slick-greeter --noconfirm
             if [[ $? != 0 ]]; then echo "error installing lightdm"; exit 1; fi
             sudo systemctl enable lightdm.service
             if [[ $? != 0 ]]; then echo "error enableling lightdm in systemctl"; exit 1; fi
