@@ -6,7 +6,7 @@ do
     case "$nerdfont" in
         [yY][eE][sS]|[yY]|"")
             echo "installing font..."
-            yay --nocleanmenu --nodiffmenu --noeditmenu --removemake -S nerd-fonts-hack
+            yay --nocleanmenu --nodiffmenu --noeditmenu --removemake -S nerd-fonts-dejavu-complete ttf-joypixels
             if [[ $? != 0 ]]; then echo "error installing font"; exit 1; fi
             break
             ;;
