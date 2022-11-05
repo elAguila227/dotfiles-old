@@ -113,6 +113,20 @@ do
             if [[ $? != 0 ]]; then echo "error installing pywal"; exit 1; fi
             yay --nocleanmenu --nodiffmenu --noeditmenu --removemake -S themix-theme-oomox-git themix-icons-numix-git
             break
+
+            lightdmConf='
+            [Seat:*]
+            greeter-session=lightdm-slick-greeter
+            display-setup-script=/usr/bin/autorandr --change
+            '
+            slickConf='
+            [Greeter]
+            background=/usr/share/wallpapers/wal.jpg
+            theme-name=oomox-colors-oomox
+            icon-theme-name=oomox-colors-oomox
+            '
+            sudo lightdmConf >> /etc/lightdm/lightdm.conf
+            sudo slickConf >> /etc/lightdm/slick-greeter.conf
             ;;
         [nN][oO]|[nN]) break ;;
         *) echo "Invalid Option" ;;
