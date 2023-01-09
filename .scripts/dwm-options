@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+CSV="
+prev tag, xdotool key Super_L+Left, edit-undo\n
+next tag, xdotool key Super_L+Right, edit-undo-rtl\n
+^sep()\n
+toogle gaps, xdotool key Super_L+alt+o, display\n
+media mode,
+  xdotool key Super_L+alt+o;
+  xdotool key Super_L+m,
+  media-tape\n
+"
+
+echo -e $CSV | jgmenu --simple && pkill -RTMIN+2 dwmblocks

@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 
 keys=$(sudo showkey | grep keycode -c)
-keys+=$(sudo showkey | grep keycode -c)
 
-if [[ $keys == "00" ]]; then
+if [[ $keys == "0" ]]; then
     xdotool key Super_L+alt+o
     xdotool key Super_L+m
     xdotool key Super_L+w
-    notify-send -u critical "idle start detected"
+    notify-send "idle start detected"
 fi

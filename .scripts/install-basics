@@ -154,9 +154,22 @@ do
     case "$misc" in
         [yY][eE][sS]|[yY]|"")
             echo "installing misc..."
+            sudo pacman -S bash-completion neofetch btop --noconfirm
+            if [[ $? != 0 ]]; then echo "error installing basic misc"; exit 1; fi
             sudo pacman -S zathura zathura-djvu zathura-pdf-poppler zathura-ps --noconfirm
-            sudo pacman -S bash-completion neofetch btop pamixer mpv udisks2 udiskie nemo nemo-fileroller xarchiver libqalculate lsd bat onboard keepassxc maim zbar networkmanager-openvpn glow --noconfirm
-            if [[ $? != 0 ]]; then echo "error installing the browser"; exit 1; fi
+            if [[ $? != 0 ]]; then echo "error installing zathura"; exit 1; fi
+            sudo pacman -S nemo nemo-fileroller xarchiver --noconfirm
+            if [[ $? != 0 ]]; then echo "error installing graphic file manager"; exit 1; fi
+            sudo pacman -S pamixer mpv --noconfirm
+            if [[ $? != 0 ]]; then echo "error installing media programs"; exit 1; fi
+            sudo pacman -S udisks2 udiskie --noconfirm
+            if [[ $? != 0 ]]; then echo "error installing external devices manager"; exit 1; fi
+            sudo pacman -S onboard keepassxc maim zbar --noconfirm
+            if [[ $? != 0 ]]; then echo "error installing desktop utils"; exit 1; fi
+            sudo pacman -S libqalculate lsd bat glow --noconfirm
+            if [[ $? != 0 ]]; then echo "error installing terminal utils"; exit 1; fi
+            sudo pacman -S networkmanager-openvpn bluez bluez-utils blueman --noconfirm
+            if [[ $? != 0 ]]; then echo "error installing network extensions"; exit 1; fi
             break
             ;;
         [nN][oO]|[nN]) break ;;

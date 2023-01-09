@@ -405,6 +405,7 @@ static const char *const autostart[] = {
     "setxkbmap", "-option", "caps:escape", NULL,
     "check-idle-start", NULL,
     "keepassxc", NULL,
+    "blueman-applet", NULL,
     NULL /* terminate */
 };
 #endif // COOL_AUTOSTART_PATCH
@@ -1189,8 +1190,8 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_comma,      tagmon,                 {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period,     tagmon,                 {.i = +1 } },
 	#if FOCUSADJACENTTAG_PATCH
-	// { MODKEY,                       XK_Left,       viewtoleft,             {0} }, // note keybinding conflict with focusdir
-	// { MODKEY,                       XK_Right,      viewtoright,            {0} }, // note keybinding conflict with focusdir
+	{ MODKEY,                       XK_Left,       viewtoleft,             {0} }, // note keybinding conflict with focusdir
+	{ MODKEY,                       XK_Right,      viewtoright,            {0} }, // note keybinding conflict with focusdir
 	{ MODKEY|ShiftMask,             XK_Left,       tagtoleft,              {0} },
 	{ MODKEY|ShiftMask,             XK_Right,      tagtoright,             {0} },
 	{ MODKEY|ControlMask,           XK_Left,       tagandviewtoleft,       {0} },
@@ -1400,7 +1401,7 @@ static Button buttons[] = {
 	/* click                event mask           button          function        argument */
 	#if BAR_STATUSBUTTON_PATCH
   { ClkButton,            0,                   Button1,        spawn,          {.v = jgmenucmd} },
-	// { ClkButton,            0,                   Button1,        spawn,          SHCMD("dwm-logout") },
+	{ ClkButton,            0,                   Button3,        spawn,          SHCMD("dwm-options") },
 	#endif // BAR_STATUSBUTTON_PATCH
 	{ ClkLtSymbol,          0,                   Button1,        setlayout,      {0} },
 	#if BAR_LAYOUTMENU_PATCH
