@@ -722,9 +722,9 @@ static const Layout layouts[] = {
 	#if NROWGRID_LAYOUT
 	{ "###",      nrowgrid,         {0} },
 	#endif
-	#if CYCLELAYOUTS_PATCH
-	{ NULL,       NULL,             {0} },
-	#endif
+	// #if CYCLELAYOUTS_PATCH
+	// { NULL,       NULL,             {0} },
+	// #endif
 };
 #else
 static const Layout layouts[] = {
@@ -772,9 +772,9 @@ static const Layout layouts[] = {
 	#if NROWGRID_LAYOUT
 	{ "###",      nrowgrid },
 	#endif
-	#if CYCLELAYOUTS_PATCH
-	{ NULL,       NULL },
-	#endif
+	// #if CYCLELAYOUTS_PATCH
+	// { NULL,       NULL },
+	// #endif
 };
 #endif // FLEXTILE_DELUXE_LAYOUT
 
@@ -942,7 +942,7 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,           XK_b,          tabmode,                {-1} },
 	#endif // TAB_PATCH
 	#if FOCUSMASTER_PATCH
-	{ MODKEY|ControlMask,           XK_space,      focusmaster,            {0} },
+	{ MODKEY,                       XK_space,      focusmaster,            {0} },
 	#endif // FOCUSMASTER_PATCH
 	#if STACKER_PATCH
 	STACKKEYS(MODKEY,                              focus)
@@ -1036,7 +1036,7 @@ static const Key keys[] = {
 	#if INSETS_PATCH
 	{ MODKEY|ShiftMask|ControlMask, XK_a,          updateinset,            {.v = &default_inset } },
 	#endif // INSETS_PATCH
-	{ MODKEY|ShiftMask,             XK_Return,     zoom,                   {0} },
+	{ MODKEY|ShiftMask,             XK_space,      zoom,                   {0} },
 	#if VANITYGAPS_PATCH
     // DEFAULT:
 	/* { MODKEY|Mod1Mask,              XK_u,          incrgaps,               {.i = +1 } }, */
@@ -1122,6 +1122,7 @@ static const Key keys[] = {
 	#endif // XRDB_PATCH
 	{ MODKEY,                       XK_t,          setlayout,              {.v = &layouts[0]} },
 	/* { MODKEY,                       XK_f,          setlayout,              {.v = &layouts[1]} }, */
+	{ MODKEY|ControlMask|Mod1Mask,  XK_space,      setlayout,              {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,          setlayout,              {.v = &layouts[2]} },
 	#if COLUMNS_LAYOUT
 	{ MODKEY,                       XK_c,          setlayout,              {.v = &layouts[3]} },
@@ -1137,8 +1138,7 @@ static const Key keys[] = {
 	{ MODKEY|Mod5Mask|Mod4Mask,     XK_Tab,        rotatelayoutaxis,       {.i = -4 } },   /* flextile, 4 = secondary stack axis */
 	{ MODKEY|ControlMask,           XK_Return,     mirrorlayout,           {0} },          /* flextile, flip master and stack areas */
 	#endif // FLEXTILE_DELUXE_LAYOUT
-	{ MODKEY|ShiftMask,             XK_space,      setlayout,              {.v = &layouts[1]} },
-	{ MODKEY,                       XK_space,      togglefloating,         {0} },
+	{ MODKEY|ControlMask,           XK_space,      togglefloating,         {0} },
 	#if MAXIMIZE_PATCH
 	{ MODKEY|ControlMask|ShiftMask, XK_h,          togglehorizontalmax,    {0} },
 	{ MODKEY|ControlMask|ShiftMask, XK_l,          togglehorizontalmax,    {0} },

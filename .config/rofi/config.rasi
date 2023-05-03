@@ -1,6 +1,6 @@
 configuration {
   modes: "drun,run,ssh,filebrowser";
-  font: "Nerd Font Hack 14";
+  font: "DejaVuSansMono Nerd Font 14";
   /*	location: 0;*/
   /*	yoffset: 0;*/
   /*	xoffset: 0;*/

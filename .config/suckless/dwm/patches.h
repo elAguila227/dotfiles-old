@@ -74,7 +74,7 @@
  *   - The text of the menu items is for display only. Name them however you want.
  * https://dwm.suckless.org/patches/layoutmenu/
  */
-#define BAR_LAYOUTMENU_PATCH 0
+#define BAR_LAYOUTMENU_PATCH 1
 
 /* Show layout symbol in bar */
 #define BAR_LTSYMBOL_PATCH 1
@@ -874,7 +874,7 @@
  */
 #define PERTAG_PATCH 1
 
-/* Option to store gaps on a per tag basis rather than on a per monitor basis.
+/* Option to enable gaps on a per tag basis rather than globally.
  * Depends on both pertag and vanitygaps patches being enabled.
  */
 #define PERTAG_VANITYGAPS_PATCH 1
@@ -1222,7 +1222,7 @@
  * while remaining in fullscreen.
  * https://github.com/bakkeby/patches/blob/master/dwm/dwm-tagmonfixfs-6.2.diff
  */
-#define TAGMONFIXFS_PATCH 0
+#define TAGMONFIXFS_PATCH 1
 
 /* Add functions and keybindings to tag a window to a desired tag on the next (right)
  * or previous (left) monitor from the currently selected monitor.
@@ -1311,6 +1311,16 @@
  */
 #define VANITYGAPS_MONOCLE_PATCH 1
 
+/* By default MOD+Tab will take the user back to the previous tag only. If the user keeps
+ * using MOD+Tab then the view will switch back and forth between the current and previous tag.
+ * This patch allows dwm to keep a longer history of previous tag changes such that MOD+Tab can
+ * be pressed multiple times to go further back to earlier tag selections.
+ *
+ * The number of history elements is defined by the NUMVIEWHIST macro in dwm.c and defaults to
+ * the number of tags in the system.
+ */
+#define VIEW_HISTORY_PATCH 0
+
 /* Follow a window to the tag it is being moved to.
  * https://dwm.suckless.org/patches/viewontag/
  */
@@ -1359,7 +1369,7 @@
  * rather than every window on the screen changing position.
  * https://dwm.suckless.org/patches/zoomswap/
  */
-#define ZOOMSWAP_PATCH 0
+#define ZOOMSWAP_PATCH 1
 
 /**
  * Layouts
