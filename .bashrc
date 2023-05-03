@@ -53,7 +53,11 @@ if [ -x "$(command -v bat)" ]; then
       bat -p -f < /dev/stdin | less -r
     else
       case "$1" in
-        *.md) glow -s dark "$1" | less -r;;
+        *.md) if [ -x "$(command -v glow)" ]; then
+                glow -s dark "$1" | less -r
+              else
+                bat "$1" -p -f | less -r
+              fi;;
         *) bat "$1" -p -f | less -r;;
       esac
     fi
@@ -94,3 +98,14 @@ alias config='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 
 # Load Angular CLI autocompletion.
 source <(ng completion script 2> /dev/null)
+
+# Cosa de mafe
+PATH="$PATH:$HOME/mafe/numerical-bagging-secundaria/src/planning/Metric-FF-v2.1"
+
+# @begin(72074527)@ - Do not edit these lines - added automatically!
+# You should customize CIAOPATH before this chunk if you place bundles in
+# places other than ~/.ciao
+if [ -x /home/user/temp/ciao/build/bin/ciao-env ] ; then
+  eval "$(/home/user/temp/ciao/build/bin/ciao-env --sh)"
+fi
+# @end(72074527)@ - End of automatically added lines.
