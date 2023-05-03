@@ -1,4 +1,4 @@
-local colorscheme = "pywal"
+local colorscheme = "pywal16"
 vim.opt.background = "dark"
 vim.o.fillchars = 'stlnc: '
 

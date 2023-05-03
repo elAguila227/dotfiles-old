@@ -26,7 +26,7 @@ end
 lualine.setup {
   options = {
     icons_enabled = true,
-    theme = 'pywal-nvim',
+    theme = 'pywal16-nvim',
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
     -- component_separators = { left = '|', right = '|'},
@@ -34,14 +34,14 @@ lualine.setup {
     disabled_filetypes = {
       "alpha",
       "dashboard",
-      "NvimTree",
+      -- "NvimTree",
       "Outline",
       statusline = {},
       winbar = {},
     },
     ignore_focus = {},
     always_divide_middle = true,
-    globalstatus = false,
+    globalstatus = true,
     refresh = {
       statusline = 1000,
       tabline = 1000,

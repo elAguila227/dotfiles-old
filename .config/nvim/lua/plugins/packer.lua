@@ -58,11 +58,13 @@ local plugins = {
   ["kylechui/nvim-surround"] = {},
   ["anuvyklack/pretty-fold.nvim"] = {},
   -- ["lukas-reineke/indent-blankline.nvim"] = {},
-  ["Yggdroot/indentLine"] = {
-    setup = function()
-      vim.g.indentLine_char = '▏'
-    end,
-  },
+  -- ["Yggdroot/indentLine"] = {
+  --   setup = function()
+  --     vim.g.indentLine_char = '▏'
+  --     vim.g.vim_json_conceal = 0
+  --     vim.g.markdown_syntax_conceal = 0
+  --   end,
+  -- },
 
   ["LukeSmithxyz/vimling"] = {},
   ["RRethy/vim-hexokinase"] = {
@@ -87,12 +89,21 @@ local plugins = {
   ['nvim-lualine/lualine.nvim'] = {
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   },
+  -- scrollbar
+  ["petertriho/nvim-scrollbar"] = {},
 
   ["moll/vim-bbye"] = {},                                 -- close buffer without closing window
 
   -- Colorschemes
   ["AlphaTechnolog/pywal.nvim"] = {
     as = 'pywal',
+  },
+  ['uZer/pywal16.nvim'] = {
+    as = 'pywal16'
+  },
+
+  ["iamcco/markdown-preview.nvim"] = {
+    run = function() vim.fn["mkdp#util#install"]() end,
   },
 
   -- dashboard
@@ -106,7 +117,7 @@ local plugins = {
     requires = { {'nvim-lua/plenary.nvim'} }
   },
 
-  -- cmp plugins
+  -- cmp plugis
   ["hrsh7th/nvim-cmp"] = {},                              -- The completion plugin
   ["hrsh7th/cmp-buffer"] = {},                            -- buffer completions
   ["hrsh7th/cmp-path"] = {},                              -- path completions

@@ -15,6 +15,32 @@ autocmd("TextYankPost", {
   group = general,
 })
 
+-- Move status line up when on command mode
+autocmd("CmdlineEnter", {
+  callback = function()
+    vim.opt.cmdheight=1
+    autocmd("CmdlineLeave", {
+      callback = function()
+        vim.opt.cmdheight=0
+      end,
+      group = general,
+    })
+  end,
+  group = general,
+})
+autocmd("RecordingEnter", {
+  callback = function()
+    vim.opt.cmdheight=1
+    autocmd("RecordingLeave", {
+      callback = function()
+        vim.opt.cmdheight=0
+      end,
+      group = general,
+    })
+  end,
+  group = general,
+})
+
 -- Files with 4 space tab
 autocmd("FileType", {
   pattern = { "c", "cpp", "py", "cs" },
@@ -101,22 +127,22 @@ autocmd("InsertEnter", {
   group = general,
 })
 
--- indentline on alpha
-autocmd("FileType", {
-  pattern = "alpha",
-  callback = function()
-    vim.cmd [[ IndentLinesDisable ]]
-    vim.opt.showtabline = 0
-    vim.opt.cmdheight = 0
-    vim.opt.laststatus = 0
-    autocmd("BufUnload", {
-      pattern = "<buffer>",
-      callback = function()
-        vim.opt.showtabline = 2
-        vim.opt.cmdheight = 1
-        vim.opt.laststatus = 2
-      end,
-    })
-  end,
-  group = general,
-})
+-- -- indentline on alpha
+-- autocmd("FileType", {
+--   pattern = "alpha",
+--   callback = function()
+--     -- vim.cmd [[ IndentLinesDisable ]]
+--     vim.opt.showtabline = 0
+--     vim.opt.cmdheight = 0
+--     vim.opt.laststatus = 0
+--     autocmd("BufUnload", {
+--       pattern = "<buffer>",
+--       callback = function()
+--         vim.opt.showtabline = 2
+--         vim.opt.cmdheight = 1
+--         vim.opt.laststatus = 2
+--       end,
+--     })
+--   end,
+--   group = general,
+-- })

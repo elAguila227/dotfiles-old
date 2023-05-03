@@ -24,6 +24,10 @@ keymap("n", "<leader>w", ":w<CR>", opts)
 keymap("n", "<leader>q", ":Bdelete<CR>", opts)
 keymap("n", "<leader><leader>q", ":q<CR>", opts)
 keymap("n", "<leader>Q", ":qa<CR>", opts)
+keymap("v", "<leader>w", ":w<CR>", opts)
+keymap("v", "<leader>q", ":Bdelete<CR>", opts)
+keymap("v", "<leader><leader>q", ":q<CR>", opts)
+keymap("v", "<leader>Q", ":qa<CR>", opts)
 
 -- Better substitude
 keymap("n", "s", ":s/", vis_opts)
@@ -32,8 +36,8 @@ keymap("v", "s", ":s/", vis_opts)
 keymap("v", "S", ":%s/", vis_opts)
 
 -- Enable spell checking
-keymap("n", "<leader>s", ":setlocal spell! spelllang=en<CR>", vis_opts)
-keymap("n", "<leader>S", ":setlocal spell! spelllang=es<CR>", vis_opts)
+keymap("n", "<leader>s", ":setlocal spell! spelllang=en<CR>", opts)
+keymap("n", "<leader>S", ":setlocal spell! spelllang=es<CR>", opts)
 
 -- Folds
 keymap("n", "<leader>a", "za", opts)
@@ -41,13 +45,12 @@ keymap("n", "<leader>A", "zA", opts)
 keymap("n", "<leader><leader>a", "zR", opts)
 keymap("n", "<leader><leader>A", "zM", opts)
 
+-- no cursor movement on line join
+keymap("n", "J", "mzJ`z", opts)
+
 -- Insert line
 keymap("n", "<A-p>", ":<C-u>call append(line('.'), repeat([''], v:count1))<CR>", opts)
 keymap("n", "<A-P>", ":<C-u>call append(line('.')-1, repeat([''], v:count1))<CR><C-e>", opts)
-
--- Move text up and down
-keymap("n", "<A-J>", ":m .+1<CR>==", opts)
-keymap("n", "<A-K>", ":m .-2<CR>==", opts)
 
 -- Copy paste
 keymap("n", "cv", '"+p', opts)
@@ -79,7 +82,6 @@ keymap("n", "<C-Down>", ":resize +2<CR>", opts)
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
--- VISUAL --
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
@@ -88,10 +90,13 @@ keymap("v", ">", ">gv", opts)
 keymap("v", "p", '"_dP', opts)
 
 -- Move text up and down
-keymap("v", "J", ":move '>+1<CR>gv-gv", opts)
-keymap("v", "K", ":move '<-2<CR>gv-gv", opts)
-keymap("v", "<A-J>", ":move '>+1<CR>gv-gv", opts)
-keymap("v", "<A-K>", ":move '<-2<CR>gv-gv", opts)
+keymap("n", "<A-J>", ":m .+1<CR>==", opts)
+keymap("n", "<A-K>", ":m .-2<CR>==", opts)
+
+keymap("v", "J", ":move '>+1<CR><CR>gv=gv", opts)
+keymap("v", "K", ":move '<-2<CR><CR>gv=gv", opts)
+keymap("v", "<A-J>", ":move '>+1<CR><CR>gv=gv", opts)
+keymap("v", "<A-K>", ":move '<-2<CR><CR>gv=gv", opts)
 
 -- PLUGINS --
 -- Nvim-Tree
@@ -109,10 +114,6 @@ keymap("n", "<leader>fr", ":Telescope oldfiles<CR>", opts)
 keymap("n", "<leader>fw", ":Telescope live_grep<CR>", opts)
 keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 keymap("n", "<leader>fh", ":Telescope help_tags<CR>", opts)
-
--- Dashboard
-keymap("n", "<leader>W", ":SessionSave<CR>", opts)
-keymap("n", "<leader>sl", ":SessionLoad<CR>", opts)
 
 -- bufferline
 keymap("n", "<A-l>", ":BufferLineMoveNext<CR>", opts)
