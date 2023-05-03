@@ -5,7 +5,7 @@ wall=$(sxiv -fto $HOME/.config/wallpapers/*.*)
 
 if [[ $wall == "" ]]; then notify-send "Theme change aborted"; exit 1; fi; dunstify -t 0 "Changing Theme"
 
-wal -i $wall; dunstify -t 0 -h int:value:20 "Changing Theme"
+wal -i $wall --saturate 0.4; dunstify -t 0 -h int:value:20 "Changing Theme"
 
 xrdb -merge $HOME/.cache/wal/colors.Xresources
 

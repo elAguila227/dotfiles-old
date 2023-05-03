@@ -3,7 +3,7 @@
     active-foreground: @foreground;
     normal-background: {background}00;
     normal-foreground: @foreground;
-    urgent-background: {color1}D9;
+    urgent-background: {color2}D9;
     urgent-foreground: @foreground;
 
     alternate-active-background: {background}00;
@@ -15,7 +15,7 @@
 
     selected-active-background: {color2}D9;
     selected-active-foreground: @foreground;
-    selected-normal-background: {color1}D9;
+    selected-normal-background: {color2}D9;
     selected-normal-foreground: @foreground;
     selected-urgent-background: {color3}D9;
     selected-urgent-foreground: @foreground;
@@ -29,7 +29,7 @@
 
 #window {{
     /* background-color: @background; */
-    border: 2;
+    border: 1;
     border-radius: 11;
     padding: 1;
 }}
@@ -71,7 +71,7 @@
 
 #element {{
     border: 0;
-    padding: 1px;
+    padding: 3px;
 }}
 
 #element.normal.normal {{
