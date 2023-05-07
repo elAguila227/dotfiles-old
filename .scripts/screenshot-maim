@@ -32,12 +32,12 @@ while getopts 'acp:' flag; do
 done
 
 cmds="\
-麗  Select	maim -su
-ﬓ  Window	maim -sut 9999999
-  Full		maim -u
-櫓  QR Scan
-  Screencap
-  Cancel"
+󰒉  Select	maim -su
+󰘔  Window	maim -sut 9999999
+󰍹  Full		maim -u
+󰐳  QR Scan
+󰨤  Screencap
+󰜺  Cancel"
 
 keys='
 configuration {

@@ -17,13 +17,13 @@ db.section.header.val = {
     '',
 }
 db.section.buttons.val = {
-  db.button("e", "  New File",                ":enew <BAR> startinsert<CR>"),
-  db.button("r", "ﮦ  Recently Opened Files",   ":Telescope oldfiles<CR>"),
-  db.button("f", "  Find File",               ":Telescope find_files<CR>"),
-  db.button("w", "  Find Word",               ":Telescope live_grep<CR>"),
-  db.button("n", "  File Browser",            ":NvimTreeOpen<CR>"),
-  db.button("c", "  Open Nvim Configuration", ":cd ".. home .."/.config/nvim/ <BAR> enew <BAR> NvimTreeOpen<CR>"),
-  db.button("q", "  Exit",                    ":qa!<CR>"),
+  db.button("e", "󰻭  New File",                ":enew <BAR> startinsert<CR>"),
+  db.button("r", "󱋢  Recently Opened Files",   ":Telescope oldfiles<CR>"),
+  db.button("f", "󰱽  Find File",               ":Telescope find_files<CR>"),
+  db.button("w", "󱀾  Find Word",               ":Telescope live_grep<CR>"),
+  db.button("n", "󰷏  File Browser",            ":NvimTreeOpen<CR>"),
+  db.button("c", "󰒓  Open Nvim Configuration", ":cd ".. home .."/.config/nvim/ <BAR> enew <BAR> NvimTreeOpen<CR>"),
+  db.button("q", "󰅖  Exit",                    ":qa!<CR>"),
 }
 
 local winheight = vim.fn.winheight(0)

@@ -88,7 +88,7 @@ static const int horizpadbar             = 6;   /* horizontal padding for status
 static const int vertpadbar              = 8;   /* vertical padding for statusbar */
 #endif // BAR_STATUSPADDING_PATCH
 #if BAR_STATUSBUTTON_PATCH
-static const char buttonbar[]            = "﫻";
+static const char buttonbar[]            = "󰗼";
 #endif // BAR_STATUSBUTTON_PATCH
 #if BAR_SYSTRAY_PATCH
 static const unsigned int systrayspacing = 6;   /* systray spacing */
@@ -156,9 +156,9 @@ static void (*bartabmonfns[])(Monitor *) = { NULL /* , customlayoutfn */ };
 #if BAR_PANGO_PATCH
 static const char font[]                 = "monospace 10";
 #else
-static const char *fonts[]               = { "DejaVuSansMono Nerd Font:size=11", "JoyPixels:pixelsize=11:antialias=true:autohint=true" };
+static const char *fonts[]               = { "DejaVuSansM Nerd Font:size=11", "JoyPixels:pixelsize=11:antialias=true:autohint=true" };
 #endif // BAR_PANGO_PATCH
-static const char dmenufont[]            = "DejaVuSansMono Nerd Font:size=14";
+static const char dmenufont[]            = "DejaVuSansM Nerd Font:size=14";
 
 static char c000000[]                    = "#000000"; // placeholder value
 
