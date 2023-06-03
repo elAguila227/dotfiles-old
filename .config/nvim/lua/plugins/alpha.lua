@@ -38,7 +38,7 @@ local footer = function()
   if packer_plugins == nil then
     return version
   else
-    local total_plugins = "   " .. #vim.tbl_keys(packer_plugins) .. " Plugins"
+    local total_plugins = "  󰂖 " .. #vim.tbl_keys(packer_plugins) .. " Plugins"
     return version .. total_plugins
   end
 end

@@ -3,9 +3,13 @@ if not status_ok then
   return
 end
 
+vim.opt.mousemoveevent = true
+
 bufferline.setup {
   options = {
     mode = "buffers", -- set to "tabs" to only show tabpages instead
+    -- style_preset = bufferline.style_preset.default, -- or bufferline.style_preset.minimal,
+    -- themable = true | false, -- allows highlight groups to be overriden i.e. sets highlights as default
     numbers = "none", -- "none" | "ordinal" | "buffer_id" | "both"
     close_command = "Bdelete %d",       -- can be a string | function, see "Mouse actions"
     right_mouse_command = "Bdelete %d", -- can be a string | function, see "Mouse actions"
@@ -72,21 +76,20 @@ bufferline.setup {
     color_icons = true, -- whether or not to add the filetype icon highlights
     show_buffer_icons = true, -- disable filetype icons for buffers
     show_buffer_close_icons = true,
-    -- show_buffer_default_icon = true, -- whether or not an unrecognised filetype should show a default icon
     show_close_icon = true,
     show_tab_indicators = true,
+    -- show_duplicate_prefix = true | false, -- whether to show duplicate buffer prefix
     persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
     -- can also be a table containing 2 custom separators
     -- [focused and unfocused]. eg: { '|', '|' }
-    -- separator_style = "thin", -- "slant" | "thick" | "thin" | { 'any', 'any' },
     separator_style = { '|', '|'}, -- "slant" | "thick" | "thin" | { 'any', 'any' },
     enforce_regular_tabs = false,
     always_show_bufferline = true,
-    -- hover = {
-    --   enabled = true,
-    --   delay = 200,
-    --   reveal = {'close'}
-    -- },
+    hover = {
+      enabled = true,
+      delay = 000,
+      reveal = {'close'}
+    },
     sort_by = 'insert_at_end', -- 'insert_after_current' |'insert_at_end' | 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function(buffer_a, buffer_b)
     --   -- add custom logic
     --   return buffer_a.modified > buffer_b.modified

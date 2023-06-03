@@ -24,6 +24,7 @@ local options = {
 
   showcmd = true,
   showmode = false,
+  cmdheight = 0,
 
   pumheight = 10,
   updatetime = 300,
@@ -57,3 +58,5 @@ end
 
 -- vim.opt.iskeyword:append "-"
 vim.opt.formatoptions:remove { 'c', 'r', 'o' }
+
+-- vim.cmd [[filetype plugin off]]

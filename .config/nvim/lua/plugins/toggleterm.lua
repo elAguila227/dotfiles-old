@@ -5,7 +5,7 @@ end
 
 toggleterm.setup {
   -- size can be a number or function which is passed the current terminal
-  size = 20, -- | function(term)
+  -- size = 20, -- | function(term)
   --   if term.direction == "horizontal" then
   --     return 15
   --   elseif term.direction == "vertical" then
@@ -19,8 +19,8 @@ toggleterm.setup {
   -- on_stderr = fun(t: Terminal, job: number, data: string[], name: string) -- callback for processing output on stderr
   -- on_exit = fun(t: Terminal, job: number, exit_code: number, name: string) -- function to run when terminal process exits
   hide_numbers = true, -- hide the number column in toggleterm buffers
-  shade_filetypes = {},
-  autochdir = false, -- when neovim changes it current directory the terminal will change it's own when next it's opened
+  -- shade_filetypes = {},
+  -- autochdir = false, -- when neovim changes it current directory the terminal will change it's own when next it's opened
   -- highlights = {
   --   -- highlights which map to a highlight group name and a table of it's values
   --   -- NOTE: this is only a subset of values, any group placed here will be set for the terminal window split
@@ -74,10 +74,19 @@ function _G.set_terminal_keymaps()
   local opts = {noremap = true}
   -- vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
   -- vim.api.nvim_buf_set_keymap(0, 't', 'jk', [[<C-\><C-n>]], opts)
-  vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', [[<C-\><C-n><C-W>h]], opts)
-  vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
-  vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
-  vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
+  -- vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', [[<C-\><C-n><C-W>h]], opts)
+  -- vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
+  -- vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
+  -- vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
+  vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+  vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+  vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+  vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+	vim.api.nvim_buf_set_keymap(0, 't', '<C-Up>',     [[<Cmd>resize -2<CR>]], opts)
+	vim.api.nvim_buf_set_keymap(0, 't', '<C-Down>',   [[<Cmd>resize +2<CR>]], opts)
+	vim.api.nvim_buf_set_keymap(0, 't', '<C-Left>',   [[<Cmd>vertical resize -2<CR>]], opts)
+	vim.api.nvim_buf_set_keymap(0, 't', '<C-Right>',  [[<Cmd>vertical resize +2<CR>]], opts)
+	vim.api.nvim_buf_set_keymap(0, 't', '<MouseMove>',  "", opts)
 end
 
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')

@@ -127,6 +127,12 @@ autocmd("InsertEnter", {
   group = general,
 })
 
+autocmd("FileType", {
+  callback = function()
+    vim.opt_local.formatoptions:remove { 'c', 'r', 'o' }
+  end,
+  group = general,
+})
 -- -- indentline on alpha
 -- autocmd("FileType", {
 --   pattern = "alpha",

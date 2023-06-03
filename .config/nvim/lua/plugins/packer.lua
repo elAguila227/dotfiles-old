@@ -66,6 +66,19 @@ local plugins = {
   --   end,
   -- },
 
+  ["chrisgrieser/nvim-various-textobjs"] = {
+    config = function()
+      textobjs_status_ok, textobjs = pcall(require, "various-textobjs")
+      if not textobjs_status_ok then
+        return
+      end
+      textobjs.setup({
+        useDefaultKeymaps = true,
+        disabledKeymaps = {'r', 'n', '!'}
+      })
+    end,
+  },
+
   ["LukeSmithxyz/vimling"] = {},
   ["RRethy/vim-hexokinase"] = {
     run = "make hexokinase",
@@ -138,7 +151,7 @@ local plugins = {
   ["nvim-treesitter/nvim-treesitter"] = {
     run = ":TSUpdate",
   },
-  ["JoosepAlviste/nvim-ts-context-commentstring"] = {},
+  -- ["JoosepAlviste/nvim-ts-context-commentstring"] = {},
   ["nvim-treesitter/nvim-treesitter-angular"] = {},
 
   -- Extra
