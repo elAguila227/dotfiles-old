@@ -24,7 +24,7 @@ local options = {
 
   showcmd = true,
   showmode = false,
-  cmdheight = 0,
+  -- cmdheight = 0,
 
   pumheight = 10,
   updatetime = 300,

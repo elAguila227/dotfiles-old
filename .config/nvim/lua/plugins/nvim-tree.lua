@@ -8,11 +8,6 @@ if not api_status_ok then
   return
 end
 
-local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
-if not config_status_ok then
-  return
-end
-
 --
 -- This function has been generated from your
 --   view.mappings.list
@@ -110,7 +105,7 @@ local function on_attach(bufnr)
 
 end
 
-nvim_tree.setup {
+nvim_tree.setup({
   renderer = {
     icons = {
       glyphs = {
@@ -198,5 +193,5 @@ nvim_tree.setup {
       },
     },
   },
-}
+})
 vim.cmd [[hi NvimTreeStatusLine cterm=NONE gui=NONE ]]

@@ -10,7 +10,7 @@ config = {
         sp = vim.o.shiftwidth
         return string.rep(' ', (vim.v.foldlevel*sp)-sp)
       end,
-      '﬋ ', '─┤', 'content', '├',
+      '󰘍 ', '─┤', 'content', '├',
     },
     right = {
       '┤ ', 'number_of_folded_lines', ': ', 'percentage', ' │',

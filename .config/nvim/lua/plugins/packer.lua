@@ -83,7 +83,8 @@ local plugins = {
   ["RRethy/vim-hexokinase"] = {
     run = "make hexokinase",
     setup = function()
-      vim.g.Hexokinase_highlighters = { 'virtual' }
+      vim.g.Hexokinase_highlighters = { 'foreground' }
+      vim.g.Hexokinase_optInPatterns = { 'full_hex,rgb,rgba,hsl,hsla' }
     end,
   },
 
@@ -104,6 +105,7 @@ local plugins = {
   },
   -- scrollbar
   ["petertriho/nvim-scrollbar"] = {},
+
 
   ["moll/vim-bbye"] = {},                                 -- close buffer without closing window
 

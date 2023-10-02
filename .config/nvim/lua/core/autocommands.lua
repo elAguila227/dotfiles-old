@@ -15,31 +15,31 @@ autocmd("TextYankPost", {
   group = general,
 })
 
--- Move status line up when on command mode
-autocmd("CmdlineEnter", {
-  callback = function()
-    vim.opt.cmdheight=1
-    autocmd("CmdlineLeave", {
-      callback = function()
-        vim.opt.cmdheight=0
-      end,
-      group = general,
-    })
-  end,
-  group = general,
-})
-autocmd("RecordingEnter", {
-  callback = function()
-    vim.opt.cmdheight=1
-    autocmd("RecordingLeave", {
-      callback = function()
-        vim.opt.cmdheight=0
-      end,
-      group = general,
-    })
-  end,
-  group = general,
-})
+-- -- Move status line up when on command mode
+-- autocmd("CmdlineEnter", {
+--   callback = function()
+--     vim.opt.cmdheight=1
+--     autocmd("CmdlineLeave", {
+--       callback = function()
+--         vim.opt.cmdheight=0
+--       end,
+--       group = general,
+--     })
+--   end,
+--   group = general,
+-- })
+-- autocmd("RecordingEnter", {
+--   callback = function()
+--     vim.opt.cmdheight=1
+--     autocmd("RecordingLeave", {
+--       callback = function()
+--         vim.opt.cmdheight=0
+--       end,
+--       group = general,
+--     })
+--   end,
+--   group = general,
+-- })
 
 -- Files with 4 space tab
 autocmd("FileType", {

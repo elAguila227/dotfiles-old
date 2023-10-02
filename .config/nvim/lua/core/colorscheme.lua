@@ -20,3 +20,6 @@ vim.cmd [[hi SpellBad term=underline cterm=underline ctermfg=red gui=underline g
 
 -- vim.cmd [[hi Folded ctermfg=1 guifg=1]]
 
+vim.cmd [[hi GitSignsAdd guifg=green ]]
+vim.cmd [[hi GitSignsChange guifg=yellow ]]
+vim.cmd [[hi GitSignsDelete guifg=red ]]
