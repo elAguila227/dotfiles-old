@@ -7,6 +7,12 @@ static const int corner_radius           = 11;
 #else
 static const unsigned int borderpx       = 2;   /* border pixel of windows */
 #endif // ROUNDED_CORNERS_PATCH
+#if BAR_BORDER_PATCH
+/* This allows the bar border size to be explicitly set separately from borderpx.
+ * If left as 0 then it will default to the borderpx value of the monitor and will
+ * automatically update with setborderpx. */
+static const unsigned int barborderpx    = 0;  /* border pixel of bar */
+#endif // BAR_BORDER_PATCH
 static const unsigned int snap           = 16;  /* snap pixel */
 #if SWALLOW_PATCH
 static const int swallowfloating         = 0;   /* 1 means swallow floating windows by default */
@@ -339,39 +345,39 @@ static char *colors[][ColCount] = {
 	[SchemeScratchNorm] = { scratchnormfgcolor, scratchnormbgcolor, scratchnormbordercolor, scratchnormfloatcolor },
 	#endif // RENAMED_SCRATCHPADS_PATCH
 	#if BAR_FLEXWINTITLE_PATCH
-	[SchemeFlexActTTB]   = { titleselfgcolor,  actTTBbgcolor,    actTTBbgcolor,        c000000 },
-	[SchemeFlexActLTR]   = { titleselfgcolor,  actLTRbgcolor,    actLTRbgcolor,        c000000 },
-	[SchemeFlexActMONO]  = { titleselfgcolor,  actMONObgcolor,   actMONObgcolor,       c000000 },
-	[SchemeFlexActGRID]  = { titleselfgcolor,  actGRIDbgcolor,   actGRIDbgcolor,       c000000 },
-	[SchemeFlexActGRD1]  = { titleselfgcolor,  actGRD1bgcolor,   actGRD1bgcolor,       c000000 },
-	[SchemeFlexActGRD2]  = { titleselfgcolor,  actGRD2bgcolor,   actGRD2bgcolor,       c000000 },
-	[SchemeFlexActGRDM]  = { titleselfgcolor,  actGRDMbgcolor,   actGRDMbgcolor,       c000000 },
-	[SchemeFlexActHGRD]  = { titleselfgcolor,  actHGRDbgcolor,   actHGRDbgcolor,       c000000 },
-	[SchemeFlexActDWDL]  = { titleselfgcolor,  actDWDLbgcolor,   actDWDLbgcolor,       c000000 },
-	[SchemeFlexActSPRL]  = { titleselfgcolor,  actSPRLbgcolor,   actSPRLbgcolor,       c000000 },
-	[SchemeFlexActFloat] = { titleselfgcolor,  actfloatbgcolor,  actfloatbgcolor,      c000000 },
-	[SchemeFlexInaTTB]   = { titlenormfgcolor, normTTBbgcolor,   normTTBbgcolor,       c000000 },
-	[SchemeFlexInaLTR]   = { titlenormfgcolor, normLTRbgcolor,   normLTRbgcolor,       c000000 },
-	[SchemeFlexInaMONO]  = { titlenormfgcolor, normMONObgcolor,  normMONObgcolor,      c000000 },
-	[SchemeFlexInaGRID]  = { titlenormfgcolor, normGRIDbgcolor,  normGRIDbgcolor,      c000000 },
-	[SchemeFlexInaGRD1]  = { titlenormfgcolor, normGRD1bgcolor,  normGRD1bgcolor,      c000000 },
-	[SchemeFlexInaGRD2]  = { titlenormfgcolor, normGRD2bgcolor,  normGRD2bgcolor,      c000000 },
-	[SchemeFlexInaGRDM]  = { titlenormfgcolor, normGRDMbgcolor,  normGRDMbgcolor,      c000000 },
-	[SchemeFlexInaHGRD]  = { titlenormfgcolor, normHGRDbgcolor,  normHGRDbgcolor,      c000000 },
-	[SchemeFlexInaDWDL]  = { titlenormfgcolor, normDWDLbgcolor,  normDWDLbgcolor,      c000000 },
-	[SchemeFlexInaSPRL]  = { titlenormfgcolor, normSPRLbgcolor,  normSPRLbgcolor,      c000000 },
-	[SchemeFlexInaFloat] = { titlenormfgcolor, normfloatbgcolor, normfloatbgcolor,     c000000 },
-	[SchemeFlexSelTTB]   = { titleselfgcolor,  selTTBbgcolor,    selTTBbgcolor,        c000000 },
-	[SchemeFlexSelLTR]   = { titleselfgcolor,  selLTRbgcolor,    selLTRbgcolor,        c000000 },
-	[SchemeFlexSelMONO]  = { titleselfgcolor,  selMONObgcolor,   selMONObgcolor,       c000000 },
-	[SchemeFlexSelGRID]  = { titleselfgcolor,  selGRIDbgcolor,   selGRIDbgcolor,       c000000 },
-	[SchemeFlexSelGRD1]  = { titleselfgcolor,  selGRD1bgcolor,   selGRD1bgcolor,       c000000 },
-	[SchemeFlexSelGRD2]  = { titleselfgcolor,  selGRD2bgcolor,   selGRD2bgcolor,       c000000 },
-	[SchemeFlexSelGRDM]  = { titleselfgcolor,  selGRDMbgcolor,   selGRDMbgcolor,       c000000 },
-	[SchemeFlexSelHGRD]  = { titleselfgcolor,  selHGRDbgcolor,   selHGRDbgcolor,       c000000 },
-	[SchemeFlexSelDWDL]  = { titleselfgcolor,  selDWDLbgcolor,   selDWDLbgcolor,       c000000 },
-	[SchemeFlexSelSPRL]  = { titleselfgcolor,  selSPRLbgcolor,   selSPRLbgcolor,       c000000 },
-	[SchemeFlexSelFloat] = { titleselfgcolor,  selfloatbgcolor,  selfloatbgcolor,      c000000 },
+	[SchemeFlexActTTB]   = { titleselfgcolor,  titlenormbgcolor, actTTBbgcolor,        c000000 },
+	[SchemeFlexActLTR]   = { titleselfgcolor,  titlenormbgcolor, actLTRbgcolor,        c000000 },
+	[SchemeFlexActMONO]  = { titleselfgcolor,  titlenormbgcolor, actMONObgcolor,       c000000 },
+	[SchemeFlexActGRID]  = { titleselfgcolor,  titlenormbgcolor, actGRIDbgcolor,       c000000 },
+	[SchemeFlexActGRD1]  = { titleselfgcolor,  titlenormbgcolor, actGRD1bgcolor,       c000000 },
+	[SchemeFlexActGRD2]  = { titleselfgcolor,  titlenormbgcolor, actGRD2bgcolor,       c000000 },
+	[SchemeFlexActGRDM]  = { titleselfgcolor,  titlenormbgcolor, actGRDMbgcolor,       c000000 },
+	[SchemeFlexActHGRD]  = { titleselfgcolor,  titlenormbgcolor, actHGRDbgcolor,       c000000 },
+	[SchemeFlexActDWDL]  = { titleselfgcolor,  titlenormbgcolor, actDWDLbgcolor,       c000000 },
+	[SchemeFlexActSPRL]  = { titleselfgcolor,  titlenormbgcolor, actSPRLbgcolor,       c000000 },
+	[SchemeFlexActFloat] = { titleselfgcolor,  titlenormbgcolor, actfloatbgcolor,      c000000 },
+	[SchemeFlexInaTTB]   = { titlenormfgcolor, titlenormbgcolor, normTTBbgcolor,       c000000 },
+	[SchemeFlexInaLTR]   = { titlenormfgcolor, titlenormbgcolor, normLTRbgcolor,       c000000 },
+	[SchemeFlexInaMONO]  = { titlenormfgcolor, titlenormbgcolor, normMONObgcolor,      c000000 },
+	[SchemeFlexInaGRID]  = { titlenormfgcolor, titlenormbgcolor, normGRIDbgcolor,      c000000 },
+	[SchemeFlexInaGRD1]  = { titlenormfgcolor, titlenormbgcolor, normGRD1bgcolor,      c000000 },
+	[SchemeFlexInaGRD2]  = { titlenormfgcolor, titlenormbgcolor, normGRD2bgcolor,      c000000 },
+	[SchemeFlexInaGRDM]  = { titlenormfgcolor, titlenormbgcolor, normGRDMbgcolor,      c000000 },
+	[SchemeFlexInaHGRD]  = { titlenormfgcolor, titlenormbgcolor, normHGRDbgcolor,      c000000 },
+	[SchemeFlexInaDWDL]  = { titlenormfgcolor, titlenormbgcolor, normDWDLbgcolor,      c000000 },
+	[SchemeFlexInaSPRL]  = { titlenormfgcolor, titlenormbgcolor, normSPRLbgcolor,      c000000 },
+	[SchemeFlexInaFloat] = { titlenormfgcolor, titlenormbgcolor, normfloatbgcolor,     c000000 },
+	[SchemeFlexSelTTB]   = { titleselfgcolor,  titleselbgcolor,  selTTBbgcolor,        c000000 },
+	[SchemeFlexSelLTR]   = { titleselfgcolor,  titleselbgcolor,  selLTRbgcolor,        c000000 },
+	[SchemeFlexSelMONO]  = { titleselfgcolor,  titleselbgcolor,  selMONObgcolor,       c000000 },
+	[SchemeFlexSelGRID]  = { titleselfgcolor,  titleselbgcolor,  selGRIDbgcolor,       c000000 },
+	[SchemeFlexSelGRD1]  = { titleselfgcolor,  titleselbgcolor,  selGRD1bgcolor,       c000000 },
+	[SchemeFlexSelGRD2]  = { titleselfgcolor,  titleselbgcolor,  selGRD2bgcolor,       c000000 },
+	[SchemeFlexSelGRDM]  = { titleselfgcolor,  titleselbgcolor,  selGRDMbgcolor,       c000000 },
+	[SchemeFlexSelHGRD]  = { titleselfgcolor,  titleselbgcolor,  selHGRDbgcolor,       c000000 },
+	[SchemeFlexSelDWDL]  = { titleselfgcolor,  titleselbgcolor,  selDWDLbgcolor,       c000000 },
+	[SchemeFlexSelSPRL]  = { titleselfgcolor,  titleselbgcolor,  selSPRLbgcolor,       c000000 },
+	[SchemeFlexSelFloat] = { titleselfgcolor,  titleselbgcolor,  selfloatbgcolor,      c000000 },
 	#endif // BAR_FLEXWINTITLE_PATCH
 };
 
@@ -399,12 +405,14 @@ static const char *const autostart[] = {
     "dwmblocks", NULL,
     "autorandr", "--change", NULL,
     "picom", "--experimental-backends", NULL,
+    "xbanish", NULL,
     "udiskie", NULL,
     "unclutter", NULL,
     "launchdunst", NULL,
     "setxkbmap", "-option", "caps:escape", NULL,
     "check-idle-start", NULL,
     "keepassxc", NULL,
+    "qbittorrent", NULL,
     "blueman-applet", NULL,
     NULL /* terminate */
 };
@@ -503,6 +511,7 @@ static const Rule rules[] = {
 	RULE(.wintype = WTYPE "SPLASH", .isfloating = 1)
 	// RULE(.class = "Gimp", .tags = 1 << 4)
 	// RULE(.class = "Firefox", .tags = 1 << 7)
+	RULE(.class = "qBittorrent", .tags = 1 << 7)
 	#if RENAMED_SCRATCHPADS_PATCH && SWALLOW_PATCH
 	RULE(.instance = "spterm", .scratchkey = 's', .isterminal = 1, .isfloating = 1)
 	RULE(.instance = "st", .isterminal = 1)
@@ -573,7 +582,7 @@ static const BarRule barrules[] = {
 	{ -1,        0,     BAR_ALIGN_LEFT,   width_taggrid,            draw_taggrid,           click_taggrid,           NULL,                    "taggrid" },
 	#endif // BAR_TAGGRID_PATCH
 	#if BAR_SYSTRAY_PATCH
-	{  0,        0,     BAR_ALIGN_RIGHT,  width_systray,            draw_systray,           click_systray,           NULL,                    "systray" },
+	{ 'A',       0,     BAR_ALIGN_RIGHT,  width_systray,            draw_systray,           click_systray,           NULL,                    "systray" },
 	#endif // BAR_SYSTRAY_PATCH
 	#if BAR_LTSYMBOL_PATCH
 	{ -1,        0,     BAR_ALIGN_LEFT,   width_ltsymbol,           draw_ltsymbol,          click_ltsymbol,          NULL,                    "layout" },
@@ -722,9 +731,6 @@ static const Layout layouts[] = {
 	#if NROWGRID_LAYOUT
 	{ "###",      nrowgrid,         {0} },
 	#endif
-	// #if CYCLELAYOUTS_PATCH
-	// { NULL,       NULL,             {0} },
-	// #endif
 };
 #else
 static const Layout layouts[] = {
@@ -772,9 +778,6 @@ static const Layout layouts[] = {
 	#if NROWGRID_LAYOUT
 	{ "###",      nrowgrid },
 	#endif
-	// #if CYCLELAYOUTS_PATCH
-	// { NULL,       NULL },
-	// #endif
 };
 #endif // FLEXTILE_DELUXE_LAYOUT
 
@@ -938,6 +941,9 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_s,          rioresize,              {0} },
 	#endif // RIODRAW_PATCH
 	{ MODKEY,                       XK_b,          togglebar,              {0} },
+	#if TOGGLETOPBAR_PATCH
+	{ MODKEY|ShiftMask,             XK_b,          toggletopbar,           {0} },
+	#endif // TOGGLETOPBAR_PATCH
 	#if TAB_PATCH
 	{ MODKEY|ControlMask,           XK_b,          tabmode,                {-1} },
 	#endif // TAB_PATCH
@@ -1477,6 +1483,9 @@ static Signal signals[] = {
 	{ "focusstack",              focusstack },
 	{ "setmfact",                setmfact },
 	{ "togglebar",               togglebar },
+	#if TOGGLETOPBAR_PATCH
+	{ "toggletopbar",            toggletopbar },
+	#endif // TOGGLETOPBAR_PATCH
 	{ "incnmaster",              incnmaster },
 	{ "togglefloating",          togglefloating },
 	{ "focusmon",                focusmon },
@@ -1675,6 +1684,9 @@ static IPCCommand ipccommands[] = {
 	IPCCOMMAND( tag, 1, {ARG_TYPE_UINT} ),
 	IPCCOMMAND( tagmon, 1, {ARG_TYPE_UINT} ),
 	IPCCOMMAND( togglebar, 1, {ARG_TYPE_NONE} ),
+	#if TOGGLETOPBAR_PATCH
+	IPCCOMMAND( toggletopbar, 1, {ARG_TYPE_NONE} ),
+	#endif // TOGGLETOPBAR_PATCH
 	IPCCOMMAND( togglefloating, 1, {ARG_TYPE_NONE} ),
 	IPCCOMMAND( toggletag, 1, {ARG_TYPE_UINT} ),
 	IPCCOMMAND( toggleview, 1, {ARG_TYPE_UINT} ),

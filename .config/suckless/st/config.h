@@ -152,7 +152,7 @@ unsigned int tabspaces = 4;
 
 #if ALPHA_PATCH
 /* bg opacity */
-float alpha = 0.85;
+float alpha = 0.75;
 #if ALPHA_GRADIENT_PATCH
 float grad_alpha = 0.54; //alpha value that'll change
 float stat_alpha = 0.46; //constant alpha value that'll get added to grad_alpha
@@ -240,7 +240,7 @@ Glyph style[] = {{' ',ATTR_ITALIC|ATTR_FAINT,15,16}, {' ',ATTR_ITALIC,232,11},
  * 7: Blinking st cursor
  * 8: Steady st cursor
  */
-static unsigned int cursorstyle = 1;
+static unsigned int cursorstyle = 5;
 static Rune stcursor = 0x2603; /* snowman (U+2603) */
 #else
 /*
@@ -250,7 +250,7 @@ static Rune stcursor = 0x2603; /* snowman (U+2603) */
  * 6: Bar ("|")
  * 7: Snowman ("☃")
  */
-static unsigned int cursorshape = 2;
+static unsigned int cursorshape = 6;
 #endif // BLINKING_CURSOR_PATCH
 
 /*
@@ -383,6 +383,12 @@ static char *setbgcolorcmd[] = { "/bin/sh", "-c",
 #endif // EXTERNALPIPEIN_PATCH
 #endif // EXTERNALPIPE_PATCH
 
+void kwrite(const Arg* a) {
+    char buf[4];
+    snprintf(buf, sizeof buf, "%s", a->s);
+    ttywrite(buf, sizeof buf, 0);
+}
+
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function         argument   screen */
 	{ XK_ANY_MOD,           XK_Break,       sendbreak,       {.i =  0} },
@@ -415,6 +421,8 @@ static Shortcut shortcuts[] = {
 	{ MODKEY,               XK_k,           kscrollup,       {.i = 1},      0, S_PRI },
 	{ MODKEY,               XK_j,           kscrolldown,     {.i = 1},      0, S_PRI },
 	#endif // SCROLLBACK_PATCH
+  { MODKEY,               XK_h,           kwrite,          {.s = "\e[D"} },
+	{ MODKEY,               XK_l,           kwrite,          {.s = "\e[C"} },
   #if CLIPBOARD_PATCH
 	{ TERMMOD,              XK_Y,           clippaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      clippaste,       {.i =  0} },
