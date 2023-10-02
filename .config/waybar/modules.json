@@ -1,0 +1,61 @@
+{
+    "hyprland/workspaces" : {
+        "active-only": false,
+        "all-outputs": false,
+        "format": "{id}",
+        "persistent_workspaces": {
+            "*": 5
+        }
+    },
+
+    "hyprland/window" : {
+        "format": "{title}",
+        "separate-outputs": true,
+    },
+
+    "wlr/taskbar": {
+        "all-outputs": false,
+        "format": "{icon}",
+        "icon-size": 16,
+        "tooltip": true,
+        "tooltip-format": "{title}",
+        "on-click": "activate",
+        "on-click-right": "close",
+    },
+
+    "custom/nwg-menu": {
+      "on-click": "nwg-menu -d -va top -isl 24 -cmd-logout 'hyprctl dispatch exit'",
+      "format": "󰗼",
+    },
+
+    "pulseaudio": {
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", ""]
+        },
+        "scroll-step": 1,
+        "on-click": "pavucontrol",
+        "ignored-sinks": ["Easy Effects Sink"]
+    },
+
+    "custom/audio_idle_inhibitor": {
+      "format": "{icon}",
+      "exec": "sway-audio-idle-inhibit --dry-print-both-waybar",
+      "exec-if": "which sway-audio-idle-inhibit",
+      "return-type": "json",
+      "format-icons": {
+        "output": "",
+        "input": "",
+        "output-input": "  ",
+        "none": ""
+      }
+    },
+}

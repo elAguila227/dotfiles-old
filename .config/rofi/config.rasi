@@ -78,7 +78,7 @@ configuration {
   kb-remove-word-forward: "Control+d";
   kb-remove-char-forward: "Delete,Control+L";
   kb-remove-char-back: "BackSpace,Shift+BackSpace,Control+H";
-  kb-remove-to-eol: "Control+c";
+  //kb-remove-to-eol: "Control+c";
   kb-remove-to-sol: "Control+C";
   kb-accept-entry: "Return,KP_Enter";
   kb-accept-alt: "Shift+Return";

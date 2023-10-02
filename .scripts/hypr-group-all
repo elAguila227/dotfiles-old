@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# WORKSPACE=$(hyprctl activewindow | grep 'workspace: ' | cut -d ' ' -f2)
+WORKSPACE=$(hyprctl activeworkspace | grep 'ID ' | cut -d ' ' -f3)
+WINDOWS=$(hyprctl -j workspaces | jq ".[] | select(.id==$WORKSPACE) .windows")
+
+hyprctl dispatch layoutmsg focusmaster master
+
+GROUPED=$(hyprctl activewindow | grep 'grouped: ' | cut -d ' ' -f2)
+
+echo $GROUPED
+
+if [ $GROUPED = "0" ]; then
+  hyprctl dispatch togglegroup
+fi
+
+for i in $(seq $WINDOWS); do
+  hyprctl --batch "dispatch layoutmsg cyclenext; dispatch moveintogroup l"
+done
+
+hyprctl dispatch changegroupactive 1

@@ -1,7 +1,9 @@
 #!/bin/sh
 
+notify-send exe
+
 if [ -d "/home/user/.scripts" ] ;
-    then PATH="$PATH:/home/user/.scripts/"
+    then PATH="/home/user/.scripts/:$PATH"
 fi
 
 wal -R && xrdb -merge /home/user/.cache/wal/colors.Xresources
