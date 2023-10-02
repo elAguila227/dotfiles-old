@@ -5,7 +5,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-PS1='\[\033[2;37m\][\[\033[0;32m\]\u@\h \[\033[0;34m\]\W\[\033[2;37m\]] \[\033[0;37m\]\$ '
+PS1='\[\033[2;37m\][\[\033[0;32m\]\u@\h \[\033[0;34m\]\W\[\033[2;37m\]]\[\033[0;37m\]\$ '
 
 export HISTCONTROL=ignorebpth:erasedups
 export EDITOR=nvim
@@ -48,23 +48,18 @@ if [ -d "$HOME/.cache/wal/" ] ;
 fi
 
 if [ -x "$(command -v bat)" ]; then
-  cless() {
-    if (( $# == 0 )) ; then
-      bat -p -f < /dev/stdin | less -r
-    else
-      case "$1" in
-        *.md) if [ -x "$(command -v glow)" ]; then
-                glow -s dark "$1" | less -r
-              else
-                bat "$1" -p -f | less -r
-              fi;;
-        *) bat "$1" -p -f | less -r;;
-      esac
-    fi
-  }
+  # cless() {
+  #   if (( $# == 0 )) ; then
+  #     # bat -p -f < /dev/stdin | less -r
+  #     less
+  #   else
+  #     bat "$1" -p -f | less -R
+  #   fi
+  # }
   MANPAGGER="sh -c 'col -bx | bat -l man -p'"
   alias cat='bat -p'
-  alias less='cless'
+  alias less='less -R'
+  export LESSOPEN="|~/.scripts/lessfilter %s"
 fi
 
 if [ -x "$(command -v lsd)" ]; then

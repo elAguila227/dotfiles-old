@@ -6,9 +6,10 @@
 # absolute path. No other format is supported.
 #
 XDG_DESKTOP_DIR="$HOME/"
-XDG_DOCUMENTS_DIR="/run/media/user/External/Documents"
-XDG_DOWNLOAD_DIR="/run/media/user/External/Downloads"
-XDG_MUSIC_DIR="/run/media/user/External/Music"
-XDG_PICTURES_DIR="/run/media/user/External/Pictures"
-XDG_VIDEOS_DIR="/mnt/library"
+XDG_DOWNLOAD_DIR="$HOME/Downloads"
+XDG_DOCUMENTS_DIR="/mnt/External/Documents"
+XDG_MUSIC_DIR="/mnt/External/Music"
+XDG_PICTURES_DIR="/mnt/External/Pictures"
+XDG_VIDEOS_DIR="/mnt/Library"
+XDG_MEDIA_DIR="/mnt/Media"
 XDG_FASTMEDIA_DIR="/mnt/FastMedia"

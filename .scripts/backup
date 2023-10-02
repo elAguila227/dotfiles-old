@@ -1,0 +1,21 @@
+#!/bin/sh
+
+backup_files=(
+  # "/home/user/.servers/"
+  "/home/user/.sifcripts"
+  )
+
+dest="/mnt/External/Documents/Backups"
+
+for file in ${backup_files[@]}; do
+  file=${file/%\//}
+  name=${file##*/}
+  name=${name/#./}
+  name="${name##*/.}-$(date +%Y%m%d%H%M%S).tar.gz"
+
+  echo $name
+
+  tar czf $dest/$name $file
+
+  ls -lh $dest
+done

@@ -63,7 +63,7 @@ configuration {
 
 choice="$(echo "$cmds" | cut -d'	' -f 1 |
   rofi -theme-str "$keys$theme #inputbar {enabled: false;}#window {width:8em;}" -dmenu -p "" -l 6)" || exit 1
-if [[ $choice == " Cancel" ]]; then
+if [[ $choice == "󰜺  Cancel" ]]; then
   exit
 fi
 
@@ -78,7 +78,7 @@ fi
 
 sleep 0.02
 
-if [[ $choice == "櫓 QR Scan" ]]; then
+if [[ $choice == "󰐳  QR Scan" ]]; then
   deco="$(maim -qus | zbarimg -q --raw - )"
   if [[ $deco != '' ]]; then
     path="$(echo $path | sed 's/.png/.txt/')"
@@ -86,7 +86,7 @@ if [[ $choice == "櫓 QR Scan" ]]; then
     notify-send "QR detected"
     eval "echo \"$deco\" "$clipboard"> $path"
   fi
-elif [[ $choice == "  Screencap" ]]; then
+elif [[ $choice == "󰨤  Screencap" ]]; then
   path="$(echo $path | sed 's/.png/.mp4/')"
   region=$(slop -f "-s %wx%h -i :0.0+%x,%y")
   if [[ $region != '' ]]; then

@@ -17,7 +17,7 @@ cat $HOME/.config/jgmenu/jgmenu.conf > $HOME/.config/jgmenu/jgmenurc && cat $HOM
 
 cat $HOME/.config/dunst/dunst.conf > $HOME/.config/dunst/dunstrc && cat $HOME/.cache/wal/colors-dunstrc >> $HOME/.config/dunst/dunstrc
 
-dunstify -t 0 -h int:value:30 "Changing Theme"
+launchdunst; dunstify -t 0 -h int:value:30 "Changing Theme"
 
 $HOME/.local/bin/razer-cli -a; dunstify -t 0 -h int:value:40 "Changing Theme"
 
@@ -34,7 +34,7 @@ dunstify -t 0 -h int:value:85 "Changing Theme"
 
 sudo convert $wall -modulate 70,55 -blur 0x8 /usr/share/wallpapers/wal.jpg; dunstify -t 0 -h int:value:95 "Changing Theme"
 
-launchdunst; dunstify -t 10 -h int:value:190 "Changing Theme"
+dunstify -t 10 -h int:value:190 "Changing Theme"
 
 notify-send "Theme successfully changed"
 
