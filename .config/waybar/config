@@ -1,28 +1,48 @@
 {
     "layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
-    // "height": 30, // Waybar height (to be removed for auto height)
+    "height": 30, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
-    "spacing": 4, // Gaps between modules (4px)
+    "spacing": 0, // Gaps between modules (4px)
 
     // Load modules
     "include": ["~/.config/waybar/modules.json"],
 
     "modules-left": [
-        "custom/nwg-menu",
+        "custom/nwg_menu",
         "hyprland/workspaces",
-        "wlr/taskbar"
+        "idle_inhibitor",
+        "wlr/taskbar",
     ],
 
     "modules-center": [
-        "hyprland/window",
+        // "mpris",
+        "custom/pacman",
+        "clock#date",
+        "clock#time",
     ],
 
     "modules-right": [
-        "pulseaudio",
-        "clock",
-        "network",
-        "custom/audio_idle_inhibitor",
+        "hyprland/window",
+        "group/audio",
+        "hyprland/language",
+        "group/connections",
         "tray",
     ],
+
+    "group/audio": {
+        "orientation": "horizontal",
+        "modules": [
+            "custom/audio_idle_inhibitor",
+            "pulseaudio",
+        ],
+    },
+
+    "group/connections": {
+        "orientation": "horizontal",
+        "modules": [
+            "network",
+            "bluetooth",
+        ],
+    },
 }

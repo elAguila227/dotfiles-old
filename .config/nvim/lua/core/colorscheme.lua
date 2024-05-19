@@ -8,11 +8,10 @@ if not status_ok then
   return
 end
 
-
-vim.cmd [[hi CursorLine term=underline cterm=underline gui=underline]]
+vim.cmd [[hi CursorLine NONE term=underline cterm=underline gui=underline]]
 vim.cmd [[hi VertSplit cterm=NONE gui=NONE guibg=NONE ]]
 vim.cmd [[hi SpellBad term=underline cterm=underline ctermfg=red gui=underline guifg=red]]
--- vim.cmd [[hi StatusLineNC cterm=NONE gui=NONE ]]
+vim.cmd [[hi StatusLineNC cterm=NONE gui=NONE ]]
 
 -- vim.cmd [[hi Normal guibg=NONE ctermbg=NONE]]
 -- vim.cmd [[hi EndOfBuffer guibg=NONE ctermbg=NONE]]
@@ -23,3 +22,4 @@ vim.cmd [[hi SpellBad term=underline cterm=underline ctermfg=red gui=underline g
 vim.cmd [[hi GitSignsAdd guifg=green ]]
 vim.cmd [[hi GitSignsChange guifg=yellow ]]
 vim.cmd [[hi GitSignsDelete guifg=red ]]
+

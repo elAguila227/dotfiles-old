@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+echo -e "Beginning upgrade.\\n"
+
+yay -Syu
+# pkill -RTMIN+8 waybar
+
+echo -e "\\nUpgrade complete.\\nPress <Enter> to exit window.\\n\\n"
+read -r _

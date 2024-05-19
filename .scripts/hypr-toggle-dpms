@@ -1,0 +1,53 @@
+#!/usr/bin/env sh
+
+print_usage() {
+    printf "
+    Usage: $(basename $0) [OPTIONS]
+
+    Simple script to manipulate the dpms state of monitos on hyprland
+
+    Options:
+    -m <MONITOR>    Set monitor to toggle dpms state
+    -d (on|off)     Force dpms state
+    -r              Set all monitors dpms state to on
+    "
+}
+
+name=""
+dpms=""
+res=""
+
+while getopts 'm:d:r' flag; do
+    case "${flag}" in
+        m) name="${OPTARG}" ;;
+        d) dpms="${OPTARG}" ;;
+        r) res="true" ;;
+        *) print_usage
+            exit 1 ;;
+    esac
+done
+
+if ! [[ -z $res ]]; then
+    hyprctl dispatch dpms on
+    exit
+fi
+
+if [[ -z $name ]]; then
+    name=$(hyprctl monitors -j | jq -r ".[] | select(.focused) .name")
+fi
+
+if [[ -z $(hyprctl monitors -j | jq ".[] | select(.name == \"$name\")") ]]; then
+    printf "Not a monitor\n"
+    exit 1
+fi
+
+if ! [[ -z $dpms ]] && ! [[ "$dpms" =~ ^(on|off)$ ]]; then
+    print_usage
+    exit 1
+elif [[ -z $dpms ]]; then
+    dpms=$(hyprctl monitors -j | jq -r ".[] | select(.name == \"$name\") .dpmsStatus" | sed -e 's/true/off/' -e 's/false/on/')
+fi
+
+echo $name $dpms
+
+hyprctl dispatch dpms $dpms $name

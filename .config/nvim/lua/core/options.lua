@@ -8,6 +8,8 @@ local options = {
   swapfile = false,
   errorbells = false,
 
+  title = true,
+
   number = true,
   relativenumber = true,
 
@@ -39,8 +41,9 @@ local options = {
   foldenable = false,
 
   -- TABCONFIG
-  tabstop = 2,
-  shiftwidth = 2,
+  tabstop = 4,
+  shiftwidth = 4,
+  softtabstop =4,
   expandtab = true,
 
   -- SPLITS

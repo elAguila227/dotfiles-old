@@ -1,0 +1,6 @@
+#!/usr/bin/env  sh
+
+wal -R
+
+swww init
+swww img "$(cat $HOME/.cache/wal/wal)"

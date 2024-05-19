@@ -1,9 +1,9 @@
 * {{
-    active-background: {color2}D9;
+    active-background: {color10}D9;
     active-foreground: @foreground;
     normal-background: {background}00;
     normal-foreground: @foreground;
-    urgent-background: {color2}D9;
+    urgent-background: {color10}D9;
     urgent-foreground: @foreground;
 
     alternate-active-background: {background}00;
@@ -13,25 +13,25 @@
     alternate-urgent-background: {background}00;
     alternate-urgent-foreground: @foreground;
 
-    selected-active-background: {color2}D9;
+    selected-active-background: {color10}D9;
     selected-active-foreground: @foreground;
-    selected-normal-background: {color2}D9;
+    selected-normal-background: {color10}D9;
     selected-normal-foreground: @foreground;
-    selected-urgent-background: {color3}D9;
+    selected-urgent-background: {color11}D9;
     selected-urgent-foreground: @foreground;
 
     background-color: {background}00;
     background: {background}D9;
     foreground: {foreground};
-    border-color: {color2};
+    border-color: {color10};
     spacing: 2;
 }}
 
 #window {{
     /* background-color: @background; */
-    border: 1;
-    border-radius: 11;
-    padding: 1;
+    border: 2px;
+    border-radius: 10;
+    padding: 0;
 }}
 
 #mainbox {{

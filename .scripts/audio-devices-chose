@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+
+keys='
+configuration {
+kb-accept-entry: "Return,KP_Enter,space,o";
+kb-row-left: "h";
+kb-row-right: "l";
+kb-row-up: "Up,k";
+kb-row-down: "Down,j";
+kb-cancel: "Escape,q";
+}
+'
+theme='
+configuration {
+show-icons: false;
+hover-select: true;
+}
+#listview {
+border: 0px;
+padding: 0px;
+scrollbar: false;
+}
+#inputbar {
+enabled: false;
+}
+element-text {
+tab-stops: [2ch];
+}
+'
+
+declare -a opts=("-display-columns" "1,2" "-display-column-separator" "," "-location" "3")
+
+device=$(echo -e "󰓃,sinks\n󰍬,sources\n󰅖,exit" | rofi -dmenu -theme-str "$keys$theme#window{x-offset:-4ch;width:10ch;}" "${opts[@]}" -l 3)
+
+lines=1
+menu=""
+
+if [[ ${device##*,} == "sinks" ]]; then
+    sinks=($(pactl list short sinks | awk '{ print $2 }'))
+
+    for sink in ${sinks[@]}; do
+        if [[ ${sink%%.*} == "alsa_output" ]]; then
+            name=${sink#*-}; name=${name%%-*}
+            type=${sink#*.}; type=${type%%-*}
+        elif [[ ${sink%%.*} == "bluez_output" ]]; then
+            name=${sink#*.}; name=${name%%'\t'*}
+            type="bluez"
+        else
+            name=${sink%%'\t'*}
+        fi
+        case $type in
+            usb) icon="󰕓";;
+            pci) icon="󰘚";;
+            bluez*) icon="󰗾";;
+            *) icon="󱡬";;
+        esac
+        menu=$menu$(echo "$icon,$name,pactl set-default-sink $sink\n")
+        ((lines=lines+1))
+    done
+    menu=$menu$(echo "󰜺,cancel,exit\n")
+
+elif [[ ${device##*,} == "sources" ]]; then
+    sources=($(pactl list short sources | grep "fallback" | awk '{ print $2 }'))
+
+    for source in ${sources[@]}; do
+        if [[ ${source%%.*} == "alsa_input" ]]; then
+            name=${source#*-}; name=${name%%-*}
+            type=${source#*.}; type=${type%%-*}
+        elif [[ ${source%%.*} == "bluez_input" ]]; then
+            name=${source#*.}; name=${name%%'\t'*}
+            type="bluez"
+        else
+            name=${source%%'\t'*}
+        fi
+        case $type in
+            usb) icon="󰕓";;
+            pci) icon="󰘚";;
+            *) icon="󱡬";;
+        esac
+        menu=$menu$(echo "$icon,$name,pactl set-default-source $source\n")
+        ((lines=lines+1))
+    done
+    menu=$menu$(echo "󰜺,cancel,exit\n")
+else
+    exit
+fi
+
+
+choise=$(echo -e $menu | rofi -dmenu -theme-str "$keys$theme#window{width:30ch;}" "${opts[@]}" -l $lines)
+
+eval ${choise##*,}

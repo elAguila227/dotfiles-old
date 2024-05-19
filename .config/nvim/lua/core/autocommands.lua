@@ -80,7 +80,7 @@ autocmd("FileType", {
 autocmd("FileType", {
   pattern = "tex",
   callback = function()
-    vim.cmd [[ nnoremap <buffer> <leader>r :!pdflatex % && pdflatex % && rm %:r.log; rm %:r.toc; rm %:r.aux<CR> ]]
+    vim.cmd [[ nnoremap <buffer> <leader>r :!pdflatex "%" && pdflatex "%" && rm "%:r.log"; rm "%:r.toc"; rm "%:r.aux"<CR> ]]
   end,
   group = general,
 })

@@ -164,18 +164,6 @@ nvim_tree.setup({
   },
   view = {
     adaptive_size = true,
-    -- mappings = {
-    --   custom_only = false,
-    --   list = {
-    --     { key = { "<CR>", "o" }, action = "edit" },
-    --     { key = "O", action = "expand_all" },
-    --     { key = "t", action = "tabnew" },
-    --     { key = "i", action = "toggle_file_info" },
-    --     { key = "v", action = "vsplit" },
-    --     { key = "s", action = "split" },
-    --     { key = "cd", action = "cd" },
-    --   },
-    -- },
   },
   on_attach = on_attach,
   git = {

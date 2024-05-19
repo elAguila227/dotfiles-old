@@ -1,0 +1,195 @@
+#!/usr/bin/env bash
+
+# A rofi -dmenu script for grimblast
+
+clipboard='false'
+path="$(pwd)"
+a_flag='false'
+
+print_usage() {
+    printf "
+    Usage: $(basename $0) [OPTIONS]
+
+    Make screanshoots with maim.
+
+    Options:
+    -p <PATH>   Set default path
+    -a          Ask for path before saving
+    -c          Use clipboard
+    "
+}
+
+while getopts 'acp:' flag; do
+    case "${flag}" in
+        a) a_flag='true';;
+        c) clipboard="true" ;;
+        p) path="${OPTARG}" ;;
+        *) print_usage
+            exit 1 ;;
+    esac
+done
+
+cmds="\
+󰋩  Capture
+󰕧  Record
+󰐳  QR Scan
+󰜺  Cancel"
+
+cap_cmds="\
+󰒉  Select
+󰍹  Monitor
+󰍺  Full
+󰜺  Cancel"
+rec_cmds="\
+󰒉  Select
+󰍹  Monitor
+󰜺  Cancel"
+
+keys='
+configuration {
+kb-accept-entry: "Return,KP_Enter,space,o";
+kb-row-left: "h";
+kb-row-right: "l";
+kb-row-up: "Up,k";
+kb-row-down: "Down,j";
+kb-cancel: "Escape,q";
+}
+'
+theme='
+configuration {
+show-icons: false;
+hover-select: true;
+}
+#listview {
+border: 0px;
+padding: 0px;
+scrollbar: false;
+}
+'
+
+choice=$(echo "$cmds" |
+    rofi -theme-str "$keys$theme #inputbar {enabled: false;}#window {width:14ch;}" -dmenu -p "" -l 4 |
+    awk '{print $2}')
+
+if [[ -z $choice ]] || [[ $choice == "Cancel" ]]; then
+    exit
+fi
+
+if [[ $choice == "Record" ]]; then
+    clipboard="false"
+fi
+
+if [[ $clipboard == "false" ]] && [[ $a_flag == 'true' ]] || [[ $path == '' ]]; then
+    newpath="$(echo "" | rofi -theme-str "$theme #window {width:30em;}#entry {placeholder: \"$path\";}" -dmenu -p "Set path" -l 0)" || exit 1
+    if ! [[ -z $newpath ]];then
+        path=$newpath
+    fi
+fi
+
+echo $path
+
+if [[ -z ${path##*'/'} ]] || [[ -d $path ]]; then
+    path="$path/$(date +%s)"
+fi
+echo $path
+
+if [[ $path != *","* ]] || [[ ${path##*'.'} == *"/"* ]]; then
+    if [[ $choice == "QR" ]]; then
+        path="$path.txt"
+    elif [[ $choice == "Record" ]]; then
+        path="$path.mkv"
+    elif [[ $choice == "Capture" ]]; then
+        path="$path.png"
+    else
+        exit 1
+    fi
+fi
+
+echo $path
+
+if mkdir -p $path 2> /dev/null ; then
+    rmdir $path 2> /dev/null
+elif ! [[ -w $path ]] || [[ $(echo -e "yes\nno" | rofi -theme-str "$keys$theme #window {width:33ch;}#entry {enabled:false;}" -dmenu -p "File already exist, replace it?" -l 2 || echo no) == "no" ]]; then
+    exit 1
+fi
+
+sleep 0.02
+
+if [[ $choice == "QR" ]]; then
+    deco="$(grim -g "$(slurp)" - | zbarimg -q --raw - )"
+    if [[ $deco != '' ]]; then
+        notify-send "QR detected"
+        if [[ $clipboard == "true" ]];then
+            echo $deco | wl-copy
+        else
+            echo $deco > $path
+        fi
+    else
+        notify-send "Not a QR"
+    fi
+else
+    if [[ $choice == "Capture" ]]; then
+        sel_choice=$(echo "$cap_cmds" |
+            rofi -theme-str "$keys$theme #inputbar {enabled: false;}#window {width:14ch;}" -dmenu -p "" -l 4 |
+            awk '{print $2}')
+    elif [[ $choice == "Record" ]]; then
+        sel_choice=$(echo "$rec_cmds" |
+            rofi -theme-str "$keys$theme #inputbar {enabled: false;}#window {width:14ch;}" -dmenu -p "" -l 3 |
+            awk '{print $2}')
+    fi
+
+
+    if [[ $sel_choice == "Select" ]]; then
+        rounding=$(hyprctl getoption decoration:rounding -j | jq ".int")
+        hyprctl keyword decoration:rounding 0
+        WORKSPACES="$(hyprctl monitors -j | jq -r 'map(.activeWorkspace.id)')"
+        WINDOWS="$(hyprctl clients -j | jq -r --argjson workspaces "$WORKSPACES" 'map(select([.workspace.id] | inside($workspaces)))')"
+        declare -a GEOM=("-g" "$(echo "$WINDOWS" | jq -r '.[] | "\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"' | slurp)")
+    elif [[ $sel_choice == "Monitor" ]]; then
+        declare -a GEOM=("-g" "$(slurp -o)")
+    elif [[ $sel_choice == "Full" ]]; then
+        declare -a GEOM
+    elif [[ -z $sel_choice ]] || [[ $sel_choice == "Cancel" ]]; then
+        exit
+    fi
+
+
+    sleep 0.02
+
+    if [[ $choice == "Capture" ]]; then
+        if [[ $clipboard == "true" ]];then
+            grim "${GEOM[@]}" - | wl-copy
+        else
+            grim "${GEOM[@]}" $path
+        fi
+    elif [[ $choice == "Record" ]]; then
+        pidrec=$(pidof wf-recorder)
+        rm $path 2> /dev/null
+        # hyprctl dispatch exec "[float;opacity 0.0 override 0.0 override;noaim;nofocus;noinitualfocus]" "alacritty -e wf-recorder $GEOM -f $path"
+        setsid -f wf-recorder "${GEOM[@]}" -f $path
+        notify-send -i media-playback-record -t 0 -w recording...
+        kill -INT $(pidof wf-recorder $(echo "$pidrec" | sed 's/\</-o /g'))
+    fi
+    if ! [[ -z $rounding ]]; then
+        hyprctl keyword decoration:rounding $rounding
+    fi
+fi
+
+
+
+
+
+# elif [[ $choice == "" ]]; then
+#   region=$(slop -f "-s %wx%h -i :0.0+%x,%y")
+#   if [[ $region != '' ]]; then
+#     setsid -f st -c FloatFFMPEG -e ffmpeg -f x11grab $region "$path"
+#     notify-send -i media-playback-record -t 0 -w recording...
+#     killall ffmpeg
+#   fi
+#
+# else
+#   cmd="$(echo "$cmds" | grep "^$choice	" | cut -d '	' -f2-)"
+#   eval "$cmd $clipboard $path" || exit 1
+#   # notify-send "Screenshot Taken!"
+# fi
+#

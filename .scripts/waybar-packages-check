@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+packages=$(pacman -Qu | grep -Fcv "[ignored]")
+
+icon="pending-updates"
+if [[ "$packages" == "0" ]]; then
+    packages=""
+    icon="updated"
+fi
+
+echo "{\"text\": \"$packages\", \"alt\":\"$icon\"}" | jq --unbuffered --compact-output

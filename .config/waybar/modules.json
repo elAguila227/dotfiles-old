@@ -1,61 +1,224 @@
 {
     "hyprland/workspaces" : {
         "active-only": false,
-        "all-outputs": false,
-        "format": "{id}",
-        "persistent_workspaces": {
-            "*": 5
+        "all-outputs": true,
+        "format": "{icon}",
+        "format-icons": {
+            "active": "󰧞",
+            "default": "󰧞",
+            "empty": "󰧟",
+            "persistent": "󰧞",
+            "special": "󰺕",
+            "urgent": "󰀨",
+        },
+        "persistent-workspaces": {
+            "*": [1, 2, 3, 4, 5]
         }
     },
 
     "hyprland/window" : {
         "format": "{title}",
         "separate-outputs": true,
+        // "on-click": "notify-send done",
+        // "on-click-right": "hyprctl dispatch killactive",
+        "rewrite": {
+            "(.*) — LibreWolf": "$1",
+            "^$": "🦀",
+        },
+    },
+
+    "hyprland/language": {
+        "format": "󰌌 {}",
+        "format-en": "us",
+        "format-es": "es",
+        // "keyboard-name": "razer-blackwidow-chroma-V2",
+        "on-click": "hyprctl switchxkblayout razer-razer-blackwidow-chroma-V2 next",
+        "on-click-right": "GTK_THEME=Adwaita:dark wf-osk --height 250 -a pinned",
     },
 
     "wlr/taskbar": {
-        "all-outputs": false,
+        "all-outputs": true,
         "format": "{icon}",
         "icon-size": 16,
         "tooltip": true,
-        "tooltip-format": "{title}",
+        "tooltip-format": "{name} - {title}",
         "on-click": "activate",
         "on-click-right": "close",
+        "rewrite": {
+            "^$": "🦀",
+        }
     },
 
-    "custom/nwg-menu": {
-      "on-click": "nwg-menu -d -va top -isl 24 -cmd-logout 'hyprctl dispatch exit'",
-      "format": "󰗼",
+    "custom/nwg_menu": {
+        "on-click": "nwg-menu -d -va top -isl 24 -fm 'nemo' -cmd-logout 'hyprctl dispatch exit'",
+        "on-click-right": "sleep 0.1 && waybar-menu",
+        "format": "󰣇",
+        "tooltip": false,
+    },
+
+    "custom/pacman": {
+        "format": "{icon}{}",
+        "format-icons": {
+            "pending-updates": "󱧐 ",
+            "updated": ""
+        },
+        "interval": "once",
+        "return-type": "json",
+        "exec": "waybar-packages-check",
+        "on-click": "alacritty --class 'system_section' -e 'waybar-packages-update'; pkill -SIGRTMIN+8 waybar",
+        "on-click-right": "pkill -SIGRTMIN+8 waybar",
+        "signal": 8
+    },
+
+    "clock#date": {
+        "format": "󰃶 {:%A, %B %d, %Y}",
+        "format-alt": "󰃶 {:%A, %B %d, %Y}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+                    "mode"          : "month",
+                    "mode-mon-col"  : 3,
+                    "weeks-pos"     : "right",
+                    "on-scroll"     : 1,
+                    "on-click-right": "mode",
+                    "format": {
+                              "months":     "<span color='#ffead3'><b>{}</b></span>",
+                              "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+                              "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+                              "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+                              "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+                              }
+                    },
+        "actions":  {
+                    "on-click-right": "mode",
+                    "on-click-forward": "tz_up",
+                    "on-click-backward": "tz_down",
+                    "on-scroll-up": "shift_down",
+                    "on-scroll-down": "shift_up"
+                    }
+    },
+    "clock#time": {
+        "interval": 1,
+        "format": "󰥔 {:%H:%M}",
+        "tooltip-format": "{:%H:%M:%S}",
+    },
+
+    "cava": {
+        //        "cava_config": "$XDG_CONFIG_HOME/cava/cava.conf",
+        "framerate": 30,
+        "autosens": 1,
+        // "sensitivity": 100,
+        "bars": 14,
+        // "lower_cutoff_freq": 50,
+        // "higher_cutoff_freq": 10000,
+        "method": "pipewire",
+        "source": "auto",
+        "stereo": true,
+        "reverse": false,
+        "bar_delimiter": 0,
+        "monstercat": false,
+        "waves": false,
+        "noise_reduction": 0.77,
+        "input_delay": 2,
+        "format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ],
+        "actions": {
+            "on-click-right": "mode"
+        }
+    },
+
+    "mpris": {
+        "format": "{status_icon} {dynamic}",
+        "status-icons": {
+            "playing": "󰐊",
+            "paused":  "󰏤",
+            "stopped": "󰓛",
+        },
+        "on-click": "playerctl play-pause",
+        "on-middle-click": "",
+        "on-right-click": "playerctl stop",
+        // "ignored-players": ["firefox"]
     },
 
     "pulseaudio": {
-        "format": "{volume}% {icon}",
-        "format-bluetooth": "{volume}% {icon}",
-        "format-muted": "",
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "󰂯 {volume}%",
+        "format-muted": "󰖁",
+        "format-source": "󰍬 {volume}%",
+        "format-source-muted": "󰍭",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", ""]
+            "headphone": "󰋋",
+            "speaker": "󰓃",
+            "hdmi": "󰡁",
+            "headset": "󰋎",
+            "hands-free": "󰋎",
+            "portable": "󰣲",
+            "car": "󰄋",
+            "hifi": "󰴸",
+            "phone": "󰏲",
+            "default": ["󰕿", "󰖀", "󰕾"]
         },
+        "tooltip-format": "{desc}\n{icon} {volume}%\t{format_source}",
         "scroll-step": 1,
-        "on-click": "pavucontrol",
+        "on-click": "pamixer -t",
+        "on-click-right": "sleep 0.1 && audio-devices-chose",
+        "max-volume": 120,
         "ignored-sinks": ["Easy Effects Sink"]
     },
 
+    "network": {
+        "on-click-right": "sleep 0.1 && networkmanager_dmenu",
+        // "interface": "wlp2s0",
+        "format": "󰛳",
+        "format-wifi": "󰖩",
+        "format-ethernet": "󰈁",
+        "format-disconnected": "󰅛", //An empty format will hide the module.
+        "tooltip-format": "󰛳 {ifname} 󰌘 {gwaddr}",
+        "tooltip-format-wifi": "󰀂 {essid} 󰖩 {signalStrength}%",
+        "tooltip-format-ethernet": "󰌹 {ifname} 󰌗 {ipaddr}/{cidr}",
+        "tooltip-format-disconnected": "Disconnected",
+        "format-icons": ["󰤟", "󰤢", "󰤥", "󰤨"],
+        // "max-length": 30,
+    },
+
+    "bluetooth": {
+        // "on-click-right": "hyprctl dispatch exec '[float;size 20% 60%;move onscreen 100% 0%]' blueman-manager",
+        "on-click-right": "sleep 0.1 && DMENU_BLUETOOTH_LAUNCHER=\"rofi -dmenu -p Devices\" dmenu-bluetooth  -theme-str \"configuration {font: 'Hack Nerd Font 11';} #window {width:35ch;}\" -i -l 15 -location 3",
+        "format": "󰂳",
+        "format-disabled": "",
+        "format-off": "󰂲",
+        "format-on": "󰂯",
+        "format-connected": "󰂱 {device_alias}",
+        "format-connected-battery": "󰂱 {device_alias} 󰥉 {device_battery_percentage}%",
+        // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+        // "max-length": 30,
+    },
+
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "󰈈",
+            "deactivated": "󰈉"
+        }
+    },
+
     "custom/audio_idle_inhibitor": {
-      "format": "{icon}",
-      "exec": "sway-audio-idle-inhibit --dry-print-both-waybar",
-      "exec-if": "which sway-audio-idle-inhibit",
-      "return-type": "json",
-      "format-icons": {
-        "output": "",
-        "input": "",
-        "output-input": "  ",
-        "none": ""
-      }
+        "format": "{icon}",
+        "exec": "sway-audio-idle-inhibit --dry-print-both-waybar",
+        "exec-if": "which sway-audio-idle-inhibit",
+        "return-type": "json",
+        "format-icons": {
+            "output": "",
+            "input": "󰍯",
+            "output-input": "󰍯",
+            "none": ""
+        }
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 5
     },
 }

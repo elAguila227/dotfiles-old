@@ -14,7 +14,7 @@ plug "zap-zsh/vim"
 HISTSIZE=1000000
 SAVEHIST=1000000
 export HISTCONTROL=ignorebpth:erasedups
-export TERMINAL=st
+# export TERM=alacritty
 export EDITOR=nvim
 # export BROWSER=librewolf
 if [ -d "$HOME/.local/bin/" ] ;
@@ -37,6 +37,14 @@ fi
 #     then . "${HOME}/.cache/wal/colors.sh"
 # fi
 
+# dinamic title fix
+case $TERM in
+  alacritty*)
+    DISABLE_AUTO_TITLE="true"
+    precmd() {print -Pn "\e]0;%~\a"}
+    ;;
+esac
+
 # Prompt
 autoload -Uz vcs_info
 autoload -U colors && colors
@@ -57,12 +65,12 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 }
 
 zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:git:*' formats " %F{4}(%f%F{1}%m%u%c%f%F{3}%f %F{5}%b%f%F{4})%f"
+zstyle ':vcs_info:git:*' formats " %F{12}(%f%F{1}%m%u%c%f%F{11}%f %F{13}%b%f%F{12})%f"
 
 # PROMPT="%B%{$fg[yellow]%}⚡% %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$fg[cyan]%}%c%{$reset_color%}"
 # PROMPT+="\$vcs_info_msg_0_ "
 # PROMPT="%F{4}[%f%n%F{3}@%f%m%F{4}]%f %F{6}%c%f\$vcs_info_msg_0_ ➜ "
-PROMPT="╭%F{4}(%f%F{8}%n%f%F{3}@%f%F{8}%m%f%F{4}) %F{6}%~%f\$vcs_info_msg_0_"$'\n'"╰─➜ "
+PROMPT="╭%F{12}(%f%F{7}%n%f%F{11}@%f%F{7}%m%f%F{12}) %F{6}%~%f\$vcs_info_msg_0_"$'\n'"╰─➜ "
 RPROMPT="%(1j.%F{8}[jobs:%j].)"
 
 # Aliases

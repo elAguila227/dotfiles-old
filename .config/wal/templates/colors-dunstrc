@@ -7,14 +7,14 @@
 
 [urgency_normal]
     background = "{color0}D9"
-    foreground = "{color7}"
-    frame_color = "{color7}"
-    highlight = "{color2}"
+    foreground = "{color15}"
+    frame_color = "{color15}"
+    highlight = "{color10}"
     timeout = 10
 
 [urgency_critical]
     background = "{color0}D9"
-    foreground = "{color1}"
-    frame_color = "{color1}"
-    highlight = "{color2}"
+    foreground = "{color9}"
+    frame_color = "{color9}"
+    highlight = "{color10}"
     timeout = 0

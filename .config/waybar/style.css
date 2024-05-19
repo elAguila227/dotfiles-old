@@ -1,138 +1,177 @@
 @import '../../.cache/wal/colors-waybar.css';
 
 * {
-    /* `otf-font-awesome` is required to be installed for icons */
-    font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
+    border: none;
+    font-family: Hack Nerd Font, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    min-height: 0;
 }
 
 window#waybar {
-    background-color: @background;
-    /* border-bottom: 0px solid @color8; */
-    color: @color7;
-    /* background: transparent; */
-    transition-property: background-color;
-    transition-duration: .5s;
+    background: transparent;
+    color: @color15;
 }
 
-window#waybar.hidden {
-    opacity: 0.2;
+window#waybar>box>box {
+    background: alpha(@background, 0.8);
+    border-style: solid;
+    border-color: @color10;
 }
 
-/*
-window#waybar.empty {
-    background-color: transparent;
+.modules-left {
+    border-radius: 0px 0px 10px 0px;
+    border-width: 0px 2px 2px 0px;
+    padding: 0px 0px 0px 0px;
 }
-window#waybar.solo {
-    background-color: #FFFFFF;
+.modules-center {
+    border-radius: 0px 0px 10px 10px;
+    border-width: 0px 2px 2px 2px;
+    padding: 0px 10px ;
+    margin: 0px 80px;
 }
-*/
+.modules-right {
+    border-radius: 0px 0px 0px 10px;
+    border-width: 0px 0px 2px 2px;
+    padding: 0px 0px 0px 0px;
+}
 
-/* window#waybar.termite { */
-/*     background-color: #3F3F3F; */
-/* } */
-/**/
-/* window#waybar.chromium { */
-/*     background-color: #000000; */
-/*     border: none; */
-/* } */
+widget>*,#connections,#audio {
+    padding: 0px 10px 0px 10px;
+    border-style: solid;
+    /* border-color: shade(@color8, 0.5); */
+    border-color: @color8;
+    border-width: 0px 0px 0px 1px;
+}
+window#waybar>box>box>*:first-child>* {
+    border: 0;
+}
 
-#taskbar button.active {
-    background-color: @color2;
+#connections>widget>*,#audio>widget>* {
+    padding: 0 0.25em;
+    border-width: 0;
+}
+#custom-audio_idle_inhibitor {
+    margin-right: 0.25em;
+}
+
+#tray>widget>* {
+    padding: 0;
+    border-width: 0;
+}
+
+#custom-nwg_menu,#idle_inhibitor,#custom-audio_idle_inhibitor,#network,#bluetooth,#window.empty #window {
+    padding-right: 15px;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 button {
-    /* Use box-shadow instead of border so the text isn't offset */
-    /* box-shadow: inset 0 -3px transparent; */
-    /* Avoid rounded borders under each button name */
-    border: none;
-    border-radius: 0;
+    background: transparent;
+    border-radius: 10px;
+    margin: 1px;
+}
+button:hover {
+    background-color: shade(@color8, 0.5);
+    border-top: 1px solid @color10;
 }
 
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
-button:hover {
-    background: inherit;
-    box-shadow: inset 0 -3px @color2;
+button>box {
+    padding-left: 2px;
 }
+
+tooltip {
+  background: @background;
+  border: 1px solid @color8;
+  /* border-radius: 5px; */
+}
+tooltip label {
+  color: @color15;
+}
+
 
 #workspaces button {
-    padding: 0 5px;
-    background-color: transparent;
-    color: @color7;
-    box-shadow: inset 0 -3px @color2;
-}
-
-#workspaces button.persistent {
-    color: @color8;
-    box-shadow: inset 0 0px @color2;
+    padding: 1px 2px 1px 0px;
+    margin: 3px;
+    border-radius: 100%;
+    color: shade(@color9, 1.25);
 }
 
 #workspaces button.active {
-    background-color: @color2;
-    box-shadow: inset 0 -3px @color1;
+    color: @color15;
+    background-color: shade(@color8, 0.5);
+    border-bottom: 1px solid @color7;
+}
+#workspaces button.empty {
+    color: @color7;
+}
+/* #workspaces button.persistent { */
+/*     color: @color7; */
+/* } */
+#workspaces button.special {
+    color: @color14;
+}
+#workspaces button.visible {
+    color: @color10;
 }
 
-#workspaces button.urgent {
-    background-color: #eb4d4b;
+#workspaces button:hover {
+    color: shade(@color10, 1.25);
 }
 
-/* #mode { */
-/*     background-color: #64727D; */
-/*     border-bottom: 3px solid #ffffff; */
-/* } */
-
-#window,
-#workspaces {
-    margin: 0 4px;
+#taskbar {
+    padding: 0;
+}
+#taskbar.empty {
+    border: 0;
+}
+#taskbar button.active {
+    border-top: 1px solid @color1;
+    background-color: shade(@color8, 0.5);
 }
 
-/* If workspaces is the leftmost module, omit left margin */
-.modules-left > widget:first-child > #workspaces {
-    margin-left: 0;
+#idle_inhibitor.activated {
+    color: shade(@color9, 1.25);
+}
+#idle_inhibitor.deactivated {
+    color: @color7;
 }
 
-/* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
+#custom-nwg_menu {
+    color: @color13;
 }
 
-#tray > .passive {
-    -gtk-icon-effect: dim;
+#pulseaudio.muted {
+    color: @color7;
+}
+#pulseaudio.bluetooth {
+    color: @color10;
 }
 
-#tray > .needs-attention {
-    -gtk-icon-effect: highlight;
-    background-color: #eb4d4b;
+#bluetooth.off {
+    color: @color7;
+}
+#bluetooth.connected {
+    color: @color10;
+}
+#bluetooth.discoverable {
+    color: @color11;
+}
+#bluetooth.discovering {
+    color: @color13;
+}
+#bluetooth.pairable {
+    color: @color9;
 }
 
-/* #language { */
-/*     background: #00b093; */
-/*     color: #740864; */
-/*     padding: 0 5px; */
-/*     margin: 0 5px; */
-/*     min-width: 16px; */
+#network.disconnected {
+    color: @color7;
+}
+#network.linked {
+    color: @color12;
+}
+/* #network.ethernet { */
+/*     color: @color9; */
 /* } */
-
-/* #keyboard-state { */
-/*     background: #97e1ad; */
-/*     color: #000000; */
-/*     padding: 0 0px; */
-/*     margin: 0 5px; */
-/*     min-width: 16px; */
-/* } */
-/**/
-/* #keyboard-state > label { */
-/*     padding: 0 5px; */
-/* } */
-/**/
-/* #keyboard-state > label.locked { */
-/*     background: rgba(0, 0, 0, 0.2); */
-/* } */
-/**/
-/* #scratchpad { */
-/*     background: rgba(0, 0, 0, 0.2); */
-/* } */
-/**/
-/* #scratchpad.empty { */
-/* 	background-color: transparent; */
-/* } */
+#network.wifi {
+    color: @color10;
+}

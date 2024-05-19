@@ -57,6 +57,9 @@ local plugins = {
   ["windwp/nvim-ts-autotag"] = {},
   ["kylechui/nvim-surround"] = {},
   ["anuvyklack/pretty-fold.nvim"] = {},
+  -- ["kevinhwang91/nvim-ufo"] = {
+  --     requires = "kevinhwang91/promise-async"
+  -- },
   -- ["lukas-reineke/indent-blankline.nvim"] = {},
   -- ["Yggdroot/indentLine"] = {
   --   setup = function()
@@ -65,6 +68,12 @@ local plugins = {
   --     vim.g.markdown_syntax_conceal = 0
   --   end,
   -- },
+
+  ["dhruvasagar/vim-table-mode"] = {
+      setup = function()
+          vim.g.table_mode_corner='|'
+      end,
+  },
 
   ["chrisgrieser/nvim-various-textobjs"] = {
     config = function()
@@ -116,10 +125,29 @@ local plugins = {
   ['uZer/pywal16.nvim'] = {
     as = 'pywal16'
   },
+  ["sonjiku/yawnc.nvim"] = {},
+  -- ["xiyaowong/transparent.nvim"] = {},
+  -- ["m-demare/hlargs.nvim"] = {},
 
+  -- Markdown
   ["iamcco/markdown-preview.nvim"] = {
     run = function() vim.fn["mkdp#util#install"]() end,
   },
+  -- ["jakewvincent/mkdnflow.nvim"] = {
+  --   -- rocks = 'luantf8'
+  -- },
+  -- ["vimwiki/vimwiki"] = {
+  --     setup = function()
+  --         vim.g.vimwiki_list = {{
+  --             path = "~/vimwiki",
+  --             syntax = "markdown",
+  --             ext = "md",
+  --         }}
+  --     end,
+  -- },
+  -- ["ixru/nvim-markdown"] = {},
+  -- ["vim-pandoc/vim-pandoc"] = {},
+  -- ["vim-pandoc/vim-pandoc-syntax"] = {},
 
   -- dashboard
   ["goolord/alpha-nvim"] = {},
